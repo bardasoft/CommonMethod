@@ -4,6 +4,9 @@ using System.Text;
 
 namespace CommonMethod
 {
+    /// <summary>
+    /// 公用对象
+    /// </summary>
     public class CommonObject
     {
         /// <summary>
@@ -12,6 +15,11 @@ namespace CommonMethod
         /// </summary>
         public class ComboBoxItem
         {
+            /// <summary>
+            /// ComboBox控件Item
+            /// </summary>
+            /// <param name="value"></param>
+            /// <param name="display"></param>
             public ComboBoxItem(object value, string display)
             {
                 this.ItemValue = value;
@@ -57,6 +65,10 @@ namespace CommonMethod
 
 
         #region Area
+
+        /// <summary>
+        /// 显示对象
+        /// </summary>
         public class Area
         {
             /// <summary>
@@ -85,6 +97,9 @@ namespace CommonMethod
                 set { m_Area_Display = value; }
             }
             private double m_Area_Order;
+            /// <summary>
+            /// 
+            /// </summary>
             public double Area_Order
             {
                 get { return m_Area_Order; }
@@ -94,10 +109,17 @@ namespace CommonMethod
 
         #endregion
 
+
+        /// <summary>
+        /// 列表
+        /// </summary>
         [Serializable]
         public class AreaLists : List<Area>
         {
             private int _maxItems = 0;
+            /// <summary>
+            /// 最大数
+            /// </summary>
             public int MaxItems { get { return this._maxItems; } set { this._maxItems = value; } }
         }
 
