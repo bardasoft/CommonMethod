@@ -150,6 +150,7 @@ namespace CommonMethod
         public void TEST()
         {
             MessageBox.Show("1");
+            MessageBox.Show("1");
         }
     }
 }
