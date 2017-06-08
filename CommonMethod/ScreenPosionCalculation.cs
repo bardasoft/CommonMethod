@@ -147,5 +147,9 @@ namespace CommonMethod
             return 1;
         }
 
+        public void TEST()
+        {
+            MessageBox.Show("1");
+        }
     }
 }
