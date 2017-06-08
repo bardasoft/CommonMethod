@@ -151,6 +151,7 @@ namespace CommonMethod
         {
             MessageBox.Show("1");
             MessageBox.Show("1");
+            MessageBox.Show("1");
         }
     }
 }
