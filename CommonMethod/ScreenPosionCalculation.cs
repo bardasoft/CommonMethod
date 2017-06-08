@@ -146,12 +146,6 @@ namespace CommonMethod
             fm.DesktopLocation = result;
             return 1;
         }
-
-        public void TEST()
-        {
-            MessageBox.Show("1");
-            MessageBox.Show("1");
-            MessageBox.Show("1");
-        }
+        
     }
 }
