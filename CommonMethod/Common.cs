@@ -45,8 +45,5 @@ namespace CommonMethod
         }
 
         #endregion
-
-        //public bool
-
     }
 }

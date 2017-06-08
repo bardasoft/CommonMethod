@@ -7,7 +7,7 @@ using System.Windows.Forms;
 namespace CommonMethod
 {
     /// <summary>
-    /// 窗体位置计算
+    /// 窗体位置计算及设置
     /// </summary>
     public class ScreenPosionCalculation
     {
@@ -95,5 +95,57 @@ namespace CommonMethod
             result = new Point(s.Bounds.Location.X + Temp_intFormStartPositionX, s.Bounds.Location.Y + Temp_intFormStartPositionY);
             return 1;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="intScreenIndex"></param>
+        /// <param name="fm"></param>
+        /// <returns>1.设置成功 2.屏幕索引号不存在 3.窗体宽度高度 大于屏幕宽度高度</returns>
+        public static int SetFormDisplayPosition(int intScreenIndex,Form fm)
+        {
+            Point result = new Point();
+            int intWindowWidth = fm.Width;
+            int intWindowsHeight = fm.Height;
+            int k = Screen.AllScreens.GetUpperBound(0);
+            if (k < intScreenIndex) //屏幕索引号不存在
+            {
+                return 2;
+            }
+
+            Screen s = Screen.AllScreens[intScreenIndex];
+            int Temp_intScreensWidth = s.Bounds.Width / 2;
+            int Temp_intScreensHeight = s.Bounds.Height / 2;
+            int Temp_intFormWidth = intWindowWidth / 2;
+            int Temp_intFormHeight = intWindowsHeight / 2;
+
+            int Temp_intFormStartPositionX = Temp_intScreensWidth - Temp_intFormWidth;
+            int Temp_intFormStartPositionY = Temp_intScreensHeight - Temp_intFormHeight;
+
+            if ((s.Bounds.Width < intWindowWidth) || (s.Bounds.Height < intWindowsHeight))    //窗体宽度高度 大于屏幕宽度高度
+            {
+                if (s.Bounds.Width < intWindowWidth)
+                {
+                    result.X = s.Bounds.Location.X;
+                }
+                else
+                {
+                    result.X = s.Bounds.Location.X + Temp_intFormStartPositionX;
+                }
+                if (s.Bounds.Height < intWindowsHeight)
+                {
+                    result.Y = s.Bounds.Location.Y;
+                }
+                else
+                {
+                    result.Y = s.Bounds.Location.Y + Temp_intFormStartPositionY;
+                }
+                return 3;
+            }
+            result = new Point(s.Bounds.Location.X + Temp_intFormStartPositionX, s.Bounds.Location.Y + Temp_intFormStartPositionY);
+            fm.DesktopLocation = result;
+            return 1;
+        }
+
     }
 }
