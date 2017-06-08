@@ -11,6 +11,7 @@ namespace CommonMethod
     /// </summary>
     public class ScreenPosionCalculation
     {
+        #region 基本计算
         /// <summary>
         /// 获取点所在的屏幕索引号 不存在则返回-1
         /// </summary>
@@ -96,13 +97,17 @@ namespace CommonMethod
             return 1;
         }
 
+        #endregion
+
+        #region 窗体位置设置
+
         /// <summary>
-        /// 
+        /// 设置窗口显示位置
         /// </summary>
-        /// <param name="intScreenIndex"></param>
-        /// <param name="fm"></param>
+        /// <param name="intScreenIndex">显示屏索引</param>
+        /// <param name="fm">目标窗体</param>
         /// <returns>1.设置成功 2.屏幕索引号不存在 3.窗体宽度高度 大于屏幕宽度高度</returns>
-        public static int SetFormDisplayPosition(int intScreenIndex,Form fm)
+        public static int SetFormDisplayPosition_ByScreenIndex(int intScreenIndex, Form fm)
         {
             Point result = new Point();
             int intWindowWidth = fm.Width;
@@ -147,5 +152,9 @@ namespace CommonMethod
             return 1;
         }
         
+        #endregion
+
+
+
     }
 }
