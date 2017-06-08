@@ -113,7 +113,8 @@ namespace CommonMethod
             int intWindowWidth = fm.Width;
             int intWindowsHeight = fm.Height;
             int k = Screen.AllScreens.GetUpperBound(0);
-            if (k < intScreenIndex) //屏幕索引号不存在
+            
+            if (k < intScreenIndex || intScreenIndex < 0)//屏幕索引号不存在
             {
                 return 2;
             }
