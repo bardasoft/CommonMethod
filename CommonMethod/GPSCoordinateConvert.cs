@@ -4,6 +4,9 @@ using System.Text;
 
 namespace CommonMethod
 {
+    /// <summary>
+    /// GPS经纬度转换
+    /// </summary>
     public class GPSCoordinateConvert
     {
         /******************************* 161219 经纬度计算

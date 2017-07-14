@@ -152,9 +152,41 @@ namespace CommonMethod
             fm.DesktopLocation = result;
             return 1;
         }
-        
+
         #endregion
 
+        #region  拓展计算
+        /// <summary>
+        /// 获取鼠标所在位置百分比 -1 表示异常 1 表示正常
+        /// </summary>
+        /// <param name="pointMousePos"></param>
+        /// <param name="sizeParentControl"></param>
+        /// <param name="dblPercentageWidth"></param>
+        /// <param name="dblPercentageHeight"></param>
+        /// <returns></returns>
+        public static int GetMosuerInPercentage(Point pointMousePos,Size sizeParentControl,out int intPercentageWidth ,out int intPercentageHeight)
+        {
+            intPercentageWidth = -1;
+            intPercentageHeight = -1;
+            try
+            {
+                int intMouseX = pointMousePos.X;
+                int intMouseY = pointMousePos.Y;
+                int intWidth = sizeParentControl.Width;
+                int intHeight = sizeParentControl.Height;
+                double dblPercentageWidth = (double)intMouseX / intWidth;
+                double dblPercentageHeight = (double)intMouseY / intHeight;
+                intPercentageWidth = Convert.ToInt32(dblPercentageWidth * 100);
+                intPercentageHeight = Convert.ToInt32(dblPercentageHeight * 100);
+                return 1;
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
+        #endregion 
 
 
     }

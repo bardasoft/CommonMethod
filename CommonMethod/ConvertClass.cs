@@ -206,7 +206,6 @@ namespace CommonMethod
             return hexStr + hexString;
         }
         #endregion
-
         
         #region 特殊转换
         /// <summary>
@@ -266,7 +265,6 @@ namespace CommonMethod
             return sbResult.ToString();
         }
         #endregion
-
 
     }
 }
