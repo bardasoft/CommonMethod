@@ -72,5 +72,64 @@ namespace CommonMethod
             }
             return true;
         }
+
+        #region 时间判断
+        /// <summary>
+        /// 是否为时间数字_时
+        /// </summary>
+        /// <param name="strNumber"></param>
+        /// <returns></returns>
+        public static bool isTimeNum_Hour(string strNumber)
+        {
+            if (isNumber(strNumber))
+            {
+                int Temp_intHour = Convert.ToInt32(strNumber);
+                if (Temp_intHour >= 0 && Temp_intHour < 24)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 是否为时间数字_分
+        /// </summary>
+        /// <param name="strNumber"></param>
+        /// <returns></returns>
+        public static bool isTimeNum_Minute(string strNumber)
+        {
+            if (isNumber(strNumber))
+            {
+                int Temp_intMinute = Convert.ToInt32(strNumber);
+                if (Temp_intMinute >= 0 && Temp_intMinute < 60)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 是否为时间数字_秒
+        /// </summary>
+        /// <param name="strNumber"></param>
+        /// <returns></returns>
+        public static bool isTimeNum_Second(string strNumber)
+        {
+            if (isNumber(strNumber))
+            {
+                int Temp_intSecond = Convert.ToInt32(strNumber);
+                if (Temp_intSecond >= 0 && Temp_intSecond < 60)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+        #endregion
+
     }
 }

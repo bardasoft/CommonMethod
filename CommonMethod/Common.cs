@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
@@ -63,6 +66,48 @@ namespace CommonMethod
         }
 
         #endregion
+
+        /// <summary>
+        /// Telnet命令
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <param name="intPort"></param>
+        /// <param name="intMillisecond"></param>
+        /// <returns></returns>
+        public static bool CmdTelnet(IPAddress ip ,int intPort,int intTimeout_Millisecond=1000)
+        {
+            try
+            {
+                TimeOutSocket.Connect(new IPEndPoint(ip, intPort), intTimeout_Millisecond);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Ping命令
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <returns></returns>
+        public static bool CmdPing(IPAddress ip , int intTimeout_Millisecond = 1000)
+        {
+            try
+            {
+                Ping ping = new Ping();
+                PingOptions options = new PingOptions();
+                options.DontFragment = true;
+                string s = "";
+                byte[] bytes = Encoding.UTF8.GetBytes(s);
+                return (ping.Send(ip, intTimeout_Millisecond, bytes, options).Status.ToString() == "Success");
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }
 
