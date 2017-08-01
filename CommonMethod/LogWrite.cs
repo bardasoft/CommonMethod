@@ -12,6 +12,16 @@ namespace CommonMethod
     public class LogWrite
     {
         /// <summary>
+        /// 异常日志路径
+        /// </summary>
+        public static string strExlogFilePath = System.Environment.CurrentDirectory + "\\UserData\\ExceptionLog";
+
+        /// <summary>
+        /// 日志记录文件
+        /// </summary>
+        public static string strLogFilePath = System.Environment.CurrentDirectory + "\\UserData\\OperAtLog";
+
+        /// <summary>
         /// 异常记录(输出至文本)
         /// </summary>
         /// <param name="Tag"></param>
@@ -19,12 +29,11 @@ namespace CommonMethod
         public static void WritExceptionLog(string Tag, Exception ex)
         {
             //工作目录下的CULog文件
-            string strExLogFilePath = System.Environment.CurrentDirectory + "\\UserData\\ExceptionLog";
-            if (!Directory.Exists(strExLogFilePath))
+            if (!Directory.Exists(strExlogFilePath))
             {
-                Directory.CreateDirectory(strExLogFilePath);
+                Directory.CreateDirectory(strExlogFilePath);
             }
-            StreamWriter sw = new StreamWriter(strExLogFilePath + "\\" + DateTime.Now.ToString("yyyyMMdd") + "(ErrorLog)" + ".log", true, Encoding.Default);
+            StreamWriter sw = new StreamWriter(strExlogFilePath + "\\" + DateTime.Now.ToString("yyyyMMdd") + "(ErrorLog)" + ".log", true, Encoding.Default);
             StringBuilder sbExceptionLog = new StringBuilder();
             sbExceptionLog.Append("[" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "]\t 异常标识:" + Tag + Environment.NewLine);
             sbExceptionLog.Append("异常信息：" + ex.Message + Environment.NewLine);
@@ -65,7 +74,6 @@ namespace CommonMethod
             {
                 lock (objWriteEventLock)
                 {
-                    string strLogFilePath = System.Environment.CurrentDirectory + "\\UserData\\OperAtLog";
                     if (!Directory.Exists(strLogFilePath)) //判断文件是否存在
                     {
                         Directory.CreateDirectory(strLogFilePath);
