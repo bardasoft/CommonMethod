@@ -31,5 +31,13 @@ namespace CommonMethod.Tests
             string stSecondNum = "00";
             Assert.IsTrue(Verification.isTimeNum_Second(stSecondNum));
         }
+
+        [TestMethod()]
+        public void isNumberTest()
+        {
+            string strTest = "";
+            Assert.IsTrue(CommonMethod.Verification.isNumber(strTest));
+            //Assert.Fail();
+        }
     }
 }

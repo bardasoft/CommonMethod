@@ -66,6 +66,11 @@ namespace CommonMethod
         public static bool isNumber(string strNumber)
         {
             Regex reg = new Regex(@"[^0-9]"); // 排除型字符组(取反思想)
+            if (string.IsNullOrEmpty(strNumber))
+            {
+                //为空
+                return false;
+            }
             if (reg.IsMatch(strNumber))
             {
                 return false;

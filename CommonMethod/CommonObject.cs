@@ -62,8 +62,6 @@ namespace CommonMethod
                 return ItemDisplay;
             }
         }
-
-
         #region Area
 
         /// <summary>
@@ -108,8 +106,6 @@ namespace CommonMethod
         }
 
         #endregion
-
-
         /// <summary>
         /// 列表
         /// </summary>
@@ -122,6 +118,5 @@ namespace CommonMethod
             /// </summary>
             public int MaxItems { get { return this._maxItems; } set { this._maxItems = value; } }
         }
-
     }
 }
