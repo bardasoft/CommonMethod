@@ -41,6 +41,7 @@
     <Compile Include="Common.cs" />
     <Compile Include="CommonObject.cs" />
     <Compile Include="Common_Form.cs" />
+    <Compile Include="Common_Web.cs" />
     <Compile Include="ConvertClass.cs" />
     <Compile Include="GPSCoordinateConvert.cs" />
     <Compile Include="LogWrite.cs" />
