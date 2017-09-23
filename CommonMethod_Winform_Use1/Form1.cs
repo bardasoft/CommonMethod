@@ -14,5 +14,11 @@ namespace CommonMethod_Winform_Use1
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(CommonMethod.Common_Web.HttpPost(textBox1.Text, textBox2.Text.Trim()));
+
+        }
     }
 }
