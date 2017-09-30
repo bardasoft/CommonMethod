@@ -108,6 +108,20 @@ namespace CommonMethod
                 return false;
             }
         }
+
+
+        /// <summary>
+        /// 获取Dictionary对象 首个对象Key
+        /// </summary>
+        /// <returns></returns>
+        public static object GetDictionaryFirstKey(System.Collections.IDictionary dic)
+        {
+            foreach (System.Collections.DictionaryEntry entry in dic)
+            {
+                return entry.Key;
+            }
+            return null;
+        }
     }
 }
 
