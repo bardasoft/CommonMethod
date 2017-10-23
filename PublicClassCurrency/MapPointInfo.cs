@@ -13,21 +13,45 @@ namespace PublicClassCurrency
         /// 经度
         /// </summary>
         double dblLon;
+        /// <summary>
+        /// 经度
+        /// </summary>
+        public double Lon
+        {
+            get { return dblLon; }
+            set { dblLon = value; }
+        }
 
         /// <summary>
         /// 纬度
         /// </summary>
         double dblLat;
+        /// <summary>
+        /// 纬度
+        /// </summary>
+        public double Lat
+        {
+            get { return dblLat; }
+            set { dblLat = value; }
+        }
 
         /// <summary>
         /// 地图等级
         /// </summary>
         int intMapLevel;
+        /// <summary>
+        /// 地图等级
+        /// </summary>
+        public int MapLevel
+        {
+            get { return intMapLevel; }
+            set { intMapLevel = value; }
+        }
 
         /// <summary>
         /// 坐标系统
         /// </summary>
-        Enum_CordinateSystem cordinateSyatem = Enum_CordinateSystem.WGS_84;
+        Enum_CordinateSystem CordinateSyatem = Enum_CordinateSystem.WGS_84;
 
     }
 }
