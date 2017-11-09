@@ -128,7 +128,7 @@ namespace CommonMethod
         /// </summary>
         /// <param name="srcPath"></param>
         /// <param name="aimPath"></param>
-        private static int CopyDir(string srcPath, string aimPath)
+        public static int CopyDir(string srcPath, string aimPath)
         {
             try
             {
