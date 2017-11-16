@@ -30,12 +30,20 @@ namespace CommonMethod.Tests
             byte[] bbytResult = ConvertClass.BCDToHex(strTest, 3);
             byte[] byt = new byte[] { 18, 52, 95 };
 
-            for  (int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
-                bbytResult[i] = Convert.ToByte(int.Parse(strTest.Substring(i * 2, 2),System.Globalization.NumberStyles.HexNumber));
+                bbytResult[i] = Convert.ToByte(int.Parse(strTest.Substring(i * 2, 2), System.Globalization.NumberStyles.HexNumber));
             }
             //string strResult = ConvertClass.HexToBCD(bbytResult);
             Assert.AreEqual(bbytResult[2], "5F");
+        }
+
+        [TestMethod()]
+        public void BitOperation_BitwiseNOTTest()
+        {
+            UInt32 Temp_Value = 2147483648;
+            UInt32 result = ConvertClass.BitOperation_BitwiseNOT(Temp_Value);
+            Assert.AreEqual(result, 1);
         }
     }
 }

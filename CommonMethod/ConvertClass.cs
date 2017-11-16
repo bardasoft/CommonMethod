@@ -270,7 +270,7 @@ namespace CommonMethod
         /// <summary>
         /// 位运算_按位取反
         /// </summary>
-        public static UInt32 BitOperation_BitwiseNOT(UInt32 intValue)
+        public static UInt32 BitOperation_BitwiseNOT(UInt32 intValue )
         {
             intValue = ((intValue >> 1) & 0X55555555) | ((intValue & 0X55555555) << 1);     //1位交换
             intValue = ((intValue >> 2) & 0X33333333) | ((intValue & 0X33333333) << 2);     //2位交换
