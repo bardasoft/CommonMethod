@@ -266,5 +266,20 @@ namespace CommonMethod
         }
         #endregion
 
+        #region 位运算
+        /// <summary>
+        /// 位运算_按位取反
+        /// </summary>
+        public static UInt32 BitOperation_BitwiseNOT(UInt32 intValue)
+        {
+            intValue = ((intValue >> 1) & 0X55555555) | ((intValue & 0X55555555) << 1);     //1位交换
+            intValue = ((intValue >> 2) & 0X33333333) | ((intValue & 0X33333333) << 2);     //2位交换
+            intValue = ((intValue >> 4) & 0X0F0F0F0F) | ((intValue & 0X0F0F0F0F) << 4);     //4位交换
+            intValue = ((intValue >> 8) & 0X00FF00FF) | ((intValue & 0X00FF00FF) << 8);     //4位交换
+            intValue = (intValue >> 16) | (intValue  << 16);     //16位交换
+            return intValue;
+        }
+
+        #endregion
     }
 }
