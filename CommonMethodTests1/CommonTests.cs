@@ -28,5 +28,16 @@ namespace CommonMethod.Tests
             Assert.IsTrue(Common.CmdTelnet(ip, intPort));
             //Assert.Fail();
         }
+
+        [TestMethod()]
+        public void GetDictionaryFirstKeyTest()
+        {
+            Dictionary<string , string > dic = new Dictionary<string , string >();
+            dic["2"] = "0";
+            dic["1"] = "1";
+            object obj = Common.GetDictionaryFirstKey(dic);
+            string s = Convert.ToString(obj);
+            Assert.AreEqual(s,"0");
+        }
     }
 }
