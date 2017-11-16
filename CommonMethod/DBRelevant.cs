@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Reflection;
 using System.Text;
 
@@ -14,13 +15,13 @@ namespace CommonMethod
         /// <param name="t"></param>
         /// <param name="strKeyField"></param>
         /// <returns></returns>
-        public static string GetDBOperatStr_Insert<T>(T t, string strKeyField)
+        public static string GetDBOperatStr_Insert<T>(T t,string strTableName, string strKeyField)
         {
 
             PropertyInfo[] propertys = t.GetType().GetProperties();// 获得此模型的公共属性
             StringBuilder sbResult = new StringBuilder();
             sbResult.Append("INSERT INTO ");
-            sbResult.Append(t.ToString() + " ");    //表名称
+            sbResult.Append(strTableName + " ");    //表名称
             sbResult.Append("( ");
             foreach (var pi in propertys)
             {
@@ -73,12 +74,12 @@ namespace CommonMethod
         /// <param name="t"></param>
         /// <param name="strsKeyField"></param>
         /// <returns></returns>
-        public static string GetDBOperatStr_Update<T>(T t, string[] strsKeyField)
+        public static string GetDBOperatStr_Update<T>(T t, string strTableName, string[] strsKeyField)
         {
             PropertyInfo[] propertys = t.GetType().GetProperties();// 获得此模型的公共属性
             StringBuilder sbResult = new StringBuilder();
             sbResult.Append("UPDATE  ");
-            sbResult.Append(t.ToString() + " ");    //表名称
+            sbResult.Append(strTableName + " ");    //表名称
             sbResult.Append("SET ");
             foreach (var pi in propertys)
             {
@@ -136,12 +137,12 @@ namespace CommonMethod
         /// <param name="strsKeyField"></param>
         /// <param name="strsUpdateField"></param>
         /// <returns></returns>
-        public static string GetDBOperatStr_Update<T>(T t, string[] strsKeyField, string[] strsUpdateField)
+        public static string GetDBOperatStr_Update<T>(T t, string strTableName, string[] strsKeyField, string[] strsUpdateField)
         {
             PropertyInfo[] propertys = t.GetType().GetProperties();// 获得此模型的公共属性
             StringBuilder sbResult = new StringBuilder();
             sbResult.Append("UPDATE  ");
-            sbResult.Append(t.ToString() + " ");    //表名称
+            sbResult.Append(strTableName + " ");    //表名称
             sbResult.Append("SET ");
             foreach (var pi in propertys)
             {
@@ -197,12 +198,12 @@ namespace CommonMethod
         /// <param name="t"></param>
         /// <param name="strsKeyField"></param>
         /// <returns></returns>
-        public static string GetDBOperatStr_Query<T>(T t, string[] strsKeyField)
+        public static string GetDBOperatStr_Query<T>(T t, string strTableName, string[] strsKeyField)
         {
             PropertyInfo[] propertys = t.GetType().GetProperties();// 获得此模型的公共属性
             StringBuilder sbResult = new StringBuilder();
             sbResult.Append("SELECT * FROM ");
-            sbResult.Append(t.ToString() + " ");
+            sbResult.Append(strTableName + " ");
             sbResult.Append("WHERE ");
             foreach (var pi in propertys)
             {
@@ -239,12 +240,12 @@ namespace CommonMethod
         /// <param name="t"></param>
         /// <param name="strsKeyField"></param>
         /// <returns></returns>
-        public static string GetDBOperatStr_Delete<T>(T t, string[] strsKeyField)
+        public static string GetDBOperatStr_Delete<T>(T t, string strTableName, string[] strsKeyField)
         {
             PropertyInfo[] propertys = t.GetType().GetProperties();// 获得此模型的公共属性
             StringBuilder sbResult = new StringBuilder();
             sbResult.Append("DELETE FROM ");
-            sbResult.Append(t.ToString() + " ");
+            sbResult.Append(strTableName + " ");
             sbResult.Append("WHERE ");
             foreach (var pi in propertys)
             {
@@ -277,5 +278,7 @@ namespace CommonMethod
             }
             return false;
         }
+
+        
     }
 }

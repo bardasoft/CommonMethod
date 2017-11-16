@@ -46,6 +46,7 @@
     <Compile Include="DBRelevant.cs" />
     <Compile Include="GPSCoordinateConvert.cs" />
     <Compile Include="LogWrite.cs" />
+    <Compile Include="ModelConvertHelper.cs" />
     <Compile Include="OnlieMapObject.cs" />
     <Compile Include="ProgramIPC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
