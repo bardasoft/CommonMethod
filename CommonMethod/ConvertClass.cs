@@ -9,6 +9,43 @@ namespace CommonMethod
     /// </summary>
     public class ConvertClass
     {
+        #region 进制转换
+        /// <summary>
+        /// 16进制转为Byte
+        /// </summary>
+        /// <param name="chrInput"></param>
+        /// <returns></returns>
+        public static byte Decimal_ChartoByte(string chrInput)
+        {
+            byte chrValue;
+            switch (chrInput)
+            {
+                case "A":
+                    chrValue = 0x0A;
+                    break;
+                case "B":
+                    chrValue = 0x0B;
+                    break;
+                case "C":
+                    chrValue = 0x0C;
+                    break;
+                case "D":
+                    chrValue = 0x0D;
+                    break;
+                case "E":
+                    chrValue = 0x0E;
+                    break;
+                case "F":
+                    chrValue = 0x0F;
+                    break;
+                default:
+                    chrValue = (byte)int.Parse(chrInput);
+                    break;
+            }
+            return chrValue;
+        }
+
+        #endregion
         #region BCD码转换
         private static Byte[] BCDToHex(string strTemp)
         {
@@ -264,6 +301,23 @@ namespace CommonMethod
             }
             return sbResult.ToString();
         }
+
+        /// <summary>
+        /// 特殊转换_字符串转换为Byte数组
+        /// </summary>
+        /// <returns></returns>
+        public static byte[] Special_StringToBytes(string strValue)
+        {
+            int arrayLen = strValue.Length / 2;
+            byte[] bytsValue = new byte[arrayLen];
+            for (int i = 0; i < arrayLen; i++)
+            {
+                bytsValue[i] = (byte)(Decimal_ChartoByte(strValue.Substring(2 * i, 1)) * 16 + Decimal_ChartoByte(strValue.Substring(2 * i + 1, 1)));
+            }
+            return bytsValue;
+        }
+
+        
         #endregion
 
         #region 位运算

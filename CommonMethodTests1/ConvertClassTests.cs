@@ -45,5 +45,13 @@ namespace CommonMethod.Tests
             UInt32 result = ConvertClass.BitOperation_BitwiseNOT(Temp_Value);
             Assert.AreEqual(result, 1);
         }
+
+        [TestMethod()]
+        public void Special_StringToBytesTest()
+        {
+            string strValue = "123456";
+            byte[] result = ConvertClass.Special_StringToBytes(strValue);
+            Assert.AreEqual(result.Length, 1);
+        }
     }
 }
