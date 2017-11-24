@@ -45,7 +45,17 @@ namespace CommonMethod
             return chrValue;
         }
 
+        public static int Decimal_BytesToInt(byte[] bytsValues)
+        {
+            int intResult = 0;
+            for (int i = bytsValues.Length - 1; i >= 0; i--)
+            {
+                intResult += (int)(bytsValues[i] << ((bytsValues.Length - 1 - i) * 8));
+            }
+            return intResult;
+        }
         #endregion
+
         #region BCD码转换
         private static Byte[] BCDToHex(string strTemp)
         {

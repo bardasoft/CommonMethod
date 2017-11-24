@@ -53,5 +53,13 @@ namespace CommonMethod.Tests
             byte[] result = ConvertClass.Special_StringToBytes(strValue);
             Assert.AreEqual(result.Length, 1);
         }
+
+        [TestMethod()]
+        public void Decimal_BytesToIntTest()
+        {
+            byte[] byts = { 0X00, 0X8D, 0X0F, 0X85 };
+            int intResult = ConvertClass.Decimal_BytesToInt(byts);
+            Assert.AreEqual(intResult, 1);
+        }
     }
 }
