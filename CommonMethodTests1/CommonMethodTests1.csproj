@@ -58,6 +58,7 @@
     <Compile Include="CommonTests.cs" />
     <Compile Include="Common_WebTests.cs" />
     <Compile Include="ConvertClassTests.cs" />
+    <Compile Include="DBRelevantTests.cs" />
     <Compile Include="GPSCoordinateConvertTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VerificationTests.cs" />

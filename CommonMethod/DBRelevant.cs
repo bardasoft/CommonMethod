@@ -68,6 +68,73 @@ namespace CommonMethod
         }
 
         /// <summary>
+        /// 获取数据库语句_插入
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t"></param>
+        /// <param name="strTableName"></param>
+        /// <param name="strKeyField"></param>
+        /// <param name="strsInsertField"></param>
+        /// <returns></returns>
+        public static string GetDBOperatStr_Insert<T>(T t, string strTableName, string strKeyField, string[] strsInsertField)
+        {
+            PropertyInfo[] propertys = t.GetType().GetProperties();// 获得此模型的公共属性
+            StringBuilder sbResult = new StringBuilder();
+            sbResult.Append("INSERT INTO ");
+            sbResult.Append(strTableName + " ");    //表名称
+            sbResult.Append("( ");
+            foreach (var pi in propertys)
+            {
+                if (strKeyField == pi.Name)
+                {
+                    continue;   //主键跳过
+                }
+                if (!StrInStrs(strsInsertField, pi.Name))
+                {
+                    continue;   //非插入字段
+                }
+                sbResult.Append(pi.Name);
+                sbResult.Append(",");
+            }
+            sbResult.Length = sbResult.Length - 1;
+
+            sbResult.Append(") ");
+            sbResult.Append("VALUES ");
+            sbResult.Append("( ");
+            foreach (var pi in propertys)
+            {
+                if (strKeyField == pi.Name)
+                {
+                    continue;   //主键跳过
+                }
+                if (!StrInStrs(strsInsertField, pi.Name))
+                {
+                    continue;   //非插入字段
+                }
+                if ((pi.PropertyType == typeof(byte)))
+                {
+                    //特殊处理1  byte类型
+                    sbResult.Append(Convert.ToString(pi.GetValue(t, null)) + " ");
+                }
+                else if ((pi.PropertyType == typeof(DateTime)))
+                {
+                    //特殊处理2 时间类型格式
+                    DateTime Temp_tim = Convert.ToDateTime(pi.GetValue(t, null));
+                    //sbResult.Append(Convert.ToString(pi.GetValue(t, null)) + " ");
+                    sbResult.Append("'" + Temp_tim.ToString("yyyy-MM-dd HH:mm:ss") + "' ");
+                }
+                else
+                {
+                    sbResult.Append("'" + Convert.ToString(pi.GetValue(t, null)) + "' ");
+                }
+                sbResult.Append(",");
+            }
+            sbResult.Length = sbResult.Length - 1;
+            sbResult.Append(") ");
+            return sbResult.ToString();
+        }
+
+        /// <summary>
         /// 获取数据库语句_更新
         /// </summary>
         /// <typeparam name="T"></typeparam>

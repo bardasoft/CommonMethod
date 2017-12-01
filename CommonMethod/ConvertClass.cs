@@ -302,12 +302,13 @@ namespace CommonMethod
         /// 特殊转换_字节数组转换为16进制字符串
         /// </summary>
         /// <returns></returns>
-        public static string Special_BytesToStrHex(byte[] bytsValue)
+        public static string Special_BytesToStrHex(byte[] bytsValue,string strDelimiter="")
         {
             StringBuilder sbResult = new StringBuilder();
             foreach (byte byt in bytsValue)       //拼接电话号码
             {
                 sbResult.Append(byt.ToString("X2"));
+                sbResult.Append(strDelimiter);
             }
             return sbResult.ToString();
         }

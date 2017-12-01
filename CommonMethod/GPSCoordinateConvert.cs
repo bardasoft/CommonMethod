@@ -14,7 +14,7 @@ namespace CommonMethod
         * GCJ-02：中国坐标偏移标准，Google Map、高德、腾讯使用
         * BD-09：百度坐标偏移标准，Baidu Map使用
         ******************************/
-        #region 坐标转换 161219
+        #region 坐标转换
 
         static double PI = 3.14159265358979324;
         static double x_pi = 3.14159265358979324 * 3000.0 / 180.0;
