@@ -19,5 +19,13 @@ namespace CommonMethod.Tests
             string strResulr = Common_Web.HttpPost(strUrl, strData);
             Assert.AreEqual(strResulr, 1);
         }
+
+        [TestMethod()]
+        public void GetNetDataTimeTest()
+        {
+            string strResult = Common_Web.GetNetDataTime();
+            DateTime tim = Convert.ToDateTime(strResult);
+            Assert.AreEqual(tim, "1");
+        }
     }
 }
