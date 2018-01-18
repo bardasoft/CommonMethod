@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublicClassCurrency", "Publ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SKDataSourceConvert", "SKDataSourceConvert\SKDataSourceConvert.csproj", "{FE048DE1-C744-49E6-A725-DA1A369FE3AC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBOperAt", "DBOperAt\DBOperAt.csproj", "{E7FC843F-C055-446B-84A7-3FF0A74B4FC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBOperAtTests", "DBOperAtTests\DBOperAtTests.csproj", "{647E21BE-8B02-4FE4-AED4-A4B071EDD80F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,14 @@ Global
 		{FE048DE1-C744-49E6-A725-DA1A369FE3AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE048DE1-C744-49E6-A725-DA1A369FE3AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE048DE1-C744-49E6-A725-DA1A369FE3AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7FC843F-C055-446B-84A7-3FF0A74B4FC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7FC843F-C055-446B-84A7-3FF0A74B4FC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7FC843F-C055-446B-84A7-3FF0A74B4FC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7FC843F-C055-446B-84A7-3FF0A74B4FC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{647E21BE-8B02-4FE4-AED4-A4B071EDD80F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{647E21BE-8B02-4FE4-AED4-A4B071EDD80F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{647E21BE-8B02-4FE4-AED4-A4B071EDD80F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{647E21BE-8B02-4FE4-AED4-A4B071EDD80F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,23 +1,34 @@
 ﻿using PublicClassCurrency;
+using SKDataSourceConvert.SK3000FieldName;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace SKDataSourceConvert
 {
+
+    /// <summary>
+    /// SK3000数据转换
+    /// </summary>
     public class SK3000DataConvert
     {
-        public static VideoInfo VideoInfo_DataRowToVideoInfo()
+        /// <summary>
+        /// 视频信息_数据行转为VideoInfo
+        /// </summary>
+        /// <param name="drVideoInfo"></param>
+        /// <returns></returns>
+        public static VideoInfo VideoInfo_DataRowToVideoInfo(DataRow drVideoInfo)
         {
             VideoInfo v = new VideoInfo();
-
+            v = GetVideoInfo_ByDataRow(drVideoInfo);
             return v;
         }
 
         #region 视频信息相关
-        private static PublicClassCurrency.VideoInfo GetVideoInfo_ByDataRow(DataRow drVideoInfo)
+        private static VideoInfo GetVideoInfo_ByDataRow(DataRow drVideoInfo)
         {
-            PublicClassCurrency.VideoInfo videoInfo = new PublicClassCurrency.VideoInfo();
+            VideoInfo videoInfo = new VideoInfo();
             string dvsNumber = Convert.ToString(drVideoInfo["DVSNumber"]);
             string cameras1 = Convert.ToString(drVideoInfo[TVideoTable_FieldName.c_strFieldName_CamerasInfo1]);
             string cameras2 = Convert.ToString(drVideoInfo[TVideoTable_FieldName.c_strFieldName_CamerasInfo2]);
@@ -48,47 +59,47 @@ namespace SKDataSourceConvert
             if (videoInfo.DVSType.EndsWith("ZW") || videoInfo.DVSType == "SK838")
             {
                 //云视通设备
-                videoInfo.VideoType = PublicClassCurrency.Enum_VideoType.CloundSee;
+                videoInfo.VideoType = Enum_VideoType.CloundSee;
             }
             else if (videoInfo.DVSType.Contains("IPCWA") || videoInfo.DVSType.Contains("SK835"))
             {
-                videoInfo.VideoType = PublicClassCurrency.Enum_VideoType.IPCWA;
+                videoInfo.VideoType = Enum_VideoType.IPCWA;
             }
             else if (videoInfo.DVSType.EndsWith("YS"))
             {
-                videoInfo.VideoType = PublicClassCurrency.Enum_VideoType.Ezviz;
+                videoInfo.VideoType = Enum_VideoType.Ezviz;
             }
             else if (videoInfo.DVSType.EndsWith("HM"))  //180117 华迈设备
             {
-                videoInfo.VideoType = PublicClassCurrency.Enum_VideoType.HuaMaiVideo;
+                videoInfo.VideoType = Enum_VideoType.HuaMaiVideo;
             }
             else if (videoInfo.DVSType.StartsWith("SK86") || videoInfo.DVSType.StartsWith("SK519") || videoInfo.DVSType.StartsWith("SK8519"))
             {
-                if (SystemSetting_VideoPlay.SKVideoNewModeEnable == 1)
+                if (SK3000TransitionSet.SKVideoTypeAssignmentEnable)
                 {
-                    videoInfo.VideoType = PublicClassCurrency.Enum_VideoType.SKVideo;
+                    videoInfo.VideoType = Enum_VideoType.SKVideo;
                     videoInfo.IntercomEnable = true;
                 }
                 else
                 {
-                    videoInfo.VideoType = PublicClassCurrency.Enum_VideoType.Unrecognized;
+                    videoInfo.VideoType = Enum_VideoType.Unrecognized;
                 }
 
             }
             else if (videoInfo.DVSType.StartsWith("SK836"))
             {
-                if (SystemSetting_VideoPlay.SKVideoNewModeEnable == 1)
+                if (SK3000TransitionSet.SKVideoTypeAssignmentEnable)
                 {
-                    videoInfo.VideoType = PublicClassCurrency.Enum_VideoType.SKVideo;
+                    videoInfo.VideoType = Enum_VideoType.SKVideo;
                 }
                 else
                 {
-                    videoInfo.VideoType = PublicClassCurrency.Enum_VideoType.Unrecognized;
+                    videoInfo.VideoType = Enum_VideoType.Unrecognized;
                 }
             }
             else
             {
-                videoInfo.VideoType = PublicClassCurrency.Enum_VideoType.Unrecognized;
+                videoInfo.VideoType = Enum_VideoType.Unrecognized;
             }
             #endregion
 
@@ -119,14 +130,14 @@ namespace SKDataSourceConvert
             return videoInfo;
         }
 
-        private static PublicClassCurrency.VideoInfo SetVideoCameraInfo(PublicClassCurrency.VideoInfo videoInfo, string strCameraInfos)
+        private static VideoInfo SetVideoCameraInfo(VideoInfo videoInfo, string strCameraInfos)
         {
             string[] strsCameraInfo = strCameraInfos.Split('$');
             if (strsCameraInfo.Length == 0)
             {
                 return videoInfo;
             }
-            videoInfo.Cameras = new Dictionary<int, PublicClassCurrency.CameraInfo>();
+            videoInfo.Cameras = new Dictionary<int, CameraInfo>();
             switch (videoInfo.DVSType)
             {
                 case "SK8601":
@@ -216,9 +227,9 @@ namespace SKDataSourceConvert
             return videoInfo;
         }
 
-        private static PublicClassCurrency.CameraInfo GetCameraInfo(PublicClassCurrency.VideoInfo v, int intChannel, string strCameraName)
+        private static CameraInfo GetCameraInfo(VideoInfo v, int intChannel, string strCameraName)
         {
-            PublicClassCurrency.CameraInfo c = new PublicClassCurrency.CameraInfo();
+            CameraInfo c = new CameraInfo();
             c.DVSNumber = v.DVSNumber;
             c.DVSType = v.DVSType;
             c.DVSAddress = v.DVSAddress;

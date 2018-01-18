@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FE048DE1-C744-49E6-A725-DA1A369FE3AC}</ProjectGuid>
+    <ProjectGuid>{E7FC843F-C055-446B-84A7-3FF0A74B4FC2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SKDataSourceConvert</RootNamespace>
-    <AssemblyName>SKDataSourceConvert</AssemblyName>
+    <RootNamespace>DBOperAt</RootNamespace>
+    <AssemblyName>DBOperAt</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -28,29 +28,33 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\SKDataSourceConvert.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.7.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll_Libary\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.66.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll_Libary\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataBaseInfo.cs" />
+    <Compile Include="DataBaseOperAt.cs" />
+    <Compile Include="DBHelpMySql.cs" />
+    <Compile Include="DBHelpMSSQL.cs" />
+    <Compile Include="DBHelpSQLite.cs" />
+    <Compile Include="Enum_DataBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SK3000DataConvert.cs" />
-    <Compile Include="SK3000FieldName\TVideoTable_FieldName.cs" />
-    <Compile Include="SK3000TransitionSet.cs" />
+    <Compile Include="PubConstant.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommonMethod\CommonMethod.csproj">
-      <Project>{fe120503-38ed-4a41-91e7-835bdb1b625c}</Project>
-      <Name>CommonMethod</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PublicClassCurrency\PublicClassCurrency.csproj">
-      <Project>{69bc40a2-638d-49e9-a367-52644bd39c54}</Project>
-      <Name>PublicClassCurrency</Name>
-    </ProjectReference>
+    <Content Include="dll_Libary\MySql.Data.dll" />
+    <Content Include="dll_Libary\System.Data.SQLite.dll" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
