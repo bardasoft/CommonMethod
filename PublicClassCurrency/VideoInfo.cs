@@ -203,7 +203,38 @@ namespace PublicClassCurrency
             set { dicCameras = value; }
         }
 
+        /// <summary>
+        /// 对讲使能
+        /// </summary>
+        private bool bolIntercomEnable = false;
+        /// <summary>
+        /// 对讲使能
+        /// </summary>
+        public bool IntercomEnable
+        {
+            get { return bolIntercomEnable; }
+            set
+            {
+                bolIntercomEnable = value;
+            }
+        }
 
+
+        /// <summary>
+        /// 仅作为对讲设备
+        /// </summary>
+        private bool bolOnlyIntercom = false;
+        /// <summary>
+        /// 仅作为对讲设备
+        /// </summary>
+        public bool OnlyIntercom
+        {
+            get { return bolOnlyIntercom; }
+            set
+            {
+                bolOnlyIntercom = value;
+            }
+        }
         #endregion
 
         #region 方法

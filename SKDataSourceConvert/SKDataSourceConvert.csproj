@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FE120503-38ED-4A41-91E7-835BDB1B625C}</ProjectGuid>
+    <ProjectGuid>{FE048DE1-C744-49E6-A725-DA1A369FE3AC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CommonMethod</RootNamespace>
-    <AssemblyName>CommonMethod</AssemblyName>
+    <RootNamespace>SKDataSourceConvert</RootNamespace>
+    <AssemblyName>SKDataSourceConvert</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -28,39 +28,15 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\CommonMethod.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common.cs" />
-    <Compile Include="CommonObject.cs" />
-    <Compile Include="Common_Form.cs" />
-    <Compile Include="Common_Web.cs" />
-    <Compile Include="ConvertClass.cs" />
-    <Compile Include="DBRelevant.cs" />
-    <Compile Include="GPSCoordinateConvert.cs" />
-    <Compile Include="LogWrite.cs" />
-    <Compile Include="ModelConvertHelper.cs" />
-    <Compile Include="OnlieMapObject.cs" />
-    <Compile Include="ProgramIPC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScreenPosionCalculation.cs" />
-    <Compile Include="SystemMetthod.cs" />
-    <Compile Include="TimeOutSocket.cs" />
-    <Compile Include="Verification.cs" />
+    <Compile Include="SK3000DataConvert.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

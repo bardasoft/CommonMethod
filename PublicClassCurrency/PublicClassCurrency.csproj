@@ -40,8 +40,10 @@
     <Compile Include="CameraInfo.cs" />
     <Compile Include="Enum_CordinateSystem.cs" />
     <Compile Include="EventRecordID.cs" />
+    <Compile Include="MapMarkerPointInfo.cs" />
     <Compile Include="MapPointInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Enum_SerialDeviceType.cs" />
     <Compile Include="VideoInfo.cs" />
     <Compile Include="Enum_VideoType.cs" />
   </ItemGroup>
