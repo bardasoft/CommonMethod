@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace DBOperAt
@@ -17,10 +18,10 @@ namespace DBOperAt
             switch (database)
             {
                 case Enum_DataBase.MySQL:
-                    DBHelpMSSQL.connectionString = PubConstant.MSSQLDBConnectionString;
+                    DBHelpMySql.connectionString = PubConstant.MySqlDBConnectionString;
                     break;
                 case Enum_DataBase.MSSQLServer:
-                    DBHelpMySql.connectionString = PubConstant.MySqlDBConnectionString;
+                    DBHelpMSSQL.connectionString = PubConstant.MSSQLDBConnectionString;
                     break;
                 case Enum_DataBase.SQLite:
                     DBHelpSQLite.connectionString = PubConstant.SQLiteDBConnectionString;
@@ -32,6 +33,22 @@ namespace DBOperAt
         public static bool DBTestConn()
         {
             return false;
+        }
+
+        public static DataSet QuerySQL(string strSQL)
+        {
+            switch (DataBaseInfo.DataBase)
+            {
+                case Enum_DataBase.MySQL:
+                    return DBHelpMySql.Query(strSQL);
+                case Enum_DataBase.MSSQLServer:
+                    return DBHelpMSSQL.QuerySQL(strSQL);
+                    break;
+                case Enum_DataBase.SQLite:
+                    return null;
+                    break;
+            }
+            return null;
         }
     }
 }

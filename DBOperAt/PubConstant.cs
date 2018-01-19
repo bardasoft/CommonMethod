@@ -17,15 +17,18 @@ namespace DBOperAt
             get
             {
                 StringBuilder sbConnstr = new StringBuilder();
-                sbConnstr.Append("server=" + DataBaseInfo.DBAddress + ", ");
+               
                 if (DataBaseInfo.DBPort != 0) //设置端口
                 {
-                    sbConnstr.Append(DataBaseInfo.DBAddress + ";");
+                    sbConnstr.Append("Data Source = " + DataBaseInfo.DBAddress + "," + DataBaseInfo.DBPort + ";");
                 }
-                sbConnstr.Append("Initial Catalog=" + DataBaseInfo.DBPort + "; ");
+                else
+                {
+                    sbConnstr.Append("Data Source = " + DataBaseInfo.DBAddress + "; ");
+                }
+                sbConnstr.Append("Initial Catalog=" + DataBaseInfo.DBName + "; ");
                 sbConnstr.Append("User ID=" + DataBaseInfo.DBUserName + "; ");
-                sbConnstr.Append("Password=" + DataBaseInfo.DBPassword + "; ");
-                sbConnstr.Append("database=" + DataBaseInfo.DBName + " ");
+                sbConnstr.Append("Password=" + DataBaseInfo.DBPassword + " ");
                 return sbConnstr.ToString();
             }
         }

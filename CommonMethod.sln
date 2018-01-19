@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBOperAt", "DBOperAt\DBOper
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBOperAtTests", "DBOperAtTests\DBOperAtTests.csproj", "{647E21BE-8B02-4FE4-AED4-A4B071EDD80F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SKDataSourceConvertTests", "SKDataSourceConvertTests\SKDataSourceConvertTests.csproj", "{747AB76C-E528-49CF-A3D3-7A06705DEA1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{647E21BE-8B02-4FE4-AED4-A4B071EDD80F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{647E21BE-8B02-4FE4-AED4-A4B071EDD80F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{647E21BE-8B02-4FE4-AED4-A4B071EDD80F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{747AB76C-E528-49CF-A3D3-7A06705DEA1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{747AB76C-E528-49CF-A3D3-7A06705DEA1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{747AB76C-E528-49CF-A3D3-7A06705DEA1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{747AB76C-E528-49CF-A3D3-7A06705DEA1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
