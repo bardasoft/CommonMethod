@@ -37,6 +37,57 @@ namespace PublicClassCurrency
         /// <summary>
         /// 华迈云视频类型
         /// </summary>
-        HuaMaiVideo = 5
+        HuaMaiVideo = 5,
+
+        /// <summary>
+        /// 安讯士
+        /// </summary>
+        Axis = 6
+    }
+
+    /// <summary>
+    /// 录像类型
+    /// 完成解析的类型
+    /// 与视频类型对应
+    /// </summary>
+    public enum Enum_VIdeoRecordType
+    {
+        /// <summary>
+        /// 未识别
+        /// </summary>
+        Unrecognized = 0,
+
+
+        /// <summary>
+        /// 安讯士
+        /// </summary>
+        Axis = 6
+    }
+
+    
+    /// <summary>
+    /// 录像文件类型
+    /// </summary>
+    public enum Enum_VideoRecordFileType
+    {
+
+        /// <summary>
+        /// 未识别
+        /// </summary>
+        Unrecognized = 0,
+
+        /// <summary>
+        /// 音频文件
+        /// </summary>
+        Video = 1,
+
+        /// <summary>
+        /// 视频文件
+        /// </summary>
+        Audio = 2,
+        /// <summary>
+        /// 音视频文件
+        /// </summary>
+        VideoAndAudio = 3,
     }
 }

@@ -50,5 +50,21 @@ namespace DBOperAt
             }
             return null;
         }
+
+        public static int ExecSQL(string strSQL)
+        {
+            switch (DataBaseInfo.DataBase)
+            {
+                case Enum_DataBase.MySQL:
+                    return DBHelpMySql.ExecuteSql(strSQL);
+                case Enum_DataBase.MSSQLServer:
+                    return DBHelpMSSQL.ExecuteSQL(strSQL);
+                    break;
+                case Enum_DataBase.SQLite:
+                    return 0;
+                    break;
+            }
+            return -1;
+        }
     }
 }

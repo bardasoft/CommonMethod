@@ -5,13 +5,9 @@ VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonMethod", "CommonMethod\CommonMethod.csproj", "{FE120503-38ED-4A41-91E7-835BDB1B625C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonMethodTests", "CommonMethodTests\CommonMethodTests.csproj", "{5B18B655-3B34-4217-A43A-609611A34F57}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonMethod_Winform_Use", "CommonMethod_Winform_Use\CommonMethod_Winform_Use.csproj", "{700932BA-5557-4BFB-9DB4-804407A51A4A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonMethod_Winform_Use1", "CommonMethod_Winform_Use1\CommonMethod_Winform_Use1.csproj", "{93D340D9-FFD9-4AC0-81FB-687C7FDE86EE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonMethodTests1", "CommonMethodTests1\CommonMethodTests1.csproj", "{307E3CEB-7564-4FC2-82D3-11806BB78CA4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublicClassCurrency", "PublicClassCurrency\PublicClassCurrency.csproj", "{69BC40A2-638D-49E9-A367-52644BD39C54}"
 EndProject
@@ -23,6 +19,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBOperAtTests", "DBOperAtTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SKDataSourceConvertTests", "SKDataSourceConvertTests\SKDataSourceConvertTests.csproj", "{747AB76C-E528-49CF-A3D3-7A06705DEA1C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonMethodTests", "CommonMethodTests\CommonMethodTests.csproj", "{933ED6DE-FE91-4030-AA89-B1F9306A8110}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBOperAtTests1", "DBOperAtTests1\DBOperAtTests1.csproj", "{E447C26E-9121-4971-AFB8-AF152697BABB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SKVideoRecordConvert", "SKVideoRecordConvert\SKVideoRecordConvert.csproj", "{86FB3241-942C-4809-9FDC-1EAF699F31F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SKVideoRecordConvertTests", "SKVideoRecordConvertTests\SKVideoRecordConvertTests.csproj", "{F702BC65-BE5E-4701-BACE-190AC9543956}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,10 +37,6 @@ Global
 		{FE120503-38ED-4A41-91E7-835BDB1B625C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE120503-38ED-4A41-91E7-835BDB1B625C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE120503-38ED-4A41-91E7-835BDB1B625C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5B18B655-3B34-4217-A43A-609611A34F57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5B18B655-3B34-4217-A43A-609611A34F57}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5B18B655-3B34-4217-A43A-609611A34F57}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5B18B655-3B34-4217-A43A-609611A34F57}.Release|Any CPU.Build.0 = Release|Any CPU
 		{700932BA-5557-4BFB-9DB4-804407A51A4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{700932BA-5557-4BFB-9DB4-804407A51A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{700932BA-5557-4BFB-9DB4-804407A51A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,10 +45,6 @@ Global
 		{93D340D9-FFD9-4AC0-81FB-687C7FDE86EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93D340D9-FFD9-4AC0-81FB-687C7FDE86EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93D340D9-FFD9-4AC0-81FB-687C7FDE86EE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{307E3CEB-7564-4FC2-82D3-11806BB78CA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{307E3CEB-7564-4FC2-82D3-11806BB78CA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{307E3CEB-7564-4FC2-82D3-11806BB78CA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{307E3CEB-7564-4FC2-82D3-11806BB78CA4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{69BC40A2-638D-49E9-A367-52644BD39C54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{69BC40A2-638D-49E9-A367-52644BD39C54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69BC40A2-638D-49E9-A367-52644BD39C54}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -69,6 +65,22 @@ Global
 		{747AB76C-E528-49CF-A3D3-7A06705DEA1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{747AB76C-E528-49CF-A3D3-7A06705DEA1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{747AB76C-E528-49CF-A3D3-7A06705DEA1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{933ED6DE-FE91-4030-AA89-B1F9306A8110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{933ED6DE-FE91-4030-AA89-B1F9306A8110}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{933ED6DE-FE91-4030-AA89-B1F9306A8110}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{933ED6DE-FE91-4030-AA89-B1F9306A8110}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E447C26E-9121-4971-AFB8-AF152697BABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E447C26E-9121-4971-AFB8-AF152697BABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E447C26E-9121-4971-AFB8-AF152697BABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E447C26E-9121-4971-AFB8-AF152697BABB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86FB3241-942C-4809-9FDC-1EAF699F31F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86FB3241-942C-4809-9FDC-1EAF699F31F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86FB3241-942C-4809-9FDC-1EAF699F31F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86FB3241-942C-4809-9FDC-1EAF699F31F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F702BC65-BE5E-4701-BACE-190AC9543956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F702BC65-BE5E-4701-BACE-190AC9543956}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F702BC65-BE5E-4701-BACE-190AC9543956}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F702BC65-BE5E-4701-BACE-190AC9543956}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -869,8 +869,6 @@ namespace DBOperAt
 
         #endregion
 
-
-
     }
 }
  

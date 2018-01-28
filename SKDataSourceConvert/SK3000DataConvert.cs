@@ -97,6 +97,10 @@ namespace SKDataSourceConvert
                     videoInfo.VideoType = Enum_VideoType.Unrecognized;
                 }
             }
+            else if (videoInfo.DVSType == "AXISM3037")
+            {
+                videoInfo.VideoType = Enum_VideoType.Axis;
+            }
             else
             {
                 videoInfo.VideoType = Enum_VideoType.Unrecognized;

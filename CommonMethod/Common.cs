@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
@@ -191,6 +192,20 @@ namespace CommonMethod
             return (T)retval;
         }
 
+
+        public static bool CreateFolder(string strFolderPath)
+        {
+            string Temp_strUpperLevelFolderPath = strFolderPath.Substring(0, strFolderPath.LastIndexOf("\\") );
+            if (!Directory.Exists(Temp_strUpperLevelFolderPath))
+            {
+                CreateFolder(Temp_strUpperLevelFolderPath);
+            }
+            if (!Directory.Exists(strFolderPath))
+            {
+                Directory.CreateDirectory(strFolderPath);
+            }
+            return true;
+        }
     }
 }
 
