@@ -823,7 +823,6 @@ namespace DBOperAt
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 MySqlCommand cmd = new MySqlCommand();
-                cmd.CommandTimeout = 300;
                 PrepareCommand(cmd, connection, null, SQLString, cmdParms);
                 using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
                 {

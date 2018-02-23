@@ -51,22 +51,6 @@ namespace DBOperAt
             return null;
         }
 
-        public static DataSet QuerySQL1(string strSQL)
-        {
-            switch (DataBaseInfo.DataBase)
-            {
-                case Enum_DataBase.MySQL:
-                    return DBHelpMySql.Query(strSQL,null);
-                case Enum_DataBase.MSSQLServer:
-                    return DBHelpMSSQL.QuerySQL(strSQL);
-                    break;
-                case Enum_DataBase.SQLite:
-                    return null;
-                    break;
-            }
-            return null;
-        }
-
         public static int ExecSQL(string strSQL)
         {
             switch (DataBaseInfo.DataBase)

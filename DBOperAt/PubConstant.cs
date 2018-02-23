@@ -42,7 +42,7 @@ namespace DBOperAt
                 sbConnstr.Append("Port=" + DataBaseInfo.DBPort + "; ");
                 sbConnstr.Append("user id=" + DataBaseInfo.DBUserName + "; ");
                 sbConnstr.Append("password=" + DataBaseInfo.DBPassword + "; ");
-                sbConnstr.Append("database=" + DataBaseInfo.DBName + ";Connect Timeout=500 ");
+                sbConnstr.Append("database=" + DataBaseInfo.DBName + " ");
                 return sbConnstr.ToString();
             }
         }
