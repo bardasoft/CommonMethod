@@ -21,12 +21,12 @@ namespace CommonMethod.Tests
         [TestMethod()]
         public void SetWindowPosTest()
         {
-            IntPtr iResult = SystemMetthod.FindWindow(null, "多方通话");
+            //IntPtr iResult = SystemMetthod.FindWindow(null, "多方通话");
             //IntPtr iResult = SystemMetthod.FindWindow(null, "多方通话");
             //IntPtr iZ=new IntPtr(-1);
-            int intResult = SystemMetthod.SetWindowPos(iResult, -1, 1, 1, 1,1,3);
+            //int intResult = SystemMetthod.SetWindowPos(iResult, -1, 1, 1, 1,1,3);
             //intResult = SystemMetthod.SetWindowPos(iResult, 1, 1, 1, 781, 484, 1);
-            Assert.AreEqual(intResult, 1);
+            //Assert.AreEqual(intResult, 1);
         }
     }
 }

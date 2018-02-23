@@ -184,6 +184,16 @@ namespace CommonMethod
             }
         }
 
+        public static string BytesToCharStr(byte[] bytsValue)
+        {
+            StringBuilder sbResult = new StringBuilder();
+            foreach (byte b in bytsValue)
+            {
+                sbResult.Append((char)b);
+            }
+            return sbResult.ToString();
+        }
+
         #endregion
 
         #region UniCode码转换
@@ -328,7 +338,15 @@ namespace CommonMethod
             return bytsValue;
         }
 
-        
+        //public static byte[] Special_StrHexToBytes(string strHex)
+        //{
+        //    return null;
+        //}
+        //public static string Special_BytesToStrHex(byte[] bytsValue, string strWidth)
+        //{
+        //    StringBuilder sbResult = new StringBuilder();
+        //    sbResult.Append("");
+        //}
         #endregion
 
         #region 位运算
