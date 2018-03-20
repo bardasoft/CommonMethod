@@ -15,7 +15,7 @@ namespace CommonMethod_Winform_Use
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             CommonMethod.LogWrite.WriteEventLog("Test", "t");
-            Application.Run(new FormMain());
+            Application.Run(new FrmItemsTest());
         }
     }
 }

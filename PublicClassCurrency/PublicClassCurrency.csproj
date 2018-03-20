@@ -40,6 +40,7 @@
     <Compile Include="CameraInfo.cs" />
     <Compile Include="Enum_CordinateSystem.cs" />
     <Compile Include="EventRecordID.cs" />
+    <Compile Include="HostInstSet.cs" />
     <Compile Include="MapMarkerPointInfo.cs" />
     <Compile Include="MapPointInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
