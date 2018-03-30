@@ -47,7 +47,12 @@ namespace PublicClassCurrency
         /// <summary>
         /// 海康DVS 直接访问模式
         /// </summary>
-        HikDVR,
+        HikDVR=7,
+
+        /// <summary>
+        /// 雄迈视频SDK
+        /// </summary>
+        XMaiVideo=8
     }
 
     /// <summary>
