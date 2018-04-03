@@ -71,7 +71,11 @@ namespace PublicClassCurrency
         /// <summary>
         /// 安讯士
         /// </summary>
-        Axis = 6
+        Axis = 6,
+        /// <summary>
+        /// 雄迈
+        /// </summary>
+        XMaiVideo=8,
     }
 
     
