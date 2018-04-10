@@ -101,6 +101,10 @@ namespace SKDataSourceConvert
             {
                 videoInfo.VideoType = Enum_VideoType.Axis;
             }
+            else if (videoInfo.DVSType.EndsWith("XM")|| videoInfo.DVSType=="SK838S")
+            {
+                videoInfo.VideoType = Enum_VideoType.XMaiVideo;
+            }
             else
             {
                 videoInfo.VideoType = Enum_VideoType.Unrecognized;
@@ -213,6 +217,18 @@ namespace SKDataSourceConvert
                         }
                     }
                     break;
+
+                case "SK838S":
+                    for (int i = 0; i < videoInfo.DVSChannelNum; i++)
+                    {
+                        if (strsCameraInfo.Length >= i)
+                        {
+                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i]);
+
+                        }
+                    }
+                    break;
+
                 default:
                     //其余设备按照通道数量区摄像头信息
                     for (int i = 0; i < strsCameraInfo.Length; i++)

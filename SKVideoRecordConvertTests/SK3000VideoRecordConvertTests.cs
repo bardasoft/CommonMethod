@@ -19,5 +19,15 @@ namespace SKVideoRecordConvert.Tests
             VideoRecordInfo v = SK3000VideoRecordConvert.GetVideoRecordInfo_ByFileName(Temp_strAxisVideoRecordFileName);
             Assert.AreEqual(v.DVSNumber, "000601");
         }
+
+        [TestMethod()]
+        public void GetVideoRecordNameTest()
+        {
+            string strVideoNum = "000101";
+            int intChannel = 0;
+            Enum_VideoType videoType = Enum_VideoType.XMaiVideo;
+            string strFilePath = SK3000VideoRecordConvert.GetVideoRecordName(strVideoNum, intChannel, videoType);
+            Assert.AreEqual("1", strFilePath);
+        }
     }
 }
