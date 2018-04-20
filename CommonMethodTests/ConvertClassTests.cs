@@ -30,7 +30,9 @@ namespace CommonMethod.Tests
         [TestMethod()]
         public void BytesToStrTest()
         {
-            Byte[] bytsValue = new byte[] { 0X31, 0X31, 0X31, 0X31, 0X31, 0X31 };
+            //Byte[] bytsValue = new byte[] { 0X31, 0X31, 0X31, 0X31, 0X31, 0X31 };
+            //Byte[] bytsValue = new byte[] { 0XFF, 0XFF, 0XFF, 0XFF, 0XFF, 0XFF };
+            Byte[] bytsValue = new byte[] { 0X00, 0XFF, 0XFF, 0XFF, 0XFF, 0XFF };
             string strResult = ConvertClass.BytesToCharStr(bytsValue);
             Assert.AreEqual(strResult, "1");
         }
