@@ -86,7 +86,7 @@ namespace SKDataSourceConvert
                 }
 
             }
-            else if (videoInfo.DVSType.StartsWith("SK836"))
+            else if (videoInfo.DVSType == "SK836")
             {
                 if (SK3000TransitionSet.SKVideoTypeAssignmentEnable)
                 {
@@ -100,6 +100,10 @@ namespace SKDataSourceConvert
             else if (videoInfo.DVSType == "AXISM3037")
             {
                 videoInfo.VideoType = Enum_VideoType.Axis;
+            }
+            else if (videoInfo.DVSType.EndsWith("XM") || videoInfo.DVSType == "SK838C" || videoInfo.DVSType == "SK836C")
+            {
+                videoInfo.VideoType = Enum_VideoType.XMaiVideo;
             }
             else
             {
@@ -213,6 +217,18 @@ namespace SKDataSourceConvert
                         }
                     }
                     break;
+
+                case "SK838C":
+                case "SK836C":
+                    for (int i = 0; i < videoInfo.DVSChannelNum; i++)
+                    {
+                        if (strsCameraInfo.Length >= i)
+                        {
+                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i]);
+                        }
+                    }
+                    break;
+
                 default:
                     //其余设备按照通道数量区摄像头信息
                     for (int i = 0; i < strsCameraInfo.Length; i++)

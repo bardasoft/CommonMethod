@@ -55,6 +55,7 @@
     <Compile Include="LogWriteTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemMetthodTests.cs" />
+    <Compile Include="XmlUseTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonMethod\CommonMethod.csproj">

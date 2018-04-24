@@ -22,7 +22,7 @@ namespace SKVideoRecordConvert
             //解析： DNVNum_Channel_起始时间（yyyyMMddHHmmss）_视频设备类型（06安讯士）.bin(后缀)
 
             string Temp_strOperat = strFileName.Substring(strFileName.LastIndexOf("\\") + 1);
-            int Temp_intIndex = Temp_strOperat.LastIndexOf(".bin");
+            int Temp_intIndex = Temp_strOperat.LastIndexOf(".");
             int Temp_intIndex1 = Temp_strOperat.LastIndexOf("_");
                 
             string Temp_strVideoType = Temp_strOperat.Substring(Temp_intIndex1 + 1, Temp_intIndex - Temp_intIndex1 - 1);
@@ -30,6 +30,9 @@ namespace SKVideoRecordConvert
             {
                 case "06":
                     v.VideoRecordType = Enum_VIdeoRecordType.Axis;
+                    break;
+                case "08":
+                    v.VideoRecordType = Enum_VIdeoRecordType.XMaiVideo;
                     break;
                 default:
                     v.VideoRecordType = Enum_VIdeoRecordType.Unrecognized;
@@ -67,7 +70,9 @@ namespace SKVideoRecordConvert
                 case Enum_VideoType.Axis:
                     sbVideoRecordFileName.Append("06.bin");
                     break;
-
+                case Enum_VideoType.XMaiVideo:
+                    sbVideoRecordFileName.Append("08.h264");
+                    break;
                 default:
                     sbVideoRecordFileName.Append("99.mp4");
                     break;
