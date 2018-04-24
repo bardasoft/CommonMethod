@@ -95,6 +95,19 @@ namespace PublicClassCurrency
         }
 
         /// <summary>
+        /// DVS数据端口
+        /// </summary>
+        private int intDVSDataPort = 0;
+        /// <summary>
+        /// DVS连接端口
+        /// </summary>
+        public int DVSDataPort
+        {
+            get { return intDVSDataPort; }
+            set { intDVSDataPort = value; }
+        }
+
+        /// <summary>
         /// 通道号数量
         /// </summary>
         private int intDVSChannelNum = 0;
