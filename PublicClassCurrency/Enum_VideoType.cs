@@ -81,6 +81,10 @@ namespace PublicClassCurrency
         /// 雄迈
         /// </summary>
         XMaiVideo=8,
+        /// <summary>
+        /// 蓝色星际
+        /// </summary>
+        BlueSky=9,
     }
 
     
