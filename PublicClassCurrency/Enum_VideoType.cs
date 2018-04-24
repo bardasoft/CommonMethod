@@ -52,7 +52,12 @@ namespace PublicClassCurrency
         /// <summary>
         /// 雄迈视频SDK
         /// </summary>
-        XMaiVideo=8
+        XMaiVideo=8,
+
+        /// <summary>
+        /// 蓝色星际
+        /// </summary>
+        BlueSky=9,
     }
 
     /// <summary>
