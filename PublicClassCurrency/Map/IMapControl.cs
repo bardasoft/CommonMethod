@@ -4,9 +4,15 @@ using System.Text;
 
 namespace PublicClassCurrency.Map
 {
+    public delegate void MapControlLoadEndDelegate(object sender, object MapControlLoadEndValue);
     public interface IMapControl
     {
-        
+        MapType mapType
+        {
+            get;
+            set;
+        }
+        event MapControlLoadEndDelegate MapControlLoadEndEvent;
         bool SetCenterPoint(MapPointInfo point);
 
         bool SetMapLevel(MapPointInfo point);

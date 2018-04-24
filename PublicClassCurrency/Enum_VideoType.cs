@@ -72,10 +72,16 @@ namespace PublicClassCurrency
         /// 安讯士
         /// </summary>
         Axis = 6,
+
+        /// <summary>
+        /// 海康DVS 直接访问模式
+        /// </summary>
+        HikDVR = 7,
+
         /// <summary>
         /// 雄迈
         /// </summary>
-        XMaiVideo=8,
+        XMaiVideo =8,
     }
 
     

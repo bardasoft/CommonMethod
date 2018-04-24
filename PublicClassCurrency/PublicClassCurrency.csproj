@@ -43,6 +43,7 @@
     <Compile Include="EventRecordID.cs" />
     <Compile Include="HostInstSet.cs" />
     <Compile Include="MapMarkerPointInfo.cs" />
+    <Compile Include="Map\Enum_MapType.cs" />
     <Compile Include="Map\IMapControl.cs" />
     <Compile Include="Map\MapPointInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
