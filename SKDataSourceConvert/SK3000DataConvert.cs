@@ -73,37 +73,34 @@ namespace SKDataSourceConvert
             {
                 videoInfo.VideoType = Enum_VideoType.HuaMaiVideo;
             }
-            else if (videoInfo.DVSType.StartsWith("SK86") || videoInfo.DVSType.StartsWith("SK519") || videoInfo.DVSType.StartsWith("SK8519"))
-            {
-                if (SK3000TransitionSet.SKVideoTypeAssignmentEnable)
-                {
-                    videoInfo.VideoType = Enum_VideoType.SKVideo;
-                    videoInfo.IntercomEnable = true;
-                }
-                else
-                {
-                    videoInfo.VideoType = Enum_VideoType.Unrecognized;
-                }
-
-            }
-            else if (videoInfo.DVSType == "SK836")
-            {
-                if (SK3000TransitionSet.SKVideoTypeAssignmentEnable)
-                {
-                    videoInfo.VideoType = Enum_VideoType.SKVideo;
-                }
-                else
-                {
-                    videoInfo.VideoType = Enum_VideoType.Unrecognized;
-                }
-            }
             else if (videoInfo.DVSType == "AXISM3037")
             {
                 videoInfo.VideoType = Enum_VideoType.Axis;
             }
-            else if (videoInfo.DVSType.EndsWith("XM") || videoInfo.DVSType == "SK838C" || videoInfo.DVSType == "SK836C")
+            else if (videoInfo.DVSType.EndsWith("XM")
+                    || videoInfo.DVSType == "SK838C"
+                    || videoInfo.DVSType == "SK836C")
             {
                 videoInfo.VideoType = Enum_VideoType.XMaiVideo;
+            }
+            else if (videoInfo.DVSType == "BSRNR8116H")
+            {
+                videoInfo.VideoType = Enum_VideoType.BlueSky;
+                videoInfo.DVSDataPort = 3720;   //使用默认数据端口，暂时不支持配置
+            }
+            else if (SK3000TransitionSet.SKVideoTypeAssignmentEnable
+                    && (videoInfo.DVSType.StartsWith("SK86")
+                    || videoInfo.DVSType.StartsWith("SK519")
+                    || videoInfo.DVSType.StartsWith("SK8519")
+                    || (videoInfo.DVSType == "SK836")))
+            {
+                videoInfo.VideoType = Enum_VideoType.SKVideo;
+                videoInfo.IntercomEnable = !(videoInfo.DVSType == "SK836");
+            }
+            else if (SK3000TransitionSet.HikVideoTypeAssignmentEnable
+                    && (videoInfo.DVSType.EndsWith("HA")))
+            {
+                videoInfo.VideoType = Enum_VideoType.HikDVR;
             }
             else
             {
@@ -207,6 +204,12 @@ namespace SKDataSourceConvert
                 case "SK8504YS":
                 case "SK8508YS":
                 case "SK8516YS":
+                case "SK8504HA":    //海康视频 从第一路开始
+                case "SK8508HA":
+                case "SK8516HA":
+                case "SK8532HA":
+                case "SK8564HA":
+                case "BSRNR8116H":  //蓝色星际 64路硬盘录像机
                     for (int i = 1; i <= videoInfo.DVSChannelNum; i++)
                     {
                         if (strsCameraInfo.Length >= i)
