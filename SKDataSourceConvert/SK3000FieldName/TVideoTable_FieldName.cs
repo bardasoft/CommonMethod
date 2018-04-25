@@ -30,6 +30,12 @@ namespace SKDataSourceConvert.SK3000FieldName
         /// </summary>
         public const string c_strFieldName_DVSControlPort = "DVSControlPort";
 
+
+        /// <summary>
+        /// DVS数据端口
+        /// </summary>
+        public const string c_strFieldName_DVSStreamPort = "DVSStreamPort";
+
         /// <summary>
         /// DVS IP及控制端口 
         /// </summary>
@@ -49,6 +55,8 @@ namespace SKDataSourceConvert.SK3000FieldName
         ///  视频设备通道数量
         /// </summary>
         public const string c_strFieldName_DVSChannelNum = "DVSChannels";
+
+
         /// <summary>
         /// 用户名
         /// </summary>

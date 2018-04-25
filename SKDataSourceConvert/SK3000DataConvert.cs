@@ -51,6 +51,7 @@ namespace SKDataSourceConvert
             videoInfo.DVSName = Convert.ToString(drVideoInfo["DVSName"]);
             videoInfo.DVSAddress = Convert.ToString(drVideoInfo["DVSAddress"]);
             videoInfo.DVSConnectPort = Convert.ToInt32(drVideoInfo[TVideoTable_FieldName.c_strFieldName_DVSControlPort]);
+            videoInfo.DVSDataPort = Convert.ToInt32(drVideoInfo[TVideoTable_FieldName.c_strFieldName_DVSStreamPort]);
             videoInfo.DVSChannelNum = Convert.ToInt32(drVideoInfo[TVideoTable_FieldName.c_strFieldName_DVSChannelNum]);
             videoInfo.DVSType = Convert.ToString(drVideoInfo["DVSType"]);
             videoInfo.UserName = Convert.ToString(drVideoInfo["UserName"]);
@@ -83,10 +84,10 @@ namespace SKDataSourceConvert
             {
                 videoInfo.VideoType = Enum_VideoType.XMaiVideo;
             }
-            else if (videoInfo.DVSType == "BSRNR8116H")
+            else if (videoInfo.DVSType.StartsWith("BSRNR"))
             {
                 videoInfo.VideoType = Enum_VideoType.BlueSky;
-                videoInfo.DVSDataPort = 3720;   //使用默认数据端口，暂时不支持配置
+                
             }
             else if (SK3000TransitionSet.SKVideoTypeAssignmentEnable
                     && (videoInfo.DVSType.StartsWith("SK86")
@@ -209,7 +210,12 @@ namespace SKDataSourceConvert
                 case "SK8516HA":
                 case "SK8532HA":
                 case "SK8564HA":
-                case "BSRNR8116H":  //蓝色星际 64路硬盘录像机
+                case "BSRNR01":  //蓝色星际
+                case "BSRNR04":
+                case "BSRNR08":
+                case "BSRNR16":
+                case "BSRNR32":
+                case "BSRNR64":
                     for (int i = 1; i <= videoInfo.DVSChannelNum; i++)
                     {
                         if (strsCameraInfo.Length >= i)

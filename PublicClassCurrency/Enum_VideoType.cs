@@ -45,9 +45,9 @@ namespace PublicClassCurrency
         Axis = 6,
 
         /// <summary>
-        /// 海康DVS 直接访问模式
+        /// 海康DVR 直接访问模式
         /// </summary>
-        HikDVR=7,
+        HikDVR=12,
 
         /// <summary>
         /// 雄迈视频SDK
@@ -81,7 +81,7 @@ namespace PublicClassCurrency
         /// <summary>
         /// 海康DVS 直接访问模式
         /// </summary>
-        HikDVR = 7,
+        HikDVR = 12,
 
         /// <summary>
         /// 雄迈
