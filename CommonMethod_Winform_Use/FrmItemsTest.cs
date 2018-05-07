@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
@@ -47,6 +48,11 @@ namespace CommonMethod_Winform_Use
             button2.BackColor = button2.BackColor == clr ? clr1 : clr;
             //button2.BackColor = ;
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            File.Delete(Environment.CurrentDirectory + "\\新建文本文档.txt");
         }
     }
 }

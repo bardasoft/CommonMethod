@@ -67,7 +67,7 @@ namespace CommonMethod
         /// </summary>
         /// <param name="logInfo"></param>
         /// <param name="logFileName"></param>
-        public static void WriteEventLog(string Tag, string LogInfo, string LogFileName = "\\UserData\\OperAtLog")
+        public static void WriteEventLog(string Tag, string LogInfo)
         {
 
             try
@@ -113,5 +113,90 @@ namespace CommonMethod
                 WritExceptionLog(Tag, ex);
             }
         }
+
+
+        /// <summary>
+        /// 异常记录(输出至文本)
+        /// </summary>
+        /// <param name="Tag"></param>
+        /// <param name="ex"></param>
+        public static bool WritExceptionLog(string Tag, Exception ex,string strFilePath)
+        {
+            bool bolResult = false;
+            string Temp_strFileFolder = "";
+            string Temp_strFileName = "";
+            if (strFilePath.EndsWith("log") || strFilePath.EndsWith("txt"))
+            {
+                Temp_strFileFolder = strFilePath.Substring(0, strFilePath.LastIndexOf("\\"));
+                Temp_strFileName = strFilePath.Substring(strFilePath.LastIndexOf("\\") + 1);
+            }
+            else
+            {
+                Temp_strFileFolder = strFilePath;
+                Temp_strFileName = DateTime.Now.ToString("yyyyMMdd") + "(EventLog)" + ".log";
+            }
+            //工作目录下的CULog文件
+            if (!Directory.Exists(Temp_strFileFolder)) //判断文件是否存在
+            {
+                Directory.CreateDirectory(Temp_strFileFolder);
+            }
+            StreamWriter sw = new StreamWriter(Temp_strFileFolder + "\\" + Temp_strFileName, true, Encoding.Default);
+            StringBuilder sbExceptionLog = new StringBuilder();
+            sbExceptionLog.Append("[" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "]\t 异常标识:" + Tag + Environment.NewLine);
+            sbExceptionLog.Append("异常信息：" + ex.Message + Environment.NewLine);
+            sbExceptionLog.Append("异常对象：" + ex.Source + Environment.NewLine);
+            sbExceptionLog.Append("调用堆栈：" + ex.StackTrace.Trim() + Environment.NewLine);
+            sbExceptionLog.Append("触发方法：" + ex.TargetSite + Environment.NewLine);
+            sbExceptionLog.Append(Environment.NewLine);
+
+            sw.Write(sbExceptionLog.ToString());
+            sw.Close();
+            return bolResult;
+        }
+
+        /// <summary>
+        /// 信息记录(输出至文本)
+        /// </summary>
+        /// <param name="logInfo"></param>
+        /// <param name="logFileName"></param>
+        public static bool WriteEventLog(string Tag, string LogInfo, string strFilePath)
+        {
+            bool bolResult = false;
+            try
+            {
+                string Temp_strFileFolder = "";
+                string Temp_strFileName = "";
+                if (strFilePath.EndsWith("log") || strFilePath.EndsWith("txt"))
+                {
+                    Temp_strFileFolder = strFilePath.Substring(0, strFilePath.LastIndexOf("\\"));
+                    Temp_strFileName = strFilePath.Substring(strFilePath.LastIndexOf("\\") + 1);
+                }
+                else
+                {
+                    Temp_strFileFolder = strFilePath;
+                    Temp_strFileName = DateTime.Now.ToString("yyyyMMdd") + "(EventLog)" + ".log";
+                }
+                
+                if (!Directory.Exists(Temp_strFileFolder)) //判断文件是否存在
+                {
+                    Directory.CreateDirectory(Temp_strFileFolder);
+                }
+                StreamWriter sw = new StreamWriter(Temp_strFileFolder + "\\" + Temp_strFileName, true, Encoding.Default);
+                StringBuilder sbEventLog = new StringBuilder();
+                sbEventLog.Append("[" + Tag + "]" + Environment.NewLine);
+                sbEventLog.Append("[DateTime : " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "]" + Environment.NewLine);
+                sbEventLog.Append(LogInfo + Environment.NewLine);
+                sbEventLog.Append(Environment.NewLine);
+                sw.WriteLine(sbEventLog);
+                sw.Close();
+
+            }
+            catch (Exception ex)
+            {
+                WritExceptionLog("写入事件记录异常", ex);
+            }
+            return bolResult;
+        }
+
     }
 }

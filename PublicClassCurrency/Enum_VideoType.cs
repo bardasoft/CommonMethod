@@ -79,11 +79,6 @@ namespace PublicClassCurrency
         Axis = 6,
 
         /// <summary>
-        /// 海康DVS 直接访问模式
-        /// </summary>
-        HikDVR = 12,
-
-        /// <summary>
         /// 雄迈
         /// </summary>
         XMaiVideo=8,
@@ -91,6 +86,15 @@ namespace PublicClassCurrency
         /// 蓝色星际
         /// </summary>
         BlueSky=9,
+        /// <summary>
+        /// 海康DVS 直接访问模式
+        /// </summary>
+        HikDVR = 12,
+
+        /// <summary>
+        /// 海康流媒体模式
+        /// </summary>
+        HikStreamVideo=14,
     }
 
     

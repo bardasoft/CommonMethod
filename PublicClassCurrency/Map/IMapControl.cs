@@ -12,6 +12,7 @@ namespace PublicClassCurrency.Map
             get;
             set;
         }
+
         event MapControlLoadEndDelegate MapControlLoadEndEvent;
         bool SetCenterPoint(MapPointInfo point);
 
