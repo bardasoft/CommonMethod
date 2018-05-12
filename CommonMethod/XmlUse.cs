@@ -102,6 +102,7 @@ namespace CommonMethod
             string  strResult = "";
             try
             {
+
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(strFilePath);
                 XmlNode nodeParent = xmlDoc.SelectSingleNode(strParentName);   //父节点
