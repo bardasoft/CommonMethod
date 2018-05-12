@@ -69,6 +69,8 @@ namespace CommonMethod
 
         #endregion
 
+        #region 网络相关
+
         /// <summary>
         /// Telnet命令
         /// </summary>
@@ -76,7 +78,7 @@ namespace CommonMethod
         /// <param name="intPort"></param>
         /// <param name="intMillisecond"></param>
         /// <returns></returns>
-        public static bool CmdTelnet(IPAddress ip ,int intPort,int intTimeout_Millisecond=1000)
+        public static bool CmdTelnet(IPAddress ip, int intPort, int intTimeout_Millisecond = 1000)
         {
             try
             {
@@ -94,7 +96,7 @@ namespace CommonMethod
         /// </summary>
         /// <param name="ip"></param>
         /// <returns></returns>
-        public static bool CmdPing(IPAddress ip , int intTimeout_Millisecond = 1000)
+        public static bool CmdPing(IPAddress ip, int intTimeout_Millisecond = 1000)
         {
             try
             {
@@ -111,6 +113,7 @@ namespace CommonMethod
             }
         }
 
+        #endregion
 
         /// <summary>
         /// 获取Dictionary对象 首个对象Key

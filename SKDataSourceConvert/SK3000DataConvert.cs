@@ -197,7 +197,8 @@ namespace SKDataSourceConvert
                         }
                     }
                     break;
-                case "SK8501ZW":    //SK838 云视通  从第一路开始
+                //从第一路开始
+                case "SK8501ZW":    //SK838 云视通  
                 case "SK8504ZW":
                 case "SK8508ZW":
                 case "SK8516ZW":
@@ -216,6 +217,7 @@ namespace SKDataSourceConvert
                 case "BSRNR16":
                 case "BSRNR32":
                 case "BSRNR64":
+                case "AXISM3037":
                     for (int i = 1; i <= videoInfo.DVSChannelNum; i++)
                     {
                         if (strsCameraInfo.Length >= i)
@@ -239,7 +241,7 @@ namespace SKDataSourceConvert
                     break;
 
                 default:
-                    //其余设备按照通道数量区摄像头信息
+                    //其余设备按照通道数量区摄像头信息 下标从0开始
                     for (int i = 0; i < strsCameraInfo.Length; i++)
                     {
                         if (videoInfo.DVSChannelNum <= i)
