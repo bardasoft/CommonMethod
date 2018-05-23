@@ -175,7 +175,7 @@ namespace SKDataSourceConvert
                         {
                             break;
                         }
-                        if ((i == 0 || i == 8 || i == 9 || i == 10) && (!string.IsNullOrEmpty(strsCameraInfo[i])))
+                        if ((i == 0 || i == 8 || i == 9 || i == 10) && !string.IsNullOrEmpty(strsCameraInfo[i]))
                         {
                             videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i]);
                         }
@@ -190,7 +190,7 @@ namespace SKDataSourceConvert
                         {
                             break;
                         }
-                        if (i == 0 && (!string.IsNullOrEmpty(strsCameraInfo[i])))
+                        if (i == 0 && !string.IsNullOrEmpty(strsCameraInfo[i]))
                         {
                             videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i]);
                             break;
