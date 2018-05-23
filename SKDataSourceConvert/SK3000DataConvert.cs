@@ -218,16 +218,16 @@ namespace SKDataSourceConvert
                 case "BSRNR32":
                 case "BSRNR64":
                 case "AXISM3037":
-                    for (int i = 1; i <= videoInfo.DVSChannelNum; i++)
+                for (int i = 1; i <= videoInfo.DVSChannelNum; i++)
+                {
+                    if (strsCameraInfo.Length >= i && !string.IsNullOrEmpty(strsCameraInfo[i - 1]))
                     {
-                        if (strsCameraInfo.Length >= i && !string.IsNullOrEmpty(strsCameraInfo[i]))
-                        {
-                            //171911 修正 通道从1 开始 ,摄像头名称依然从1 开始
-                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i - 1]);
+                        //171911 修正 通道从1 开始 ,摄像头名称依然从1 开始
+                        videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i - 1]);
 
-                        }
                     }
-                    break;
+                }
+                break;
 
                 case "SK838C":
                 case "SK836C":
