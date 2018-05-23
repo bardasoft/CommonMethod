@@ -39,14 +39,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CameraInfo.cs" />
-    <Compile Include="Enum_CordinateSystem.cs" />
+    <Compile Include="Enum_CordinateSystem1.cs" />
     <Compile Include="EventRecordID.cs" />
     <Compile Include="HostInstSet.cs" />
     <Compile Include="MapMarkerPointInfo.cs" />
     <Compile Include="Map\Enum_MapStatus.cs" />
-    <Compile Include="Map\Enum_MapType.cs" />
+    <Compile Include="Map\Enum_MapType1.cs" />
     <Compile Include="Map\IMapControl.cs" />
-    <Compile Include="Map\MapPointInfo.cs" />
+    <Compile Include="Map\MapPointInfo1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Enum_SerialDeviceType.cs" />
     <Compile Include="VideoInfo.cs" />

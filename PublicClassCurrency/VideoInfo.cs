@@ -173,18 +173,7 @@ namespace PublicClassCurrency
             set { intVideoPlayTime_Minute = value; }
         }
 
-        /// <summary>
-        /// 网络状态 大于0在线 0离线 -1状态未明
-        /// </summary>
-        private int intNetworkState;
-        /// <summary>
-        /// 网络状态 大于0在线 0离线 -1状态未明
-        /// </summary>
-        public int NetworkState
-        {
-            get { return intNetworkState; }
-            set { intNetworkState = value; }
-        }
+        
 
         /// <summary>
         /// 自动对讲功能
@@ -215,6 +204,7 @@ namespace PublicClassCurrency
             get { return dicCameras; }
             set { dicCameras = value; }
         }
+        #region 设备功能
 
         /// <summary>
         /// 对讲使能
@@ -248,6 +238,59 @@ namespace PublicClassCurrency
                 bolOnlyIntercom = value;
             }
         }
+        #endregion
+
+        #region 设备状态
+        /// <summary>
+        /// 网络状态 大于0在线 0离线 -1状态未明
+        /// </summary>
+        private int intNetworkState;
+        /// <summary>
+        /// 网络状态 大于0在线 0离线 -1状态未明
+        /// </summary>
+        public int NetworkState
+        {
+            get { return intNetworkState; }
+            set { intNetworkState = value; }
+        }
+
+        /// <summary>
+        /// 设备登陆状态 -1表示登陆失败 0表示未登录  1表示已登陆
+        /// </summary>
+        private int intLoginState;
+
+        /// <summary>
+        /// 设备登陆状态 -1表示登陆失败 0表示未登录  1表示已登陆
+        /// </summary>
+        public int LoginState
+        {
+            get { return intLoginState; }
+            set
+            {
+                if (intLoginState != value)
+                {
+                    intLoginState = value;
+                    VideoLoginStateChanged(null);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 设备登陆句柄
+        /// </summary>
+        private int intLoginHandle;
+
+        /// <summary>
+        /// 设备登陆句柄
+        /// </summary>
+        public int LoginHandle
+        {
+            get { return intLoginHandle; }
+            set { intLoginHandle = value; }
+        }
+        
+        #endregion
+
         #endregion
 
         #region 方法
@@ -305,6 +348,22 @@ namespace PublicClassCurrency
                 return true;
             }
             return false;
+        }
+        #endregion
+
+        #region 事件与委托
+
+        public delegate void VideoLoginStateChangedDelegate(object sender, object VideoLoginStateChangedValue);
+        /// <summary>
+        /// 用户登陆状态改变事件
+        /// </summary>
+        public event VideoLoginStateChangedDelegate VideoLoginStateChangeEvent;
+        public void VideoLoginStateChanged(object VideoLoginStateChangedValue)
+        {
+            if (VideoLoginStateChangeEvent != null)
+            {
+                VideoLoginStateChangeEvent(this, VideoLoginStateChangedValue);
+            }
         }
         #endregion
     }

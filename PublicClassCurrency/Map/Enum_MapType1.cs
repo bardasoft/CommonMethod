@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PublicClassCurrency.Map
 {
-    public enum MapType
+    public enum MapType1
     {
         /// <summary>
         /// 百度在线地图

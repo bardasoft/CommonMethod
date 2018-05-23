@@ -7,7 +7,7 @@ namespace PublicClassCurrency
     /// <summary>
     /// 地图点信息
     /// </summary>
-    public class MapPointInfo
+    public class MapPointInfo1
     {
         /// <summary>
         /// 经度
@@ -27,21 +27,21 @@ namespace PublicClassCurrency
         /// <summary>
         /// 坐标系统
         /// </summary>
-        public Enum_CordinateSystem cordinateSyatem = Enum_CordinateSystem.WGS_84;
+        public Enum_CordinateSystem1 cordinateSyatem = Enum_CordinateSystem1.WGS_84;
         #region　事件
 
-        public MapPointInfo ToWGS_84()
+        public MapPointInfo1 ToWGS_84()
         {
-            MapPointInfo result = new MapPointInfo();
+            MapPointInfo1 result = new MapPointInfo1();
             result.intMapLevel = intMapLevel;
-            result.cordinateSyatem = Enum_CordinateSystem.WGS_84;
+            result.cordinateSyatem = Enum_CordinateSystem1.WGS_84;
             double Temp_dblLon = dblLon;
             double Temp_dblLat = dblLat;
-            if (cordinateSyatem == Enum_CordinateSystem.GCJ_02)
+            if (cordinateSyatem == Enum_CordinateSystem1.GCJ_02)
             {
                 GCJToWGS_encrypt(dblLon, dblLat, out Temp_dblLon, out Temp_dblLat);
             }
-            else if (cordinateSyatem == Enum_CordinateSystem.BD_09)
+            else if (cordinateSyatem == Enum_CordinateSystem1.BD_09)
             {
                 BDToWGS_encrypt(dblLon, dblLat, out Temp_dblLon, out Temp_dblLat);
             }
@@ -50,18 +50,18 @@ namespace PublicClassCurrency
             return result;
         }
 
-        public MapPointInfo ToGCJ_02()
+        public MapPointInfo1 ToGCJ_02()
         {
-            MapPointInfo result = new MapPointInfo();
+            MapPointInfo1 result = new MapPointInfo1();
             result.intMapLevel = intMapLevel;
-            result.cordinateSyatem = Enum_CordinateSystem.GCJ_02;
+            result.cordinateSyatem = Enum_CordinateSystem1.GCJ_02;
             double Temp_dblLon = dblLon;
             double Temp_dblLat = dblLat;
-            if (cordinateSyatem == Enum_CordinateSystem.WGS_84)
+            if (cordinateSyatem == Enum_CordinateSystem1.WGS_84)
             {
                 WGSToGCJ_encrypt(dblLon, dblLat, out Temp_dblLon, out Temp_dblLat);
             }
-            else if (cordinateSyatem == Enum_CordinateSystem.BD_09)
+            else if (cordinateSyatem == Enum_CordinateSystem1.BD_09)
             {
                 BDToGCJ_encrypt(dblLon, dblLat, out Temp_dblLon, out Temp_dblLat);
             }
@@ -70,18 +70,18 @@ namespace PublicClassCurrency
             return result;
         }
 
-        public MapPointInfo ToBD_09()
+        public MapPointInfo1 ToBD_09()
         {
-            MapPointInfo result = new MapPointInfo();
+            MapPointInfo1 result = new MapPointInfo1();
             result.intMapLevel = intMapLevel;
-            result.cordinateSyatem = Enum_CordinateSystem.BD_09;
+            result.cordinateSyatem = Enum_CordinateSystem1.BD_09;
             double Temp_dblLon = dblLon;
             double Temp_dblLat = dblLat;
-            if (cordinateSyatem == Enum_CordinateSystem.WGS_84)
+            if (cordinateSyatem == Enum_CordinateSystem1.WGS_84)
             {
                 WGSToBD_encrypt(dblLon, dblLat, out Temp_dblLon, out Temp_dblLat);
             }
-            else if (cordinateSyatem == Enum_CordinateSystem.GCJ_02)
+            else if (cordinateSyatem == Enum_CordinateSystem1.GCJ_02)
             {
                 GCJToBD_encrypt(dblLon, dblLat, out Temp_dblLon, out Temp_dblLat);
             }

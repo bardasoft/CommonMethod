@@ -32,11 +32,11 @@ namespace PublicClassCurrency
         /// <summary>
         /// 标注点Icon 宽度
         /// </summary>
-        public int MarkerIconWidth = 32;
+        public int MarkerIconWidth = 16;
         /// <summary>
         /// 标注点Icon 高度
         /// </summary>
-        public int MarkerIconHeight = 32;
+        public int MarkerIconHeight = 16;
 
         /// <summary>
         /// 标注点首次显示地图等级
@@ -47,6 +47,6 @@ namespace PublicClassCurrency
         /// <summary>
         /// 地图点信息
         /// </summary>
-        public MapPointInfo MarkerPoint = new MapPointInfo();
+        public MapPointInfo1 MarkerPoint = new MapPointInfo1();
     }
 }

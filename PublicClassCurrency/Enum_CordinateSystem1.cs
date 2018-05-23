@@ -7,7 +7,7 @@ namespace PublicClassCurrency
     /// <summary>
     /// 坐标系统
     /// </summary>
-    public enum Enum_CordinateSystem
+    public enum Enum_CordinateSystem1
     {
         /// <summary>
         /// 大地坐标系统

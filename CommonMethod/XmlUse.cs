@@ -95,7 +95,7 @@ namespace CommonMethod
         /// <param name="strFilePath"></param>
         /// <param name="strParentName"></param>
         /// <param name="strNodeName"></param>
-        /// <param name="strKeyValue"></param>
+        /// <param name="strField"></param>
         /// <returns></returns>
         public static string  GetNodeInfo(string strFilePath, string strParentName,string strNodeName, string strField)
         {

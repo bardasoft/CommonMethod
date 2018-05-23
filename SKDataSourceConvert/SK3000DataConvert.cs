@@ -220,7 +220,7 @@ namespace SKDataSourceConvert
                 case "AXISM3037":
                     for (int i = 1; i <= videoInfo.DVSChannelNum; i++)
                     {
-                        if (strsCameraInfo.Length >= i)
+                        if (strsCameraInfo.Length >= i && !string.IsNullOrEmpty(strsCameraInfo[i]))
                         {
                             //171911 修正 通道从1 开始 ,摄像头名称依然从1 开始
                             videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i - 1]);
@@ -233,7 +233,7 @@ namespace SKDataSourceConvert
                 case "SK836C":
                     for (int i = 0; i < videoInfo.DVSChannelNum; i++)
                     {
-                        if (strsCameraInfo.Length >= i)
+                        if (strsCameraInfo.Length >= i && !string.IsNullOrEmpty(strsCameraInfo[i]))
                         {
                             videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i]);
                         }

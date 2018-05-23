@@ -364,5 +364,20 @@ namespace CommonMethod
         }
 
         #endregion
+
+        #region 时间相关
+        public static DateTime UnixTimestampToDateTime(long lTime)
+        {
+            DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+            lTime = long.Parse(lTime + "0000000");
+            TimeSpan toNow = new TimeSpan(lTime);
+            return dtStart.Add(toNow);
+        }
+        public static long DateTimeToUnixTimestamp(DateTime dateTime)
+        {
+            var start = new DateTime(1970, 1, 1, 8, 0, 0, dateTime.Kind);
+            return Convert.ToInt64((dateTime - start).TotalSeconds);
+        }
+        #endregion
     }
 }

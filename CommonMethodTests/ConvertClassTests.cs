@@ -36,5 +36,22 @@ namespace CommonMethod.Tests
             string strResult = ConvertClass.BytesToCharStr(bytsValue);
             Assert.AreEqual(strResult, "1");
         }
+
+        [TestMethod()]
+        public void LinuxToTimeTest()
+        {
+            long l = 1526886082;
+            DateTime timResult = ConvertClass.UnixTimestampToDateTime(l);
+            Assert.AreEqual(timResult, DateTime.Now);
+        }
+
+        [TestMethod()]
+        public void DateTimeToUnixTimestampTest()
+        {
+            long l = 1526886082;
+            DateTime timResult = ConvertClass.UnixTimestampToDateTime(l);
+            long lResult = ConvertClass.DateTimeToUnixTimestamp(timResult);
+            Assert.AreEqual(l, lResult);
+        }
     }
 }

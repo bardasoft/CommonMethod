@@ -36,7 +36,7 @@ namespace CommonMethod.Tests
         [TestMethod()]
         public void WriteEventLogTest1()
         {
-            string Temp_strLog = Environment.CurrentDirectory;
+            string Temp_strLog = Environment.CurrentDirectory+"\\RemoveAlarmException";
             Assert.IsTrue(LogWrite.WriteEventLog("123", "312", Temp_strLog));
         }
     }

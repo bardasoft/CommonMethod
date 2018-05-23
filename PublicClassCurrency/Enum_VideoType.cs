@@ -32,7 +32,7 @@ namespace PublicClassCurrency
         /// <summary>
         /// 时刻视频
         /// </summary>
-        SKVideo = 4,
+        SKVideo = 81,
 
         /// <summary>
         /// 华迈云视频类型
