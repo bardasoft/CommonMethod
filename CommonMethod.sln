@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SKVideoRecordConvert", "SKV
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SKVideoRecordConvertTests", "SKVideoRecordConvertTests\SKVideoRecordConvertTests.csproj", "{F702BC65-BE5E-4701-BACE-190AC9543956}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CmdTest", "CmdTest\CmdTest.csproj", "{3ABE5564-9A8E-479D-B576-0051F7D33D3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{F702BC65-BE5E-4701-BACE-190AC9543956}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F702BC65-BE5E-4701-BACE-190AC9543956}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F702BC65-BE5E-4701-BACE-190AC9543956}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ABE5564-9A8E-479D-B576-0051F7D33D3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ABE5564-9A8E-479D-B576-0051F7D33D3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ABE5564-9A8E-479D-B576-0051F7D33D3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ABE5564-9A8E-479D-B576-0051F7D33D3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

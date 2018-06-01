@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace CommonMethod_Winform_Use
+namespace CmdTest
 {
     static class Program
     {
@@ -14,8 +14,7 @@ namespace CommonMethod_Winform_Use
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            CommonMethod.LogWrite.WriteEventLog("Test", "t");
-            Application.Run(new FrmCmdTest());
+            Application.Run(new Form1());
         }
     }
 }

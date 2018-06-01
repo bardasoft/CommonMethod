@@ -9,6 +9,17 @@ namespace PublicClassCurrency
     /// </summary>
     public class CameraInfo
     {
+
+        private int intCameraID = 0;
+        /// <summary>
+        /// ID
+        /// </summary>
+        public int CameraID
+        {
+            get { return intCameraID; }
+            set { intCameraID = value; }
+        }
+
         /// <summary>
         /// 视频设备编号
         /// </summary>
@@ -91,6 +102,38 @@ namespace PublicClassCurrency
             set { strCameraUniqueCode = value; }
         }
 
-    }
+        /// <summary>
+        /// 平面地图名称
+        /// </summary>
+        private string strPlaneMapName = "";
+        /// <summary>
+        /// 平面地图名称
+        /// </summary>
+        public string PlaneMapName
+        {
+            get { return strPlaneMapName; }
+            set { strPlaneMapName = value; }
+        }
 
+        private int intPlaneMapX;
+
+        /// <summary>
+        /// 平面地图X
+        /// </summary>
+        public int PlaneMapX
+        {
+            get { return intPlaneMapX; }
+            set { intPlaneMapX = value; }
+        }
+
+        private int intPlaneMapY;
+        /// <summary>
+        /// 平面地图Y
+        /// </summary>
+        public int PlaneMapY
+        {
+            get { return intPlaneMapY; }
+            set { intPlaneMapY = value; }
+        }
+    }
 }

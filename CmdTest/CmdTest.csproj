@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{700932BA-5557-4BFB-9DB4-804407A51A4A}</ProjectGuid>
+    <ProjectGuid>{3ABE5564-9A8E-479D-B576-0051F7D33D3B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>CommonMethod_Winform_Use</RootNamespace>
-    <AssemblyName>CommonMethod_Winform_Use</AssemblyName>
+    <RootNamespace>CmdTest</RootNamespace>
+    <AssemblyName>CmdTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -23,7 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,43 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common_Form_UseTest.cs">
+    <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Common_Form_UseTest.Designer.cs">
-      <DependentUpon>Common_Form_UseTest.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormMain.Designer.cs">
-      <DependentUpon>FormMain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrmCmdTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmCmdTest.Designer.cs">
-      <DependentUpon>FrmCmdTest.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrmItemsTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmItemsTest.Designer.cs">
-      <DependentUpon>FrmItemsTest.cs</DependentUpon>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Common_Form_UseTest.resx">
-      <DependentUpon>Common_Form_UseTest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormMain.resx">
-      <DependentUpon>FormMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmCmdTest.resx">
-      <DependentUpon>FrmCmdTest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmItemsTest.resx">
-      <DependentUpon>FrmItemsTest.cs</DependentUpon>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -98,12 +71,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CommonMethod\CommonMethod.csproj">
-      <Project>{fe120503-38ed-4a41-91e7-835bdb1b625c}</Project>
-      <Name>CommonMethod</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -204,6 +204,16 @@ namespace PublicClassCurrency
             get { return dicCameras; }
             set { dicCameras = value; }
         }
+
+        private Dictionary<int, VideoTalkChannelInfo> dicTalkChannel = new Dictionary<int, VideoTalkChannelInfo>();
+        /// <summary>
+        /// 对讲通道信息
+        /// </summary>
+        public Dictionary<int, VideoTalkChannelInfo> TalkChannel
+        {
+            get { return dicTalkChannel; }
+            set { dicTalkChannel = value; }
+        }
         #region 设备功能
 
         /// <summary>

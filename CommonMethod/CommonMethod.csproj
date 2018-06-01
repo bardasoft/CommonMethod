@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CmdEXE.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="CommonObject.cs" />
     <Compile Include="Common_Form.cs" />
