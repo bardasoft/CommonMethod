@@ -248,6 +248,21 @@ namespace PublicClassCurrency
                 bolOnlyIntercom = value;
             }
         }
+
+        /// <summary>
+        /// 云台控制使能
+        /// </summary>
+        private bool bolPTZControlEnable = true;
+
+        /// <summary>
+        /// 云台控制使能
+        /// </summary>
+        public bool PTZControlEnable
+        {
+            get { return bolPTZControlEnable; }
+            set { bolPTZControlEnable = value; }
+        }
+
         #endregion
 
         #region 设备状态

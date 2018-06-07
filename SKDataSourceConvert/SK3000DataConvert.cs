@@ -146,6 +146,10 @@ namespace SKDataSourceConvert
             videoInfo.Cameras = new Dictionary<int, CameraInfo>();
             switch (videoInfo.DVSType)
             {
+                case "SK8600":
+                    videoInfo.OnlyIntercom = true;
+                    videoInfo.PTZControlEnable = false;
+                    break;
                 case "SK8601":
                 case "SK8604":
                 case "SK8608":
