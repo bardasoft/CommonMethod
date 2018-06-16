@@ -50,6 +50,10 @@ namespace PublicClassCurrency
         HikDVR=12,
 
         /// <summary>
+        /// 海康流媒体模式
+        /// </summary>
+        HikDVRStream=13,
+        /// <summary>
         /// 雄迈视频SDK
         /// </summary>
         XMaiVideo=8,
