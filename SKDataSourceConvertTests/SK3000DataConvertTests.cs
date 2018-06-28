@@ -24,7 +24,7 @@ namespace SKDataSourceConvert.Tests
         {
             StringBuilder sbExecSQL = new StringBuilder();
             sbExecSQL.Append("SELECT TOP 1 * FROM T_VideoTable ");
-            sbExecSQL.Append("WHERE HostNumber ='4610' ");
+            sbExecSQL.Append("WHERE HostNumber ='4006' ");
             DataTable dtResult = DataBaseOperAt.QuerySQL(sbExecSQL.ToString()).Tables[0];
             VideoInfo v = SK3000DataConvert.VideoInfo_DataRowToVideoInfo(dtResult.Rows[0]);
             Assert.AreEqual(v.VideoType, Enum_VideoType.XMaiVideo);

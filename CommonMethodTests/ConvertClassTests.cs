@@ -54,5 +54,14 @@ namespace CommonMethod.Tests
             Assert.AreEqual(l, lResult);
             //ch01_00000000001041800
         }
+
+        [TestMethod()]
+        public void GetWeekOfDataTimeTest()
+        {
+            //DateTime tim = DateTime.Now;
+            DateTime tim = DateTime.Parse("2018-12-30 11:11:11");
+            int intWeek = ConvertClass.GetWeekOfDataTime(tim);
+            Assert.AreEqual(intWeek, 1);
+        }
     }
 }

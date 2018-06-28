@@ -28,6 +28,8 @@ namespace SKDataSourceConvert
         #region 视频信息相关
         private static VideoInfo GetVideoInfo_ByDataRow(DataRow drVideoInfo)
         {
+            string Temp_strValue = "";
+            string[] Temp_strsValue;
             VideoInfo videoInfo = new VideoInfo();
             string dvsNumber = Convert.ToString(drVideoInfo["DVSNumber"]);
             string cameras1 = Convert.ToString(drVideoInfo[TVideoTable_FieldName.c_strFieldName_CamerasInfo1]);
@@ -56,6 +58,21 @@ namespace SKDataSourceConvert
             videoInfo.DVSType = Convert.ToString(drVideoInfo["DVSType"]);
             videoInfo.UserName = Convert.ToString(drVideoInfo["UserName"]);
             videoInfo.Password = Convert.ToString(drVideoInfo["PassWord"]);
+            //独立视频服务器信息
+            Temp_strValue = Convert.ToString(drVideoInfo["DVSPTZProtocol"]);
+            Temp_strsValue = Temp_strValue.Split(':');
+            if (Temp_strsValue.Length == 2
+                && CommonMethod.Verification.isIP(Temp_strsValue[0])
+                && CommonMethod.Verification.isNumber(Temp_strsValue[1]))
+            {
+                videoInfo.VideoServerEnable = true;
+                videoInfo.VideoServerIP = Temp_strsValue[0];
+                videoInfo.VideoServerPort = Convert.ToInt32(Temp_strValue[1]);
+            }
+            else
+            {
+                videoInfo.VideoServerEnable = false;
+            }
             #region 新版本视频控件兼容类型判断
             if (videoInfo.DVSType.EndsWith("ZW") || videoInfo.DVSType == "SK838")
             {

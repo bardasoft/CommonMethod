@@ -10,6 +10,9 @@ namespace PublicClassCurrency
     public class VideoInfo
     {
         #region 参数
+
+        #region 设备基本信息
+
         /// <summary>
         /// 视频设备类型
         /// </summary>
@@ -84,7 +87,7 @@ namespace PublicClassCurrency
         /// <summary>
         /// DVS连接端口
         /// </summary>
-        private int intDVSConnectPort=0;
+        private int intDVSConnectPort = 0;
         /// <summary>
         /// DVS连接端口
         /// </summary>
@@ -162,7 +165,7 @@ namespace PublicClassCurrency
         /// <summary>
         /// 视频播放时间限制_分 0代表无限制
         /// </summary>
-        private int intVideoPlayTime_Minute=0;
+        private int intVideoPlayTime_Minute = 0;
 
         /// <summary>
         /// 视频播放时间限制_分 0代表无限制
@@ -173,7 +176,7 @@ namespace PublicClassCurrency
             set { intVideoPlayTime_Minute = value; }
         }
 
-        
+
 
         /// <summary>
         /// 自动对讲功能
@@ -214,6 +217,48 @@ namespace PublicClassCurrency
             get { return dicTalkChannel; }
             set { dicTalkChannel = value; }
         }
+        #endregion
+
+        #region 服务器相关信息（部分设备独立配置服务器，以满足客户部分特殊需求）
+
+        private bool bolVideoServerEnable = false;
+        /// <summary>
+        /// 视频服务器是否启用
+        /// </summary>
+        public bool VideoServerEnable
+        {
+            get { return bolVideoServerEnable; }
+            set { bolVideoServerEnable = value; }
+        }
+
+
+
+        private string strVideoServerIP;
+
+        /// <summary>
+        /// 视频服务器IP
+        /// </summary>
+        public string VideoServerIP
+        {
+            get { return strVideoServerIP; }
+            set { strVideoServerIP = value; }
+        }
+
+        private int intVideoServerPort;
+
+        /// <summary>
+        /// 视频服务器端口
+        /// </summary>
+        public int VideoServerPort
+        {
+            get { return intVideoServerPort; }
+            set { intVideoServerPort = value; }
+        }
+
+
+
+        #endregion
+
         #region 设备功能
 
         /// <summary>
