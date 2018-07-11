@@ -426,6 +426,29 @@ namespace CommonMethod
             //三.（今天 减去 第一周周末）/7 等于 距第一周有多少周 再加上第一周的1 就是今天是今年的第几周了
             return Convert.ToInt32(Math.Ceiling((currentDay - firstWeekend) / 7.0)) + 1;
         }
+
+        /// <summary>
+        ///获取周Value  
+        ///（周一 1）（周二 2）（周三3）（周四 4） （周五 5）（周六6）（周日 7） 
+        /// </summary>
+        /// <param name="dayWeek"></param>
+        /// <returns></returns>
+        public static int GetWeekofDateTimeValue(DayOfWeek dayWeek)
+        {
+            int result = (int)dayWeek;
+            result = result == 0 ? 7 : result;
+            return result;
+        }
+        /// <summary>
+        /// 获取当前时间月份  时间
+        /// </summary>
+        /// <param name="tim"></param>
+        /// <returns></returns>
+        public static DateTime GetMonthDateTime(DateTime tim)
+        {
+            DateTime result = tim.AddDays(1 - tim.Day);
+            return result;
+        }
         #endregion
     }
 }

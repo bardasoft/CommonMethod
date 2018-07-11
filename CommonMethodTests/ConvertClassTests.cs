@@ -59,9 +59,28 @@ namespace CommonMethod.Tests
         public void GetWeekOfDataTimeTest()
         {
             //DateTime tim = DateTime.Now;
-            DateTime tim = DateTime.Parse("2018-12-30 11:11:11");
+            //DateTime tim = DateTime.Parse("2018-12-30 11:11:11");
+
+            DateTime tim = DateTime.Now.AddDays(-1);
             int intWeek = ConvertClass.GetWeekOfDataTime(tim);
             Assert.AreEqual(intWeek, 1);
+        }
+
+        [TestMethod()]
+        public void GetWeekofDateTimeValueTest()
+        {
+
+            DateTime tim = DateTime.Now.AddDays(-6);
+            int intWeek = ConvertClass.GetWeekofDateTimeValue(tim.DayOfWeek);
+            Assert.AreEqual(intWeek, 1);
+        }
+
+        [TestMethod()]
+        public void GetMonthDateTimeTest()
+        {
+            DateTime tim1 = DateTime.Today;
+            DateTime result = ConvertClass.GetMonthDateTime(tim1);
+            Assert.AreEqual(result, DateTime.Now);
         }
     }
 }
