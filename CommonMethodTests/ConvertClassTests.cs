@@ -82,5 +82,37 @@ namespace CommonMethod.Tests
             DateTime result = ConvertClass.GetMonthDateTime(tim1);
             Assert.AreEqual(result, DateTime.Now);
         }
+
+        [TestMethod()]
+        public void GetDataToDayTest()
+        {
+            DateTime tim = DateTime.Now;
+            DateTime timResult = ConvertClass.GetDataTimeToDay(tim);
+            Assert.AreEqual(timResult, "123");
+        }
+
+        [TestMethod()]
+        public void GetWeekOfYearTest()
+        {
+            DateTime tim = DateTime.Now;
+            int intWeekValue = ConvertClass.GetWeekOfDataTime(tim);
+            Assert.AreEqual(intWeekValue, 1);
+        }
+
+        [TestMethod()]
+        public void GetWeekNumInMonthTest()
+        {
+            DateTime tim = DateTime.Now;
+            int intWeekValue = ConvertClass.GetWeekNumInMonth(tim);
+            Assert.AreEqual(intWeekValue, 1);
+        }
+
+        [TestMethod()]
+        public void GetWeekOfYearTest1()
+        {
+            DateTime tim = DateTime.Now;
+            int intWeekValue = ConvertClass.GetWeekOfYear(tim);
+            Assert.AreEqual(intWeekValue, 1);
+        }
     }
 }
