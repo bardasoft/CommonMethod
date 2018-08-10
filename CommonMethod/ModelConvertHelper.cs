@@ -8,6 +8,11 @@ namespace CommonMethod
 {
     public class ModelConvertHelper<T> where T : new()
     {
+        /// <summary>
+        /// 模型转换_Table
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
         public static IList<T> ConvertToModel(DataTable dt)
         {
 
@@ -43,6 +48,29 @@ namespace CommonMethod
             return ts;
         }
 
+        /// <summary>
+        /// 模型转换_Table
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static IList<T> ConvertToModel1(DataTable dt)
+        {
+
+            IList<T> ts = new List<T>();// 定义集合
+            Type type = typeof(T); // 获得此模型的类型
+            string tempName = "";
+            foreach (DataRow dr in dt.Rows)
+            {
+                ts.Add(ConvertToModel(dr));
+            }
+            return ts;
+        }
+
+        /// <summary>
+        /// 模型类型转换_DataRow
+        /// </summary>
+        /// <param name="dr"></param>
+        /// <returns></returns>
         public static T ConvertToModel(DataRow dr)
         {
             T t = new T();
@@ -62,6 +90,11 @@ namespace CommonMethod
                     {
                         value = Convert.ToByte(value);
                     }
+                    else if (pi.PropertyType == typeof(int))
+                    {
+                        string Temp_strValue = Convert.ToString(value);
+                        value = string.IsNullOrEmpty(Temp_strValue) ? 0 : value;
+                    }
                     pi.SetValue(t, value, null);
                 }
 
@@ -70,5 +103,7 @@ namespace CommonMethod
             return t;
         }
 
+
+        //public static List<string> GetModel
     }
 }

@@ -10,6 +10,7 @@ namespace CommonMethod
     /// </summary>
     public class Verification
     {
+        #region 网络相关
         /// <summary>
         /// 判断是否为合法的IP地址
         /// </summary>
@@ -56,8 +57,77 @@ namespace CommonMethod
                 return false;
             }
         }
+        /// <summary>
+        /// 是否为域名
+        /// </summary>
+        /// <param name="strDomainName"></param>
+        /// <returns></returns>
+        public static bool IsDomainName(string strDomainName)
+        {
+            //bool result = Regex.IsMatch(strDomainName, "[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+.?");
+            //return result;
+            return CheckIsFormat(@"(http://)?([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?", strDomainName);
+        }
+        /// 检测串值是否为合法的格式
+                /// </summary>
+                /// <param name="strRegex">正则表达式</param>
+                /// <param name="strValue">要检测的String值</param>
+                /// <returns>成功返回true 失败返回false</returns>
+        public static bool CheckIsFormat(string strRegex, string strValue)
+        {
+            if (strValue != null && strValue.Trim() != "")
+            {
+                Regex re = new Regex(strRegex);
+                if (re.IsMatch(strValue))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
+        #region 180124 判断IP地址为内网或外网
+        //        public bool isInnerIP(string ipAddress)
+        //        {
+        //            bool isInnerIp = false;
+        //            long ipNum = getIpNum(ipAddress);
+        //            /**  
+        //5.         私有IP：A类  10.0.0.0-10.255.255.255  
+        //6.                B类  172.16.0.0-172.31.255.255  
+        //7.                C类  192.168.0.0-192.168.255.255  
+        //8.         当然，还有127这个网段是环回地址  
+        //9.         **/
+        //            long aBegin = getIpNum("10.0.0.0");
+        //            long aEnd = getIpNum("10.255.255.255");
+        //            long bBegin = getIpNum("172.16.0.0");
+        //            long bEnd = getIpNum("172.31.255.255");
+        //            long cBegin = getIpNum("192.168.0.0");
+        //            long cEnd = getIpNum("192.168.255.255");
+        //            isInnerIp = isInner(ipNum, aBegin, aEnd) || isInner(ipNum, bBegin, bEnd) || isInner(ipNum, cBegin, cEnd) || ipAddress.Equals("127.0.0.1");
+        //            return isInnerIp;
+        //        }
+        //        private long getIpNum(string ipAddress)
+        //        {
+        //            string[] ip = ipAddress.Split(new string[] { "." }, StringSplitOptions.None);
+        //            long a = long.Parse(ip[0]);
+        //            long b = long.Parse(ip[1]);
+        //            long c = long.Parse(ip[2]);
+        //            long d = long.Parse(ip[3]);
+
+        //            long ipNum = a * 256 * 256 * 256 + b * 256 * 256 + c * 256 + d;
+        //            return ipNum;
+        //        }
+        //        private bool isInner(long userIp, long begin, long end)
+        //        {
+        //            return (userIp >= begin) && (userIp <= end);
+        //        }
+        #endregion
 
 
+        #endregion
         /// <summary>
         /// 是否为数字
         /// </summary>
@@ -135,42 +205,7 @@ namespace CommonMethod
 
 
         #endregion
-        #region 180124 判断IP地址为内网或外网
-//        public bool isInnerIP(string ipAddress)
-//        {
-//            bool isInnerIp = false;
-//            long ipNum = getIpNum(ipAddress);
-//            /**  
-//5.         私有IP：A类  10.0.0.0-10.255.255.255  
-//6.                B类  172.16.0.0-172.31.255.255  
-//7.                C类  192.168.0.0-192.168.255.255  
-//8.         当然，还有127这个网段是环回地址  
-//9.         **/
-//            long aBegin = getIpNum("10.0.0.0");
-//            long aEnd = getIpNum("10.255.255.255");
-//            long bBegin = getIpNum("172.16.0.0");
-//            long bEnd = getIpNum("172.31.255.255");
-//            long cBegin = getIpNum("192.168.0.0");
-//            long cEnd = getIpNum("192.168.255.255");
-//            isInnerIp = isInner(ipNum, aBegin, aEnd) || isInner(ipNum, bBegin, bEnd) || isInner(ipNum, cBegin, cEnd) || ipAddress.Equals("127.0.0.1");
-//            return isInnerIp;
-//        }
-//        private long getIpNum(string ipAddress)
-//        {
-//            string[] ip = ipAddress.Split(new string[] { "." }, StringSplitOptions.None);
-//            long a = long.Parse(ip[0]);
-//            long b = long.Parse(ip[1]);
-//            long c = long.Parse(ip[2]);
-//            long d = long.Parse(ip[3]);
 
-//            long ipNum = a * 256 * 256 * 256 + b * 256 * 256 + c * 256 + d;
-//            return ipNum;
-//        }
-//        private bool isInner(long userIp, long begin, long end)
-//        {
-//            return (userIp >= begin) && (userIp <= end);
-//        }
-        #endregion
-
+        
     }
 }
