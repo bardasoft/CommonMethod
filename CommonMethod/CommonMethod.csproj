@@ -46,6 +46,7 @@
     <Compile Include="Common_Web.cs" />
     <Compile Include="ConvertClass.cs" />
     <Compile Include="DBRelevant.cs" />
+    <Compile Include="FileOperat.cs" />
     <Compile Include="GetSystemInfo.cs" />
     <Compile Include="GPSCoordinateConvert.cs" />
     <Compile Include="LogWrite.cs" />

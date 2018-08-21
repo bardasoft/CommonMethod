@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using System.Xml;
 
@@ -155,6 +156,7 @@ namespace CommonMethod
 
             return bolResult;
         }
+
         #endregion
 
         #region 数据获取
@@ -196,6 +198,44 @@ namespace CommonMethod
         }
 
         #endregion
+
+        #region 对象更新
+
+        /// <summary>
+        /// 添加节点信息
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t"></param>
+        /// <param name="strFilePath"></param>
+        /// <returns></returns>
+        public static bool AddNodeInfo<T>(T t, string strFilePath)
+        {
+            bool bolResult = false;
+
+
+            return bolResult;
+        }
+
+        /// <summary>
+        /// 更新节点信息
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t"></param>
+        /// <param name="strFilePath"></param>
+        /// <param name="strKey"></param>
+        /// <returns></returns>
+        public static bool UpdateNodeInfo<T>(T t, string strFilePath, string strKey)
+        {
+            bool bolResult = false;
+
+
+            return bolResult;
+        }
+
+
+
+        #endregion
+
 
 
     }
