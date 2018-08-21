@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net;
 
 namespace CommonMethod.Tests
 {
@@ -14,11 +15,14 @@ namespace CommonMethod.Tests
         [TestMethod()]
         public void IsDomainNameTest()
         {
-            string strDomainName = "12avs3.com";
+            string strDomainName = "121.41.87.203";
             //bool bolResult = Verification.isIP(strDomainName);
             //Assert.IsTrue(bolResult);
             bool bolResult = Verification.IsDomainName(strDomainName);
-            Assert.IsTrue(bolResult);
+
+            IPHostEntry hostInfo = Dns.GetHostEntry("lr.mmall.com");
+            string ip = hostInfo.AddressList[0].ToString();
+            Assert.AreEqual(ip, "1");
         }
     }
 }

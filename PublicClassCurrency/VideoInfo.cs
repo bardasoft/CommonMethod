@@ -330,7 +330,7 @@ namespace PublicClassCurrency
         private int intLoginState;
 
         /// <summary>
-        /// 设备登陆状态 -1表示登陆失败 0表示未登录  1表示已登陆
+        /// 设备登陆状态 -1表示登陆失败 0表示未登录  1表示已登陆  2表示登陆中
         /// </summary>
         public int LoginState
         {
