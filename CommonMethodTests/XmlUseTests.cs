@@ -108,5 +108,97 @@ namespace CommonMethod.Tests
             bool bolResult = XmlUse.UpdateNodeInfo(strFilePath, strParertName, element);
             Assert.IsTrue(bolResult);
         }
+
+        [TestMethod()]
+        public void AddNodeInfoTest1()
+        {
+            bool bolResult = false;
+            string strFilePath = Environment.CurrentDirectory + "\\EntranceTypeInfo.xml";
+            string strParertName = "EntranceTypeInfo";
+            XmlUse.CreateXmlFile(strFilePath, strParertName);
+
+            string strNodeName;
+            string[] strsField;
+            string[] strsValue;
+
+            strNodeName = "EntranceType";
+            strsField = new string[] { "Key", "Key1", "Name", "ProgValue", "Describe" };
+            strsValue = new string[] { "21", "21E0", "联动门外门", "DoubleDoorFinger", "" };
+            XmlUse.AddNodeInfo(strFilePath, strParertName, strNodeName, strsField, strsValue);
+
+
+            strNodeName = "EntranceType";
+            strsField = new string[] { "Key", "Key1", "Name", "ProgValue", "Describe" };
+            strsValue = new string[] { "25", "21E1", "联动门内门", "DoubleInDoorFinger", "" };
+            XmlUse.AddNodeInfo(strFilePath, strParertName, strNodeName, strsField, strsValue);
+
+            strNodeName = "EntranceType";
+            strsField = new string[] { "Key", "Key1", "Name", "ProgValue", "Describe" };
+            strsValue = new string[] { "22", "22E1", "业务库金库门", "MoneyRoomFinger", "" };
+            XmlUse.AddNodeInfo(strFilePath, strParertName, strNodeName, strsField, strsValue);
+
+
+            strNodeName = "EntranceType";
+            strsField = new string[] { "Key", "Key1", "Name", "ProgValue", "Describe" };
+            strsValue = new string[] { "24", "22E0", "业务库隔离门", "SplitDoorFinger", "" };
+            XmlUse.AddNodeInfo(strFilePath, strParertName, strNodeName, strsField, strsValue);
+
+            strNodeName = "EntranceType";
+            strsField = new string[] { "Key", "Key1", "Name", "Progvalue", "Describe" };
+            strsValue = new string[] { "23", "23E0", "加钞间", "AddMoneyFinger", "" };
+            XmlUse.AddNodeInfo(strFilePath, strParertName, strNodeName, strsField, strsValue);
+
+            Assert.IsTrue(bolResult);
+        }
+
+        [TestMethod()]
+        public void GetNodeInfo_ByElementTest()
+        {
+            string strFilePath = Environment.CurrentDirectory + "\\EntranceTypeInfo.xml";
+            string strParertName = "EntranceTypeInfo";
+            string strNodeName = "EntranceType";
+            XmlNodeList x = XmlUse.GetNodeListInfo(strFilePath, strParertName, strNodeName);
+            Assert.AreEqual(x, "1");
+        }
+
+        public class EntranceType
+        {
+            public string Key
+            {
+                get; set;
+            }
+
+            public string Key1
+            {
+                get; set;
+            }
+        }
+
+        [TestMethod()]
+        public void GetObjectInfoTest()
+        {
+            string strFilePath = Environment.CurrentDirectory + "\\EntranceTypeInfo.xml";
+            string strParertName = "EntranceTypeInfo";
+            string strNodeName = "EntranceType";
+            XmlNodeList x = XmlUse.GetNodeListInfo(strFilePath, strParertName, strNodeName);
+            XmlNode node = x[0];
+            EntranceType result = XmlUse.GetObjectInfo<EntranceType>(node);
+            Assert.AreEqual(result.Key1, "1");
+        }
+
+        
+
+        [TestMethod()]
+        public void GetObjectListInfoTest()
+        {
+
+            string strFilePath = Environment.CurrentDirectory + "\\EntranceTypeInfo.xml";
+            string strParertName = "EntranceTypeInfo";
+            string strNodeName = "EntranceType";
+            XmlNodeList x = XmlUse.GetNodeListInfo(strFilePath, strParertName, strNodeName);
+
+            List<EntranceType> result = XmlUse.GetObjectListInfo<EntranceType>(x);
+            Assert.AreEqual(result.Count, 1);
+        }
     }
 }

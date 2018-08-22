@@ -8,14 +8,14 @@ namespace CommonMethod
 {
     public class XmlUse
     {
-        public static bool CreateXmlFile(string strFilePath,string strRootNodeName)
+        public static bool CreateXmlFile(string strFilePath, string strRootNodeName)
         {
-                XmlDocument xmlDoc = new XmlDocument();
-                //根节点
-                XmlElement rootElement = xmlDoc.CreateElement(strRootNodeName);
-                xmlDoc.AppendChild(rootElement);
-                xmlDoc.Save(strFilePath);
-                return true;
+            XmlDocument xmlDoc = new XmlDocument();
+            //根节点
+            XmlElement rootElement = xmlDoc.CreateElement(strRootNodeName);
+            xmlDoc.AppendChild(rootElement);
+            xmlDoc.Save(strFilePath);
+            return true;
         }
 
         #region 数据更新
@@ -107,7 +107,7 @@ namespace CommonMethod
                 foreach (XmlAttribute attr in xn.Attributes)
                 {
                     XmlAttribute Temp_attr = node.Attributes[attr.Name];
-                    if (Temp_attr == null )
+                    if (Temp_attr == null)
                     {
                         element = (XmlElement)node;
                         element.SetAttribute(attr.Name, attr.Value);
@@ -197,6 +197,18 @@ namespace CommonMethod
             return result;
         }
 
+        public static XmlNodeList GetNodeListInfo(string strFilePath, string strParentName, string strNodeName)
+        {
+            XmlNodeList result = null;
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(strFilePath);
+            XmlNodeList x = xmlDoc.GetElementsByTagName("EntranceType");
+            int count = x.Count;
+            XmlNode nodeParent = xmlDoc.SelectSingleNode(strParentName);   //父节点
+            result = nodeParent.SelectNodes(strNodeName);
+            return result;
+        }
+
         #endregion
 
         #region 对象更新
@@ -236,7 +248,33 @@ namespace CommonMethod
 
         #endregion
 
+        #region 对象获取
+        public static T GetObjectInfo<T>(XmlNode node)
+        {
+            T reuslt = System.Activator.CreateInstance<T>();
+            PropertyInfo[] propertys = reuslt.GetType().GetProperties();// 获得此模型的公共属性
+            foreach (var pi in propertys)
+            {
+                string Temp_strFieldName = pi.Name;
+                XmlAttribute attr = node.Attributes[Temp_strFieldName];
+                if (attr != null)
+                {
+                    pi.SetValue(reuslt, attr.Value, null);
+                }
+            }
+            return reuslt;
+        }
 
+        public static List<T> GetObjectListInfo<T>(XmlNodeList lstNode)
+        {
+            List<T> result = new List<T>();
+            foreach (XmlNode node in lstNode)
+            {
+                result.Add(GetObjectInfo<T>(node));
+            }
+            return result;
+        }
+        #endregion
 
     }
 }
