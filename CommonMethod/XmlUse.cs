@@ -218,9 +218,10 @@ namespace CommonMethod
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="t"></param>
-        /// <param name="strFilePath"></param>
+        /// <param name="strFilePath">文件地址</param>
+        /// <param name="strParentName">父节点名称</param>
         /// <returns></returns>
-        public static bool AddNodeInfo<T>(T t, string strFilePath)
+        public static bool AddNodeInfo<T>(T t, string strFilePath,string strParentName)
         {
             bool bolResult = false;
 
@@ -233,10 +234,12 @@ namespace CommonMethod
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="t"></param>
-        /// <param name="strFilePath"></param>
-        /// <param name="strKey"></param>
+        /// <param name="strParentName">父节点名称</param>
+        /// <param name="strFilePath">Xml文件地址</param>
+        /// <param name="strField">字段名称</param>
+        /// <param name="strKey">字段值</param>
         /// <returns></returns>
-        public static bool UpdateNodeInfo<T>(T t, string strFilePath, string strKey)
+        public static bool UpdateNodeInfo<T>(T t, string strFilePath,string strParentName, string strField,string strKey)
         {
             bool bolResult = false;
 
