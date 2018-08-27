@@ -53,7 +53,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CommonTests.cs" />
+    <Compile Include="Common_WebTests.cs" />
     <Compile Include="ConvertClassTests.cs" />
+    <Compile Include="FTPHelperTests.cs" />
     <Compile Include="GetSystemInfoTests.cs" />
     <Compile Include="LogWriteTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
