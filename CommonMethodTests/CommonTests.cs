@@ -14,7 +14,7 @@ namespace CommonMethod.Tests
         [TestMethod()]
         public void CreateFolderTest()
         {
-            string Temp_strFolderPath = @"G:\上班汇总\Working\维护项目\公用项目\VideoPlayControl\VideoPlayControl\VideoPlayControl\VideoPlayControl_UseDemo\bin\Debug\AxisRecord\AxisRecord1\AxisRecord2\AxisRecord3\AxisRecord4";
+            string Temp_strFolderPath = @"C:\Users\thankyou_1996\Desktop\新建文件夹\123\456\456.txt";
             bool bolResult = Common.CreateFolder(Temp_strFolderPath);
             Assert.IsTrue(bolResult);
         }

@@ -196,6 +196,11 @@ namespace CommonMethod
         }
 
 
+        /// <summary>
+        /// 创建文件地址
+        /// </summary>
+        /// <param name="strFolderPath"></param>
+        /// <returns></returns>
         public static bool CreateFolder(string strFolderPath)
         {
             string Temp_strUpperLevelFolderPath = strFolderPath.Substring(0, strFolderPath.LastIndexOf("\\") );
