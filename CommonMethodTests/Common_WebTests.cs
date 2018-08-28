@@ -64,5 +64,22 @@ namespace CommonMethod.Tests
             string strResult = Common_Web.HttpGet(strUrl, "");
             Assert.AreEqual(strResult, "");
         }
+
+        [TestMethod()]
+        public void HFSHttpGetFileNameListTest()
+        {
+            string strUrl = "http://192.168.2.19:8008/SK_VideoRecord/0001/";
+            List<HFSDownLoadFileInfo> result = Common_Web.HFSHttpGetFileNameList(strUrl);
+            Assert.AreEqual(result.Count, 1);
+        }
+
+        [TestMethod()]
+        public void HFSHttpGetFileTest()
+        {
+            string strUrl = "http://192.168.2.19:8008/SK_VideoRecord/0001/";
+            string strLocalPath = @"C:\Users\thankyou_1996\Desktop\新建文件夹";
+            bool bolResult = Common_Web.HFSHttpGetFile(strUrl, strLocalPath);
+            Assert.IsTrue(bolResult);
+        }
     }
 }

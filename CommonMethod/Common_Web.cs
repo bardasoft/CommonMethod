@@ -163,9 +163,9 @@ namespace CommonMethod
             string strType = "";
             bool bolResult = false;
             string strUrl = "https://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?";
-            string strData ="cb=jQuery1102033239549674370017_1513645089824&resource_name=guishudi&query="+ strPhome + "&_=1513645089826";
-            int Temp_intIndex1=0;
-            int Temp_intIndex2= 0;
+            string strData = "cb=jQuery1102033239549674370017_1513645089824&resource_name=guishudi&query=" + strPhome + "&_=1513645089826";
+            int Temp_intIndex1 = 0;
+            int Temp_intIndex2 = 0;
             int Temp_intLength = 0;
             try
             {
@@ -203,9 +203,11 @@ namespace CommonMethod
             sbJsonData.Append("\"city\":\"" + strCity + "\",");
             sbJsonData.Append("\"type\":\"" + strType + "\"");
             sbJsonData.Append("}]");
-            return sbJsonData.ToString() ;
+            return sbJsonData.ToString();
         }
 
+
+        #region HFS
         /// <summary>
         /// HFSHttpUploadFile
         /// </summary>
@@ -336,6 +338,180 @@ namespace CommonMethod
             {
                 return stream.ReadToEnd();
             }
+        }
+
+        /// <summary>
+        /// HFS获取文件/下载文件
+        /// </summary>
+        /// <param name="strUrl"></param>
+        /// <param name="strLocalSavePath"></param>
+        /// <returns></returns>
+        public static bool HFSHttpGetFile(string strUrl, string strLocalSavePath)
+        {
+            bool bolResult = false;
+            List<HFSDownLoadFileInfo> lstDownLoaFile = HFSHttpGetFileNameList(strUrl);
+            foreach (HFSDownLoadFileInfo s in lstDownLoaFile)
+            {
+                s.SaveName = strLocalSavePath + "/" + s.SaveName;
+                s.DownName = strUrl + "/" + s.DownName;
+            }
+            bolResult = HFSHttpGetFile(lstDownLoaFile);
+            return bolResult;
+        }
+
+        /// <summary>
+        /// HFS获取文件/下载文件
+        /// </summary>
+        /// <param name="lstDownLoaFile"></param>
+        /// <returns></returns>
+        public static bool HFSHttpGetFile(List<HFSDownLoadFileInfo> lstDownLoaFile)
+        {
+            bool bolResult = false;
+            foreach (HFSDownLoadFileInfo s in lstDownLoaFile)
+            {
+                HFSHttpGetFile(s);
+            }
+            return bolResult;
+        }
+
+        /// <summary>
+        /// HFS获取文件/下载文件
+        /// </summary>
+        /// <param name="DownLoadFile"></param>
+        /// <returns></returns>
+        public static bool HFSHttpGetFile(HFSDownLoadFileInfo DownLoadFile)
+        {
+            bool bolResult = false;
+            string Temp_strSavePath = DownLoadFile.SaveName;
+            string Temp_strSaveFolder = Temp_strSavePath.Substring(0, Temp_strSavePath.LastIndexOf('/'));
+            Common.CreateFolder(Temp_strSaveFolder);
+            string Temp_strDownLoadUrl = DownLoadFile.DownName;
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(Temp_strDownLoadUrl);
+            request.Timeout = 5000;
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            long Temp_lngTotal = response.ContentLength;
+            using (Stream st = response.GetResponseStream())
+            {
+                using (Stream so = new FileStream(Temp_strSavePath, FileMode.Create))
+                {
+                    long Temp_lngDownTotal = 0;
+                    byte[] buffer = new byte[4096];
+                    int intOSize = st.Read(buffer, 0, (int)buffer.Length);
+                    while (intOSize > 0)
+                    {
+                        Temp_lngDownTotal += intOSize;
+                        so.Write(buffer, 0, intOSize);
+                        intOSize = st.Read(buffer, 0, (int)buffer.Length);
+                    }
+                }
+            }
+            return bolResult;
+        }
+
+        /// <summary>
+        /// 获取URL的文件列表
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="savePath"></param>
+        public static List<HFSDownLoadFileInfo> HFSHttpGetFileNameList(string strUrl)
+        {
+            List<HFSDownLoadFileInfo> result = new List<HFSDownLoadFileInfo>();
+            WebClient MyWebClient = new WebClient();
+            MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
+            Byte[] pageData = MyWebClient.DownloadData(strUrl); //从指定网站下载数据
+            //string pageHtml = System.Text.Encoding.GetEncoding("GB2312").GetString(pageData);
+            //string pageHtml = Encoding.Default.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句          
+            string pageHtml = Encoding.UTF8.GetString(pageData); //如果获取网站页面采用的是UTF-8，则使用这句
+
+            //获取表格信息
+            int tbStartIndex = pageHtml.IndexOf("<table id='files'>");
+            int tbEndIndex = pageHtml.IndexOf("</table>") + 8;
+            int tbLength = tbEndIndex - tbStartIndex;
+            if (tbStartIndex > -1)
+            {
+                //无文件信息;
+                string strTb = pageHtml.Substring(tbStartIndex, tbLength);
+                string[] fileInfos = strTb.Split(Environment.NewLine.ToCharArray());//换行分割
+                List<string> fileNames = new List<string>();
+                foreach (string s in fileInfos)
+                {
+                    if (string.IsNullOrEmpty(s))
+                    {
+                        continue;
+                    }
+                    if (!s.Trim().StartsWith("<a href="))       //<a>标签
+                    {
+                        continue;
+                    }
+                    if (!(s.Trim().IndexOf("<img src") != -1))//有前置小图标 下载文件
+                    {
+                        continue;
+                    }
+                    string saveFileName = "";
+                    string downLoadUrlName = "";
+                    string strTransition = "";    //过渡变量，便于字符串截取
+                    strTransition = s.Substring(0, s.IndexOf("</a>"));
+                    saveFileName = strTransition.Substring(strTransition.LastIndexOf(">") + 2); //网页中文件名称前面会有一个空格字符
+
+                    int downLoadUrlStartIndex = s.IndexOf("href=") + 6;
+                    int downLoadUrlEndIndex = s.IndexOf('"' + ">");
+                    int downLoadUrlNameLength = downLoadUrlEndIndex - downLoadUrlStartIndex;
+                    //下载地址url
+                    downLoadUrlName = s.Substring(downLoadUrlStartIndex, downLoadUrlNameLength);
+                    
+                    //lstDownLoadUrls.Add(url + "\\" + downLoadUrlName);
+                    if (downLoadUrlName.LastIndexOf(".") == -1)
+                    {
+                        //文件夹 递归
+                        List<HFSDownLoadFileInfo> Temp_Result = HFSHttpGetFileNameList(strUrl + "\\" + downLoadUrlName);
+                        foreach (HFSDownLoadFileInfo ss in Temp_Result)
+                        {
+                            //result.Add(downLoadUrlName + "/" + ss);
+                            result.Add(new HFSDownLoadFileInfo
+                            {
+                                SaveName = downLoadUrlName + "/" + ss.SaveName,
+                                DownName = downLoadUrlName + "/" + ss.DownName,
+                            });
+                        }
+                    }
+                    else
+                    {
+                        HFSDownLoadFileInfo Temp_HFSFileInfo = new HFSDownLoadFileInfo
+                        {
+                            SaveName = saveFileName,
+                            DownName = downLoadUrlName
+                        };
+
+                        result.Add(Temp_HFSFileInfo);
+                    }
+                }
+            }
+
+            return result;
+        }
+
+
+        #endregion 
+    }
+    public class HFSDownLoadFileInfo
+    {
+        /// <summary>
+        /// 保存名称
+        /// </summary>
+        public string SaveName
+        {
+            get;
+            set;
+        }
+
+
+        /// <summary>
+        /// 下载名称
+        /// </summary>
+        public string DownName
+        {
+            get;
+            set;
         }
 
     }
