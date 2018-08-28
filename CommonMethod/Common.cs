@@ -129,10 +129,11 @@ namespace CommonMethod
         }
 
         /// <summary>
-        /// 复制文件夹 文件 
+        /// 复制文件夹 文件
+        /// 目录中的文件以及文件夹复制到指定目录中（不包含根目录）
         /// </summary>
-        /// <param name="srcPath"></param>
-        /// <param name="aimPath"></param>
+        /// <param name="srcPath">原文件夹</param>
+        /// <param name="aimPath">目的路径</param>
         public static int CopyDir(string srcPath, string aimPath)
         {
             try
@@ -173,6 +174,32 @@ namespace CommonMethod
                 throw;
             }
         }
+
+
+        /// <summary>
+        /// 删除文件夹文件(不删除根目录)
+        /// </summary>
+        /// <param name="srcPath"></param>
+        /// <returns></returns>
+        public static int DeleteDir(string srcPath)
+        {
+            DirectoryInfo dir = new DirectoryInfo(srcPath);
+            FileSystemInfo[] fileinfo = dir.GetFileSystemInfos();  //返回目录中所有文件和子目录
+            foreach (FileSystemInfo i in fileinfo)
+            {
+                if (i is DirectoryInfo)            //判断是否文件夹
+                {
+                    DirectoryInfo subdir = new DirectoryInfo(i.FullName);
+                    subdir.Delete(true);          //删除子目录和文件
+                }
+                else
+                {
+                    File.Delete(i.FullName);      //删除指定文件
+                }
+            }
+            return 1;
+        }
+
 
         /// <summary>
         /// 深度拷贝

@@ -18,5 +18,22 @@ namespace CommonMethod.Tests
             bool bolResult = Common.CreateFolder(Temp_strFolderPath);
             Assert.IsTrue(bolResult);
         }
+
+        [TestMethod()]
+        public void CopyDirTest()
+        {
+            string s1 = @"C:\Users\thankyou_1996\Desktop\新建文件夹";
+            string s2 = @"C:\Users\thankyou_1996\Desktop\新建文件夹 (2)";
+            int intResult = CommonMethod.Common.CopyDir(s1, s2);
+            Assert.AreEqual(intResult, 1);
+        }
+
+        [TestMethod()]
+        public void DeleteDirTest()
+        {
+            string s2 = @"C:\Users\thankyou_1996\Desktop\新建文件夹 (2)";
+            int intResult = CommonMethod.Common.DeleteDir( s2);
+            Assert.AreEqual(intResult, 1);
+        }
     }
 }
