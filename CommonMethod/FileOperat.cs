@@ -61,16 +61,18 @@ namespace CommonMethod
         }
 
 
+
         /// <summary>
         /// 获取文件信息
         /// </summary>
         /// <param name="fileinfo">文件信息</param>
+        /// <param name="RelativePath">相对路径</param>
         /// <returns></returns>
-        public static SKFileInfo GetSKFileInfo(FileInfo fileinfo)
+        public static SKFileInfo GetSKFileInfo(FileInfo fileinfo, string RelativePath)
         {
             SKFileInfo result = new SKFileInfo();
 
-            //返回的文件信息路径为绝对路径，因为没有给出相对路径
+            //如果相对路径为空返回的文件信息为绝对路径，否则为相对路径
             FileInfo fileInfo = fileinfo;
 
             // 如果文件存在
@@ -94,8 +96,14 @@ namespace CommonMethod
                 {
                     result.productversion = info.ProductVersion;
                 }
-                //clientInfo.path = fileInfo.FullName.Replace(Path, "."); //绝对路径中的初始路径改为 . 形成相对路径
-                result.path = fileInfo.FullName;
+                if (RelativePath == "")
+                {
+                    result.path = fileInfo.FullName;
+                }
+                else
+                {
+                    result.path = fileInfo.FullName.Replace(RelativePath, "."); //绝对路径中的初始路径改为 . 形成相对路径
+                }
                 result.createtime = fileInfo.CreationTime.ToString("yyyy-MM-dd HH:mm:ss");
                 result.modifytime = fileInfo.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss");
                 if (info.FileDescription == null)
@@ -113,14 +121,12 @@ namespace CommonMethod
             }
             else
             {
-                Console.WriteLine("指定的文件路径不正确!");
+
             }
             // 末尾空一行
-            Console.WriteLine();
+            //Console.WriteLine();
             //return clientInfo;
-
-
-
+            
             return result;
         }
 
@@ -135,6 +141,17 @@ namespace CommonMethod
         {
             SKFileInfo result = new SKFileInfo();
 
+            //由单元素获取此元素内的文件信息
+            result.name = element.Attributes["name"].Value;
+            result.fileversion = element.Attributes["fileversion"].Value;
+            result.productversion = element.Attributes["productversion"].Value;
+            result.path = element.Attributes["path"].Value;
+            result.createtime = element.Attributes["createtime"].Value;
+            result.modifytime = element.Attributes["modifytime"].Value;
+            result.description = element.Attributes["description"].Value;
+            result.size = element.Attributes["size"].Value;
+            result.type = element.Attributes["type"].Value;
+            result.remark = element.Attributes["remark"].Value;
 
             return result;
         }
@@ -147,10 +164,23 @@ namespace CommonMethod
         /// <returns></returns>
         public static SKFileInfo GetSKFileInfo(XmlNode node)
         {
+
+            //节点为元素类型，即一个元素占一个属性
             SKFileInfo result = new SKFileInfo();
+            XmlNodeList xmlNodeList = node.ChildNodes; //获取所有子节点
 
-
+            result.name = xmlNodeList[0].InnerText;
+            result.fileversion = xmlNodeList[1].InnerText;
+            result.productversion = xmlNodeList[2].InnerText;
+            result.path = xmlNodeList[3].InnerText;
+            result.createtime = xmlNodeList[4].InnerText;
+            result.modifytime = xmlNodeList[5].InnerText;
+            result.description = xmlNodeList[6].InnerText;
+            result.size = xmlNodeList[7].InnerText;
+            result.type = xmlNodeList[8].InnerText;
+            result.remark = xmlNodeList[9].InnerText;
             return result;
+
         }
 
         /// <summary>
@@ -161,13 +191,8 @@ namespace CommonMethod
         public static List<SKFileInfo> GetSKFileInfoList(string strFolderName)
         {
             List<SKFileInfo> reuslt = new List<SKFileInfo>();
-            //List<string> l = new List<string>();
-            //foreach (string s in l)
-            //{
-            //    reuslt.Add(GetSKFileInfo(s)); 
-            //}
 
-            reuslt.AddRange(ReadFile(strFolderName));     //使用递归
+            reuslt.AddRange(ReadFile(strFolderName, strFolderName));     //使用递归
 
             return reuslt;
         }
@@ -177,15 +202,14 @@ namespace CommonMethod
         /// </summary>
         /// <param name="fileinfos">系统文件列表</param>
         /// <returns></returns>
-        public static List<SKFileInfo> GetSKFileInfoList(FileInfo[] fileinfos)
+        public static List<SKFileInfo> GetSKFileInfoList(FileInfo[] fileinfos, string RelativePath = "")
         {
             List<SKFileInfo> reuslt = new List<SKFileInfo>();
             //前提：确保FileInfo中没有文件夹否则将无法获取文件夹内的信息
             FileInfo[] fileInfo = fileinfos;
             for (int i = 0; i < fileInfo.Length; i++)
             {
-                //SKFileInfo ClientInfo = FileInfo(fileInfo[i], fileInfo[i].FullName);
-                SKFileInfo ClientInfo = GetSKFileInfo(fileInfo[i]);
+                SKFileInfo ClientInfo = GetSKFileInfo(fileInfo[i], RelativePath);
 
                 if (ClientInfo != null)
                 {
@@ -201,102 +225,88 @@ namespace CommonMethod
             List<SKFileInfo> reuslt = new List<SKFileInfo>();
 
             //前提：XML文件格式与 SKFileInfo 格式相同，直接反序列化
-            FileStream fs = new FileStream(srtXMLFilePath, FileMode.Open);
-            XmlSerializer xs = new XmlSerializer(typeof(List<SKFileInfo>));
-            reuslt = xs.Deserialize(fs) as List<SKFileInfo>;
-
+            FileStream fs = new FileStream(srtXMLFilePath, FileMode.Open);  //打开XML文件
+            XmlSerializer xs = new XmlSerializer(typeof(List<SKFileInfo>));  //XML序列化
+            reuslt = xs.Deserialize(fs) as List<SKFileInfo>;  //将文件流反序列化到实例对象
+            fs.Close(); //关闭文件流
             return reuslt;
+
         }
         public static List<SKFileInfo> GetSKFileInfoList_ByRootNode(XmlNode rootNode)
         {
             List<SKFileInfo> reuslt = new List<SKFileInfo>();
 
+            //传入的节点为根节点 
+            XmlNodeList xmlNodeList = rootNode.ChildNodes; //获取所有子节点
+            foreach (XmlNode xn in xmlNodeList)
+            {
+                XmlElement xe = (XmlElement)xn;
+                SKFileInfo Info = new SKFileInfo();
+                Info.name = xe.Attributes["name"].Value;
+                Info.fileversion = xe.Attributes["fileversion"].Value;
+                Info.productversion = xe.Attributes["productversion"].Value;
+                Info.path = xe.Attributes["path"].Value;
+                Info.createtime = xe.Attributes["createtime"].Value;
+                Info.modifytime = xe.Attributes["modifytime"].Value;
+                Info.description = xe.Attributes["description"].Value;
+                Info.size = xe.Attributes["size"].Value;
+                Info.type = xe.Attributes["type"].Value;
+                Info.remark = xe.Attributes["remark"].Value;
+                reuslt.Add(Info);
+            }
+
+
             return reuslt;
         }
 
 
-        /// <summary>
-        /// 获取子文件信息
-        /// </summary>
-        /// <param name="File"></param>
-        /// <param name="Path"></param>
-        /// <returns></returns>
-        private static SKFileInfo FileInfo(FileInfo File, string Path)
-        {
-            FileInfo fileInfo = File;
-            SKFileInfo clientInfo = new SKFileInfo();
-
-            // 如果文件存在
-            if (fileInfo != null && fileInfo.Exists)
-            {
-                System.Diagnostics.FileVersionInfo info = System.Diagnostics.FileVersionInfo.GetVersionInfo(fileInfo.FullName);
-                clientInfo.name = fileInfo.Name;
-                if (info.FileVersion == null)
-                {
-                    clientInfo.fileversion = " ";
-                }
-                else
-                {
-                    clientInfo.fileversion = info.FileVersion;
-                }
-                if (info.ProductVersion == null)
-                {
-                    clientInfo.productversion = " ";
-                }
-                else
-                {
-                    clientInfo.productversion = info.ProductVersion;
-                }
-                clientInfo.path = fileInfo.FullName.Replace(Path, "."); //绝对路径中的初始路径改为 . 形成相对路径
-                clientInfo.createtime = fileInfo.CreationTime.ToString("yyyy-MM-dd HH:mm:ss");
-                clientInfo.modifytime = fileInfo.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss");
-                if (info.FileDescription == null)
-                {
-                    clientInfo.description = " ";
-                }
-                else
-                {
-                    clientInfo.description = info.FileDescription;
-                }
-                clientInfo.size = fileInfo.Length.ToString();
-                clientInfo.type = "1";
-                clientInfo.remark = " ";
-
-            }
-            else
-            {
-                Console.WriteLine("指定的文件路径不正确!");
-            }
-            // 末尾空一行
-            Console.WriteLine();
-            return clientInfo;
-        }
 
         /// <summary>
         /// 读取文件夹路径内所有子文件
         /// </summary>
         /// <param name="strFilePath">文件夹路径</param>
-        /// <returns>所有子文件</returns>
-        private static List<SKFileInfo> ReadFile(string strFilePath)
+        /// <param name="RelativePath">相对路径</param>
+        /// <returns>所有子文件信息</returns>
+        private static List<SKFileInfo> ReadFile(string strFilePath, string RelativePath)
         {
             List<SKFileInfo> reuslt = new List<SKFileInfo>();
+
             DirectoryInfo theFolder = new DirectoryInfo(strFilePath);
             DirectoryInfo[] arrFir = theFolder.GetDirectories();
             foreach (FileSystemInfo i in arrFir) //如果存在文件夹，进入递归
             {
-                reuslt.AddRange(ReadFile(i.FullName));     //使用递归
+                reuslt.AddRange(ReadFile(i.FullName, RelativePath));     //使用递归
             }
 
             FileInfo[] fileInfo = theFolder.GetFiles();
-            for (int i = 0; i < fileInfo.Length; i++)
+            reuslt.AddRange(GetSKFileInfoList(fileInfo, RelativePath));
+
+            return reuslt;
+        }
+
+        /// <summary>
+        /// 保存为XML文件
+        /// </summary>
+        /// <param name="XMLFilePath">保存文件的路径</param>
+        /// <param name="sKFileInfos">文件列表</param>
+        /// <returns></returns>
+        public static bool Creater(string XMLFilePath, List<SKFileInfo> sKFileInfos)
+        {
+            bool reuslt = false;
+
+            if (sKFileInfos != null)
             {
-                //SKFileInfo ClientInfo = FileInfo(fileInfo[i], fileInfo[i].FullName);
-                SKFileInfo ClientInfo = GetSKFileInfo(fileInfo[i]);
-                if (ClientInfo != null)
-                {
-                    reuslt.Add(ClientInfo);
-                }
+                XMLFilePath += "\\" + "FileVerInfo.xml";
+                XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+                ns.Add("", ""); //除去声明头
+                FileStream fs = new FileStream(XMLFilePath, FileMode.Create, FileAccess.Write); //创建文件流
+                XmlSerializer ResSerializer = new XmlSerializer(typeof(List<SKFileInfo>));  //声明XML序列化
+                ResSerializer.Serialize(fs, sKFileInfos, ns); //将文件列表XML序列化到文件流并保存文件
+                fs.Close(); //关闭文件流
+
+                reuslt = true;
             }
+
 
             return reuslt;
         }
