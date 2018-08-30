@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
@@ -126,7 +127,7 @@ namespace CommonMethod
             // 末尾空一行
             //Console.WriteLine();
             //return clientInfo;
-            
+
             return result;
         }
 
@@ -309,6 +310,247 @@ namespace CommonMethod
 
 
             return reuslt;
+        }
+
+
+        /// <summary>
+        /// 对比
+        /// </summary>
+        /// <param name="NEWList">新的XML</param>
+        /// <param name="OldList">本地XML</param>
+        /// <param name="AddOrUpList">需要添加或更新的文件列表</param>
+        /// <param name="DelList">需要本地删除的XML列表</param>
+        /// <returns></returns>
+        public static void Contrast(List<SKFileInfo> NEWList, List<SKFileInfo> OldList, ref List<SKFileInfo> AddOrUpList, ref List<SKFileInfo> DelList)
+        {
+            List<SKFileInfo> ReturnList = new List<SKFileInfo>();
+            List<SKFileInfo> RemoveList = new List<SKFileInfo>();
+
+            List<SKFileInfo> XMLNEWList = new List<SKFileInfo>(NEWList);
+            List<SKFileInfo> XMLOLDList = new List<SKFileInfo>(OldList);
+
+            //先判断本地需不需要删除文件，再判断文件的更新和添加
+
+            #region 删除文件部分
+            for (int i = 0; i < XMLOLDList.Count; i++)
+            {
+                bool isRemove = false;
+                for (int j = 0; j < XMLNEWList.Count; j++)
+                {
+                    if (XMLOLDList[i].name == XMLNEWList[j].name && XMLOLDList[i].path == XMLNEWList[j].path)//相同路径下有相同的名字
+                    {
+                        isRemove = false; //不需要删除
+                        break;
+                    }
+                    else
+                    {
+                        isRemove = true;  //名字或路径有不同。删除
+                    }
+
+                }
+                if (isRemove)
+                {
+                    RemoveList.Add(XMLOLDList[i]);
+                    XMLOLDList.RemoveAt(i);
+                    i -= 1;
+                }
+            }
+            DelList = RemoveList;
+
+            #endregion
+
+            #region 添加、更新
+            for (int i = 0; i < XMLNEWList.Count; i++)
+            {
+                bool isNewAdd = true; //默认是要添加
+                for (int j = 0; j < XMLOLDList.Count; j++)
+                {
+                    if (XMLNEWList[i].name == XMLOLDList[j].name && XMLNEWList[i].fileversion == XMLOLDList[j].fileversion && XMLNEWList[i].productversion == XMLOLDList[j].productversion
+                        && XMLNEWList[i].path == XMLOLDList[j].path && XMLNEWList[i].createtime == XMLOLDList[j].createtime && XMLNEWList[i].modifytime == XMLOLDList[j].modifytime
+                        && XMLNEWList[i].description == XMLOLDList[j].description && XMLNEWList[i].size == XMLOLDList[j].size && XMLNEWList[i].type == XMLOLDList[j].type && XMLNEWList[i].remark == XMLOLDList[j].remark)
+                    {
+                        isNewAdd = false; //如果全部属性相同，则设置为不添加
+                        break;
+                    }
+                }
+
+                if (isNewAdd)
+                {
+                    ReturnList.Add(XMLNEWList[i]);
+                    XMLNEWList.RemoveAt(i);
+                    i = i - 1;
+                    continue;
+                }
+
+            }
+
+            AddOrUpList = ReturnList;
+
+            #endregion
+
+            return;
+
+        }
+
+        /// <summary>
+        /// 对比
+        /// </summary>
+        /// <param name="NEWList">新的XML</param>
+        /// <param name="OldList">本地XML</param>
+        /// <param name="Keys">Key</param>
+        /// <param name="Contrasts">对比项</param>
+        /// <returns>添加或更新的列表</returns>
+        public static List<SKFileInfo> Contrast(List<SKFileInfo> NEWList, List<SKFileInfo> OldList, string Keys, string Contrasts)
+        {
+            List<SKFileInfo> ReturnList = new List<SKFileInfo>();
+            List<SKFileInfo> RemoveList = new List<SKFileInfo>();
+            if (NEWList == null || OldList == null || NEWList.Count <= 0 || OldList.Count <= 0 || Keys.Length <= 0 || Contrasts.Length <= 0)
+            {
+
+            }
+            else
+            {
+                List<SKFileInfo> XMLNEWList = new List<SKFileInfo>(NEWList);
+                List<SKFileInfo> XMLOLDList = new List<SKFileInfo>(OldList);
+                string LookupKeys = Keys;
+                string LookupContrasts = Contrasts;
+
+                #region 删除文件部分
+                for (int i = 0; i < XMLOLDList.Count; i++)
+                {
+                    bool isRemove = false;
+                    for (int j = 0; j < XMLNEWList.Count; j++)
+                    {
+                        if (XMLOLDList[i].name == XMLNEWList[j].name && XMLOLDList[i].path == XMLNEWList[j].path)//相同路径下有相同的名字
+                        {
+                            isRemove = false; //同路径同名字不删除
+                            break;
+                        }
+                        else
+                        {
+                            isRemove = true;
+                        }
+
+                    }
+                    if (isRemove)
+                    {
+                        RemoveList.Add(XMLOLDList[i]);
+                        XMLOLDList.RemoveAt(i);
+                        i -= 1;
+                    }
+                }
+
+                #endregion
+
+                
+                #region 文件添加、更新
+                //遍历 新XML 列表 每个值再遍历 本地XML 列表  以防文件位置乱序导致匹配错误
+
+
+                for (int i = 0; i < XMLNEWList.Count; i++)
+                {
+                    bool isNewAdd = true; //默认是要添加
+                    PropertyInfo[] propertys = XMLNEWList[i].GetType().GetProperties();// 获得 新XML 模型的公共属性
+
+                    for (int j = 0; j < XMLOLDList.Count; j++)   
+                    {
+                        string NewXmlKeyValue = "";  
+                        string OldXmlKeyValue = "";
+
+                        foreach (PropertyInfo p in propertys)  //遍历公共属性查找对应的Key值
+                        {
+                            if (p.Name == LookupKeys)
+                            {
+                                object obj = p.GetValue(XMLNEWList[i], null); //获取对应的Key值
+                                NewXmlKeyValue = obj.ToString();
+                            }
+                        }
+
+                        PropertyInfo[] propertys1 = XMLOLDList[j].GetType().GetProperties();// 获得 本地XML 模型的公共属性
+                        foreach (PropertyInfo p in propertys1)  //遍历公共属性查找对应的Key值
+                        {
+                            if (p.Name == LookupKeys)
+                            {
+                                object obj = p.GetValue(XMLOLDList[j], null);  //获取对应的Key值
+                                OldXmlKeyValue = obj.ToString();
+
+                                if (NewXmlKeyValue == OldXmlKeyValue)  //判断 新Key 与 本地Key 是否相同
+                                {
+                                    isNewAdd = false;  //Key相同，不用更新
+                                    break;
+                                }
+                                else
+                                {
+                                    isNewAdd = true;
+                                }
+                            }
+
+                        }
+
+
+                        if (!isNewAdd)  //如果Key相同，判断 对比项 
+                        {
+                            isNewAdd = false;
+
+                            propertys = XMLNEWList[i].GetType().GetProperties();// 获得此模型的公共属性
+                            foreach (PropertyInfo p in propertys)
+                            {
+                                if (p.Name == LookupContrasts)
+                                {
+                                    object obj = p.GetValue(XMLNEWList[i], null);
+                                    NewXmlKeyValue = obj.ToString();
+                                }
+                            }
+                            propertys1 = XMLOLDList[j].GetType().GetProperties();// 获得此模型的公共属性
+                            foreach (PropertyInfo p in propertys1)
+                            {
+                                if (p.Name == LookupContrasts)
+                                {
+                                    object obj = p.GetValue(XMLOLDList[j], null);
+                                    OldXmlKeyValue = obj.ToString();
+
+                                    if (NewXmlKeyValue == OldXmlKeyValue)
+                                    {
+                                        isNewAdd = false;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        isNewAdd = true;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (!isNewAdd)
+                        {
+                            break;
+                        }
+
+
+                    }
+
+
+
+                    if (isNewAdd)
+                    {
+                        ReturnList.Add(XMLNEWList[i]);
+                        XMLNEWList.RemoveAt(i);
+                        i = i - 1;
+                        continue;
+                    }
+
+                }
+
+
+            }
+
+
+
+            #endregion
+
+
+            return ReturnList;
         }
     }
 

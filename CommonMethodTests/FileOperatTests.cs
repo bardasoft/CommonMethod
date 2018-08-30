@@ -90,5 +90,40 @@ namespace CommonMethod.Tests
             bool OK = FileOperat.Creater(XMLFilePath, sKFileInfos);
             Assert.IsTrue(OK);
         }
+
+        [TestMethod()]
+        public void ContrastTest()
+        {
+            string XMLFileName = @"C:\Users\Administrator\Desktop\FileVerInfo.xml";
+            List<SKFileInfo> sKFileInfos = FileOperat.GetSKFileInfoList_ByXmlFilePath(XMLFileName);
+
+            XMLFileName = @"C:\Users\Administrator\Desktop\FileVerInfo - 副本.xml";
+            List<SKFileInfo> sKFileInfos1 = FileOperat.GetSKFileInfoList_ByXmlFilePath(XMLFileName);
+
+            List<SKFileInfo> AddOrUpList = new List<SKFileInfo>();
+            List<SKFileInfo> DelList = new List<SKFileInfo>();
+            FileOperat.Contrast(sKFileInfos, sKFileInfos1, ref AddOrUpList, ref DelList);
+
+            Assert.AreEqual(sKFileInfos.Count, 1);
+        }
+
+        [TestMethod()]
+        public void ContrastTest1()
+        {
+            string XMLFileName = @"C:\Users\Administrator\Desktop\FileVerInfo.xml";
+            List<SKFileInfo> sKFileInfos = FileOperat.GetSKFileInfoList_ByXmlFilePath(XMLFileName);
+
+            XMLFileName = @"C:\Users\Administrator\Desktop\FileVerInfo - 副本.xml";
+            List<SKFileInfo> sKFileInfos1 = FileOperat.GetSKFileInfoList_ByXmlFilePath(XMLFileName);
+
+
+            string Key = "name";
+            string Contrast = "fileversion";
+
+            List<SKFileInfo> returnList = FileOperat.Contrast(sKFileInfos, sKFileInfos1, Key, Contrast);
+
+            Assert.AreEqual(sKFileInfos.Count, 1);
+
+        }
     }
 }
