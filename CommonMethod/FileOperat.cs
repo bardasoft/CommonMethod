@@ -103,7 +103,7 @@ namespace CommonMethod
                 }
                 else
                 {
-                    result.path = fileInfo.FullName.Replace(RelativePath, "."); //绝对路径中的初始路径改为 . 形成相对路径
+                    result.path = fileInfo.FullName.Replace(RelativePath + @"\", "").Replace(@"\", "/"); //绝对路径中的初始路径改为 . 形成相对路径 
                 }
                 result.createtime = fileInfo.CreationTime.ToString("yyyy-MM-dd HH:mm:ss");
                 result.modifytime = fileInfo.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss");
@@ -400,7 +400,7 @@ namespace CommonMethod
         /// <param name="Keys">Key</param>
         /// <param name="Contrasts">对比项</param>
         /// <returns>添加或更新的列表</returns>
-        public static List<SKFileInfo> Contrast(List<SKFileInfo> NEWList, List<SKFileInfo> OldList, string Keys, string Contrasts)
+        public static List<SKFileInfo> Contrast(List<SKFileInfo> NEWList, List<SKFileInfo> OldList, string Keys, string[] Contrasts)
         {
             List<SKFileInfo> ReturnList = new List<SKFileInfo>();
             List<SKFileInfo> RemoveList = new List<SKFileInfo>();
@@ -413,7 +413,7 @@ namespace CommonMethod
                 List<SKFileInfo> XMLNEWList = new List<SKFileInfo>(NEWList);
                 List<SKFileInfo> XMLOLDList = new List<SKFileInfo>(OldList);
                 string LookupKeys = Keys;
-                string LookupContrasts = Contrasts;
+                string[] LookupContrasts = Contrasts;
 
                 #region 删除文件部分
                 for (int i = 0; i < XMLOLDList.Count; i++)
@@ -488,35 +488,38 @@ namespace CommonMethod
                         }
 
 
-                        if (!isNewAdd)  //如果Key相同，判断 对比项 
+                        for (int k = 0; k < LookupContrasts.Length; k++)
                         {
-                            isNewAdd = false;
-
-                            propertys = XMLNEWList[i].GetType().GetProperties();// 获得此模型的公共属性
-                            foreach (PropertyInfo p in propertys)
+                            if (!isNewAdd)
                             {
-                                if (p.Name == LookupContrasts)
-                                {
-                                    object obj = p.GetValue(XMLNEWList[i], null);
-                                    NewXmlKeyValue = obj.ToString();
-                                }
-                            }
-                            propertys1 = XMLOLDList[j].GetType().GetProperties();// 获得此模型的公共属性
-                            foreach (PropertyInfo p in propertys1)
-                            {
-                                if (p.Name == LookupContrasts)
-                                {
-                                    object obj = p.GetValue(XMLOLDList[j], null);
-                                    OldXmlKeyValue = obj.ToString();
+                                isNewAdd = false;
 
-                                    if (NewXmlKeyValue == OldXmlKeyValue)
+                                propertys = XMLNEWList[i].GetType().GetProperties();// 获得此模型的公共属性
+                                foreach (PropertyInfo p in propertys)
+                                {
+                                    if (p.Name == LookupContrasts[k])
                                     {
-                                        isNewAdd = false;
-                                        break;
+                                        object obj = p.GetValue(XMLNEWList[i], null);
+                                        NewXmlKeyValue = obj.ToString();
                                     }
-                                    else
+                                }
+                                propertys1 = XMLOLDList[j].GetType().GetProperties();// 获得此模型的公共属性
+                                foreach (PropertyInfo p in propertys1)
+                                {
+                                    if (p.Name == LookupContrasts[k])
                                     {
-                                        isNewAdd = true;
+                                        object obj = p.GetValue(XMLOLDList[j], null);
+                                        OldXmlKeyValue = obj.ToString();
+
+                                        if (NewXmlKeyValue == OldXmlKeyValue)
+                                        {
+                                            isNewAdd = false;
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            isNewAdd = true;
+                                        }
                                     }
                                 }
                             }

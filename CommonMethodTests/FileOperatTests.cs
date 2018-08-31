@@ -14,7 +14,7 @@ namespace CommonMethod.Tests
         [TestMethod()]
         public List<SKFileInfo> GetSKFileInfoListTest()
         {
-            string FilePath = @"C:\Users\Administrator\Desktop\测试_接警客户端V2.9更新包_180815_01";
+            string FilePath = @"E:\客户端";
             List<SKFileInfo> sKFileInfos = FileOperat.GetSKFileInfoList(FilePath);
 
             return sKFileInfos;
@@ -118,7 +118,7 @@ namespace CommonMethod.Tests
 
 
             string Key = "name";
-            string Contrast = "fileversion";
+            string[] Contrast = { "path", "fileversion" };
 
             List<SKFileInfo> returnList = FileOperat.Contrast(sKFileInfos, sKFileInfos1, Key, Contrast);
 
