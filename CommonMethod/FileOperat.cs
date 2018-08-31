@@ -362,14 +362,32 @@ namespace CommonMethod
             #region 添加、更新
             for (int i = 0; i < XMLNEWList.Count; i++)
             {
+                PropertyInfo[] propertys = XMLNEWList[i].GetType().GetProperties();// 获得此模型的公共属性
+                int NewListProperties = 0;
                 bool isNewAdd = true; //默认是要添加
                 for (int j = 0; j < XMLOLDList.Count; j++)
                 {
-                    if (XMLNEWList[i].name == XMLOLDList[j].name && XMLNEWList[i].fileversion == XMLOLDList[j].fileversion && XMLNEWList[i].productversion == XMLOLDList[j].productversion
-                        && XMLNEWList[i].path == XMLOLDList[j].path && XMLNEWList[i].createtime == XMLOLDList[j].createtime && XMLNEWList[i].modifytime == XMLOLDList[j].modifytime
-                        && XMLNEWList[i].description == XMLOLDList[j].description && XMLNEWList[i].size == XMLOLDList[j].size && XMLNEWList[i].type == XMLOLDList[j].type && XMLNEWList[i].remark == XMLOLDList[j].remark)
+                    PropertyInfo[] propertys1 = XMLOLDList[j].GetType().GetProperties();// 获得此模型的公共属性
+                    for (int k = 0; k < propertys.Length; k++)
                     {
-                        isNewAdd = false; //如果全部属性相同，则设置为不添加
+                        if (propertys[k].Name == propertys1[k].Name)
+                        {
+                            string cc1 = propertys[k].GetValue(XMLNEWList[i], null).ToString();
+                            string cc2 = propertys1[k].GetValue(XMLOLDList[j], null).ToString();
+                            if (cc1 == cc2)
+                            {
+                                isNewAdd = false; //如果全部属性相同，则设置为不添加  
+                                NewListProperties = k;
+                            }
+                            else
+                            {
+                                isNewAdd = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (NewListProperties == propertys.Length - 1)
+                    {
                         break;
                     }
                 }
