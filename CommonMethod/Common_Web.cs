@@ -458,19 +458,22 @@ namespace CommonMethod
                     int downLoadUrlNameLength = downLoadUrlEndIndex - downLoadUrlStartIndex;
                     //下载地址url
                     downLoadUrlName = s.Substring(downLoadUrlStartIndex, downLoadUrlNameLength);
-                    
-                    //lstDownLoadUrls.Add(url + "\\" + downLoadUrlName);
-                    if (downLoadUrlName.LastIndexOf(".") == -1)
+
+                    string[] temp = s.Split('>');
+                    string Temp_strSaveName = temp[2].Replace("</a", "").Trim();
+
+                    //if (downLoadUrlName.LastIndexOf(".") == -1)
+                    if (downLoadUrlName.EndsWith("/"))
                     {
                         //文件夹 递归
-                        List<HFSDownLoadFileInfo> Temp_Result = HFSHttpGetFileNameList(strUrl + "\\" + downLoadUrlName);
+                        List<HFSDownLoadFileInfo> Temp_Result = HFSHttpGetFileNameList(strUrl + "\\" + Temp_strSaveName);
                         foreach (HFSDownLoadFileInfo ss in Temp_Result)
                         {
                             //result.Add(downLoadUrlName + "/" + ss);
                             result.Add(new HFSDownLoadFileInfo
                             {
-                                SaveName = downLoadUrlName + "/" + ss.SaveName,
-                                DownName = downLoadUrlName + "/" + ss.DownName,
+                                SaveName = Temp_strSaveName + "/" + ss.SaveName,
+                                DownName = Temp_strSaveName + "/" + ss.DownName,
                             });
                         }
                     }

@@ -60,7 +60,7 @@ namespace CommonMethod.Tests
         [TestMethod()]
         public void HttpGetTest()
         {
-            string strUrl = "http://192.168.2.19:8008/SK_VideoRecord/0001/5/";
+            string strUrl = "http://192.168.2.19:8008/SK3000ClientRemoteUpdate/Trunk/ezviz/";
             string strResult = Common_Web.HttpGet(strUrl, "");
             Assert.AreEqual(strResult, "");
         }
@@ -68,7 +68,7 @@ namespace CommonMethod.Tests
         [TestMethod()]
         public void HFSHttpGetFileNameListTest()
         {
-            string strUrl = "http://192.168.2.19:8008/SK_VideoRecord/0001/";
+            string strUrl = "http://192.168.2.19:8008/SK3000ClientRemoteUpdate/Trunk";
             List<HFSDownLoadFileInfo> result = Common_Web.HFSHttpGetFileNameList(strUrl);
             Assert.AreEqual(result.Count, 1);
         }
@@ -76,7 +76,7 @@ namespace CommonMethod.Tests
         [TestMethod()]
         public void HFSHttpGetFileTest()
         {
-            string strUrl = "http://192.168.2.19:8008/SK_VideoRecord/0001/";
+            string strUrl = "http://192.168.2.19:8008/SK3000ClientRemoteUpdate/Trunk";
             string strLocalPath = @"C:\Users\thankyou_1996\Desktop\新建文件夹";
             bool bolResult = Common_Web.HFSHttpGetFile(strUrl, strLocalPath);
             Assert.IsTrue(bolResult);
