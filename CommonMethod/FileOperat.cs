@@ -372,9 +372,9 @@ namespace CommonMethod
                     {
                         if (propertys[k].Name == propertys1[k].Name)
                         {
-                            string cc1 = propertys[k].GetValue(XMLNEWList[i], null).ToString();
-                            string cc2 = propertys1[k].GetValue(XMLOLDList[j], null).ToString();
-                            if (cc1 == cc2)
+                            string NewXmlKeyValue = propertys[k].GetValue(XMLNEWList[i], null).ToString();
+                            string OldXmlKeyValue = propertys1[k].GetValue(XMLOLDList[j], null).ToString();
+                            if (NewXmlKeyValue == OldXmlKeyValue)
                             {
                                 isNewAdd = false; //如果全部属性相同，则设置为不添加  
                                 NewListProperties = k;
@@ -422,7 +422,7 @@ namespace CommonMethod
         {
             List<SKFileInfo> ReturnList = new List<SKFileInfo>();
             List<SKFileInfo> RemoveList = new List<SKFileInfo>();
-            if (NEWList == null || OldList == null || NEWList.Count <= 0 || OldList.Count <= 0 || Keys.Length <= 0 || Contrasts.Length <= 0)
+            if (NEWList == null || NEWList.Count <= 0 || Keys.Length <= 0 || Contrasts.Length <= 0)
             {
 
             }
@@ -470,19 +470,19 @@ namespace CommonMethod
                     bool isNewAdd = true; //默认是要添加
                     PropertyInfo[] propertys = XMLNEWList[i].GetType().GetProperties();// 获得 新XML 模型的公共属性
 
+                    string NewXmlKeyValue = "";
+                    foreach (PropertyInfo p in propertys)  //遍历公共属性查找对应的Key值
+                    {
+                        if (p.Name == LookupKeys)
+                        {
+                            object obj = p.GetValue(XMLNEWList[i], null); //获取对应的Key值
+                            NewXmlKeyValue = obj.ToString();
+                        }
+                    }
+
                     for (int j = 0; j < XMLOLDList.Count; j++)   
                     {
-                        string NewXmlKeyValue = "";  
                         string OldXmlKeyValue = "";
-
-                        foreach (PropertyInfo p in propertys)  //遍历公共属性查找对应的Key值
-                        {
-                            if (p.Name == LookupKeys)
-                            {
-                                object obj = p.GetValue(XMLNEWList[i], null); //获取对应的Key值
-                                NewXmlKeyValue = obj.ToString();
-                            }
-                        }
 
                         PropertyInfo[] propertys1 = XMLOLDList[j].GetType().GetProperties();// 获得 本地XML 模型的公共属性
                         foreach (PropertyInfo p in propertys1)  //遍历公共属性查找对应的Key值

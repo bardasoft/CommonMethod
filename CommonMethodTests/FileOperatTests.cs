@@ -104,16 +104,16 @@ namespace CommonMethod.Tests
             List<SKFileInfo> DelList = new List<SKFileInfo>();
             FileOperat.Contrast(sKFileInfos, sKFileInfos1, ref AddOrUpList, ref DelList);
 
-            Assert.AreEqual(sKFileInfos.Count, 1);
+            Assert.AreEqual(sKFileInfos.Count, sKFileInfos.Count);
         }
 
         [TestMethod()]
         public void ContrastTest1()
         {
-            string XMLFileName = @"C:\Users\Administrator\Desktop\FileVerInfo.xml";
+            string XMLFileName = @"C:\Users\Administrator\Desktop\新建文件夹 (2)\FileVerInfo.xml";
             List<SKFileInfo> sKFileInfos = FileOperat.GetSKFileInfoList_ByXmlFilePath(XMLFileName);
 
-            XMLFileName = @"C:\Users\Administrator\Desktop\FileVerInfo - 副本.xml";
+            XMLFileName = @"C:\Users\Administrator\Desktop\FileVerInfo.xml";
             List<SKFileInfo> sKFileInfos1 = FileOperat.GetSKFileInfoList_ByXmlFilePath(XMLFileName);
 
 
@@ -122,7 +122,7 @@ namespace CommonMethod.Tests
 
             List<SKFileInfo> returnList = FileOperat.Contrast(sKFileInfos, sKFileInfos1, Key, Contrast);
 
-            Assert.AreEqual(sKFileInfos.Count, 1);
+            Assert.AreEqual(sKFileInfos.Count, sKFileInfos.Count);
 
         }
     }
