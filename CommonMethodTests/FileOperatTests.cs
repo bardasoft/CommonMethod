@@ -12,13 +12,11 @@ namespace CommonMethod.Tests
     public class FileOperatTests
     {
         [TestMethod()]
-        public List<SKFileInfo> GetSKFileInfoListTest()
+        public void GetSKFileInfoListTest()
         {
-            string FilePath = @"E:\客户端";
-            List<SKFileInfo> sKFileInfos = FileOperat.GetSKFileInfoList(FilePath);
-
-            return sKFileInfos;
-            //Assert.AreEqual(sKFileInfos.Count, 1);
+            string XMLFilePath = @"G:\Working\Maintenance\SK3000\RemoteUpdatePackage\Trunk";
+            List<SKFileInfo> sKFileInfos = FileOperat.GetSKFileInfoList(XMLFilePath);
+            Assert.AreEqual(sKFileInfos.Count, 1);
 
         }
 
@@ -85,9 +83,9 @@ namespace CommonMethod.Tests
         [TestMethod()]
         public void CreaterTest()
         {
-            string XMLFilePath = @"C:\Users\Administrator\Desktop";
-            List<SKFileInfo> sKFileInfos = GetSKFileInfoListTest();
-            bool OK = FileOperat.Creater(XMLFilePath, sKFileInfos);
+            string XMLFilePath = @"G:\Working\Maintenance\SK3000\RemoteUpdatePackage\Trunk";
+            List<SKFileInfo> sKFileInfos = FileOperat.GetSKFileInfoList(XMLFilePath);
+            bool OK = FileOperat.CreateSKFileInfoXML(XMLFilePath, sKFileInfos);
             Assert.IsTrue(OK);
         }
 
@@ -102,7 +100,7 @@ namespace CommonMethod.Tests
 
             List<SKFileInfo> AddOrUpList = new List<SKFileInfo>();
             List<SKFileInfo> DelList = new List<SKFileInfo>();
-            FileOperat.Contrast(sKFileInfos, sKFileInfos1, ref AddOrUpList, ref DelList);
+            FileOperat.ContrastSKFileInfo(sKFileInfos, sKFileInfos1, ref AddOrUpList, ref DelList);
 
             Assert.AreEqual(sKFileInfos.Count, sKFileInfos.Count);
         }
@@ -120,7 +118,7 @@ namespace CommonMethod.Tests
             string Key = "name";
             string[] Contrast = { "path", "fileversion" };
 
-            List<SKFileInfo> returnList = FileOperat.Contrast(sKFileInfos, sKFileInfos1, Key, Contrast);
+            List<SKFileInfo> returnList = FileOperat.ContrastSKFileInfo(sKFileInfos, sKFileInfos1, Key, Contrast);
 
             Assert.AreEqual(sKFileInfos.Count, sKFileInfos.Count);
 

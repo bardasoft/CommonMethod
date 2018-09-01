@@ -103,7 +103,7 @@ namespace CommonMethod.Tests
             string Key = "name";
             string[] Contrasts = { "path", "fileversion", "size" };
 
-            List<SKFileInfo> returnList = FileOperat.Contrast(sKFileInfos, sKFileInfos1, Key, Contrasts);
+            List<SKFileInfo> returnList = FileOperat.ContrastSKFileInfo(sKFileInfos, sKFileInfos1, Key, Contrasts);
 
             //获取HFS文件列表
             string strUrl = "http://192.168.2.19:8008/SK3000ClientRemoteUpdate/Trunk"; //获取的链接
@@ -119,7 +119,7 @@ namespace CommonMethod.Tests
                 {
                     //if (SKFile.path.Replace(@".\", "").Replace(@"\", "/") == HFSFile.SaveName)
                     if (SKFile.path == HFSFile.SaveName)
-                        {
+                    {
                         HFSFile.SaveName = strLocalPath + "/" + HFSFile.SaveName;
                         HFSFile.DownName = strUrl + "/" + HFSFile.DownName;
                         DownList.Add(HFSFile);
@@ -137,6 +137,18 @@ namespace CommonMethod.Tests
 
         }
 
-
+        [TestMethod()]
+        public void HFSHttpGetFileTest1()
+        {
+            string Temp_str = "http://192.168.2.19:8008/SK3000ClientRemoteUpdate/Trunk/FileVerInfo.xml";
+            string Temp_str1= @"C:\Users\thankyou_1996\Desktop\新建文件夹 (2)\FileVerInfo.xml";
+            HFSDownLoadFileInfo h = new HFSDownLoadFileInfo
+            {
+                DownName= Temp_str,
+                SaveName=Temp_str1
+            };
+            bool bolResule = Common_Web.HFSHttpGetFile(h);
+            Assert.IsTrue(bolResule);
+        }
     }
 }

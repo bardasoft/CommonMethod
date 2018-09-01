@@ -59,6 +59,7 @@
     <Compile Include="FTPHelperTests.cs" />
     <Compile Include="GetSystemInfoTests.cs" />
     <Compile Include="LogWriteTests.cs" />
+    <Compile Include="ProcessControlTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemMetthodTests.cs" />
     <Compile Include="VerificationTests.cs" />

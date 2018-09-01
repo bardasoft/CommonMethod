@@ -381,30 +381,39 @@ namespace CommonMethod
         /// <returns></returns>
         public static bool HFSHttpGetFile(HFSDownLoadFileInfo DownLoadFile)
         {
-            bool bolResult = false;
-            string Temp_strSavePath = DownLoadFile.SaveName;
-            string Temp_strSaveFolder = Temp_strSavePath.Substring(0, Temp_strSavePath.LastIndexOf('/'));
+            bool bolResult = true;
+            string Temp_strSaveFolder = Path.GetDirectoryName(DownLoadFile.SaveName);
             Common.CreateFolder(Temp_strSaveFolder);
             string Temp_strDownLoadUrl = DownLoadFile.DownName;
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(Temp_strDownLoadUrl);
             request.Timeout = 5000;
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            long Temp_lngTotal = response.ContentLength;
-            using (Stream st = response.GetResponseStream())
+            try
             {
-                using (Stream so = new FileStream(Temp_strSavePath, FileMode.Create))
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                long Temp_lngTotal = response.ContentLength;
+                using (Stream st = response.GetResponseStream())
                 {
-                    long Temp_lngDownTotal = 0;
-                    byte[] buffer = new byte[4096];
-                    int intOSize = st.Read(buffer, 0, (int)buffer.Length);
-                    while (intOSize > 0)
+                    using (Stream so = new FileStream(DownLoadFile.SaveName, FileMode.Create))
                     {
-                        Temp_lngDownTotal += intOSize;
-                        so.Write(buffer, 0, intOSize);
-                        intOSize = st.Read(buffer, 0, (int)buffer.Length);
+                        long Temp_lngDownTotal = 0;
+                        byte[] buffer = new byte[4096];
+                        int intOSize = st.Read(buffer, 0, (int)buffer.Length);
+                        while (intOSize > 0)
+                        {
+                            Temp_lngDownTotal += intOSize;
+                            so.Write(buffer, 0, intOSize);
+                            intOSize = st.Read(buffer, 0, (int)buffer.Length);
+                        }
                     }
                 }
             }
+            catch 
+            {
+                //如果404 会产生异常
+                bolResult = false;
+            }
+
+            
             return bolResult;
         }
 

@@ -291,7 +291,7 @@ namespace CommonMethod
         /// <param name="XMLFilePath">保存文件的路径</param>
         /// <param name="sKFileInfos">文件列表</param>
         /// <returns></returns>
-        public static bool Creater(string XMLFilePath, List<SKFileInfo> sKFileInfos)
+        public static bool CreateSKFileInfoXML(string XMLFilePath, List<SKFileInfo> sKFileInfos)
         {
             bool reuslt = false;
 
@@ -321,7 +321,7 @@ namespace CommonMethod
         /// <param name="AddOrUpList">需要添加或更新的文件列表</param>
         /// <param name="DelList">需要本地删除的XML列表</param>
         /// <returns></returns>
-        public static void Contrast(List<SKFileInfo> NEWList, List<SKFileInfo> OldList, ref List<SKFileInfo> AddOrUpList, ref List<SKFileInfo> DelList)
+        public static void ContrastSKFileInfo(List<SKFileInfo> NEWList, List<SKFileInfo> OldList, ref List<SKFileInfo> AddOrUpList, ref List<SKFileInfo> DelList)
         {
             List<SKFileInfo> ReturnList = new List<SKFileInfo>();
             List<SKFileInfo> RemoveList = new List<SKFileInfo>();
@@ -418,7 +418,7 @@ namespace CommonMethod
         /// <param name="Keys">Key</param>
         /// <param name="Contrasts">对比项</param>
         /// <returns>添加或更新的列表</returns>
-        public static List<SKFileInfo> Contrast(List<SKFileInfo> NEWList, List<SKFileInfo> OldList, string Keys, string[] Contrasts)
+        public static List<SKFileInfo> ContrastSKFileInfo(List<SKFileInfo> NEWList, List<SKFileInfo> OldList, string Keys, string[] Contrasts)
         {
             List<SKFileInfo> ReturnList = new List<SKFileInfo>();
             List<SKFileInfo> RemoveList = new List<SKFileInfo>();
