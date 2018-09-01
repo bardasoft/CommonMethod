@@ -198,18 +198,50 @@ namespace CommonMethod
             return reuslt;
         }
 
+
+        /// <summary>
+        /// 获取文件信息列表
+        /// </summary>
+        /// <param name="strFolderName">文件夹名称</param>
+        /// <param name="IgnoreFileList">要忽略的文件列表</param>
+        /// <returns></returns>
+        public static List<SKFileInfo> GetSKFileInfoList(string strFolderName, List<string> IgnoreFileList)
+        {
+            List<SKFileInfo> reuslt = new List<SKFileInfo>();
+
+            reuslt.AddRange(ReadFile(strFolderName, strFolderName, IgnoreFileList));     //使用递归
+
+            return reuslt;
+        }
+
         /// <summary>
         /// 获取文件信息列表
         /// </summary>
         /// <param name="fileinfos">系统文件列表</param>
         /// <returns></returns>
-        public static List<SKFileInfo> GetSKFileInfoList(FileInfo[] fileinfos, string RelativePath = "")
+        public static List<SKFileInfo> GetSKFileInfoList(FileInfo[] fileinfos, List<string> IgnoreFileList, string RelativePath = "")
         {
             List<SKFileInfo> reuslt = new List<SKFileInfo>();
             //前提：确保FileInfo中没有文件夹否则将无法获取文件夹内的信息
             FileInfo[] fileInfo = fileinfos;
             for (int i = 0; i < fileInfo.Length; i++)
             {
+                bool isAdd = true;
+
+                foreach (string s in IgnoreFileList)
+                {
+                    if (fileInfo[i].Name == s)
+                    {
+                        isAdd = false;
+                        break;
+                    }
+                }
+
+                if (!isAdd)
+                {
+                    continue;
+                }
+
                 SKFileInfo ClientInfo = GetSKFileInfo(fileInfo[i], RelativePath);
 
                 if (ClientInfo != null)
@@ -268,7 +300,7 @@ namespace CommonMethod
         /// <param name="strFilePath">文件夹路径</param>
         /// <param name="RelativePath">相对路径</param>
         /// <returns>所有子文件信息</returns>
-        private static List<SKFileInfo> ReadFile(string strFilePath, string RelativePath)
+        private static List<SKFileInfo> ReadFile(string strFilePath, string RelativePath, List<string> IgnoreFileList = null)
         {
             List<SKFileInfo> reuslt = new List<SKFileInfo>();
 
@@ -276,11 +308,13 @@ namespace CommonMethod
             DirectoryInfo[] arrFir = theFolder.GetDirectories();
             foreach (FileSystemInfo i in arrFir) //如果存在文件夹，进入递归
             {
-                reuslt.AddRange(ReadFile(i.FullName, RelativePath));     //使用递归
+                reuslt.AddRange(ReadFile(i.FullName, RelativePath, IgnoreFileList));     //使用递归
             }
 
             FileInfo[] fileInfo = theFolder.GetFiles();
-            reuslt.AddRange(GetSKFileInfoList(fileInfo, RelativePath));
+
+
+            reuslt.AddRange(GetSKFileInfoList(fileInfo, IgnoreFileList, RelativePath));
 
             return reuslt;
         }
@@ -291,13 +325,20 @@ namespace CommonMethod
         /// <param name="XMLFilePath">保存文件的路径</param>
         /// <param name="sKFileInfos">文件列表</param>
         /// <returns></returns>
-        public static bool CreateSKFileInfoXML(string XMLFilePath, List<SKFileInfo> sKFileInfos)
+        public static bool CreateSKFileInfoXML(string XMLFileName, string XMLFilePath, List<SKFileInfo> sKFileInfos)
         {
             bool reuslt = false;
 
             if (sKFileInfos != null)
             {
-                XMLFilePath += "\\" + "FileVerInfo.xml";
+                if (XMLFileName.Contains(".xml"))
+                {
+                    XMLFilePath += "\\" + XMLFileName;
+                }
+                else
+                {
+                    XMLFilePath += "\\" + XMLFileName + ".xml";
+                }
                 XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
                 ns.Add("", ""); //除去声明头
                 FileStream fs = new FileStream(XMLFilePath, FileMode.Create, FileAccess.Write); //创建文件流
@@ -321,8 +362,9 @@ namespace CommonMethod
         /// <param name="AddOrUpList">需要添加或更新的文件列表</param>
         /// <param name="DelList">需要本地删除的XML列表</param>
         /// <returns></returns>
-        public static void ContrastSKFileInfo(List<SKFileInfo> NEWList, List<SKFileInfo> OldList, ref List<SKFileInfo> AddOrUpList, ref List<SKFileInfo> DelList)
+        public static bool ContrastSKFileInfo(List<SKFileInfo> NEWList, List<SKFileInfo> OldList, ref List<SKFileInfo> AddOrUpList, ref List<SKFileInfo> DelList)
         {
+            bool reuslt = false;
             List<SKFileInfo> ReturnList = new List<SKFileInfo>();
             List<SKFileInfo> RemoveList = new List<SKFileInfo>();
 
@@ -404,9 +446,14 @@ namespace CommonMethod
 
             AddOrUpList = ReturnList;
 
+            if (ReturnList != null && ReturnList.Count > 0)
+            {
+                reuslt = true;
+            }
+
             #endregion
 
-            return;
+            return reuslt;
 
         }
 
@@ -460,7 +507,7 @@ namespace CommonMethod
 
                 #endregion
 
-                
+
                 #region 文件添加、更新
                 //遍历 新XML 列表 每个值再遍历 本地XML 列表  以防文件位置乱序导致匹配错误
 
@@ -480,7 +527,7 @@ namespace CommonMethod
                         }
                     }
 
-                    for (int j = 0; j < XMLOLDList.Count; j++)   
+                    for (int j = 0; j < XMLOLDList.Count; j++)
                     {
                         string OldXmlKeyValue = "";
 
@@ -508,6 +555,8 @@ namespace CommonMethod
 
                         for (int k = 0; k < LookupContrasts.Length; k++)
                         {
+                            string NewXmlLookupValue = "";
+                            string OldXmlLookupValue = "";
                             if (!isNewAdd)
                             {
                                 isNewAdd = false;
@@ -518,7 +567,7 @@ namespace CommonMethod
                                     if (p.Name == LookupContrasts[k])
                                     {
                                         object obj = p.GetValue(XMLNEWList[i], null);
-                                        NewXmlKeyValue = obj.ToString();
+                                        NewXmlLookupValue = obj.ToString();
                                     }
                                 }
                                 propertys1 = XMLOLDList[j].GetType().GetProperties();// 获得此模型的公共属性
@@ -527,9 +576,9 @@ namespace CommonMethod
                                     if (p.Name == LookupContrasts[k])
                                     {
                                         object obj = p.GetValue(XMLOLDList[j], null);
-                                        OldXmlKeyValue = obj.ToString();
+                                        OldXmlLookupValue = obj.ToString();
 
-                                        if (NewXmlKeyValue == OldXmlKeyValue)
+                                        if (NewXmlLookupValue == OldXmlLookupValue)
                                         {
                                             isNewAdd = false;
                                             break;
@@ -573,6 +622,60 @@ namespace CommonMethod
 
             return ReturnList;
         }
+
+
+        public static bool ContrastSKFileInfo(List<SKFileInfo> NEWList, List<SKFileInfo> OldList)
+        {
+            bool Identical = true;
+            List<SKFileInfo> XMLNEWList = new List<SKFileInfo>(NEWList);
+            List<SKFileInfo> XMLOLDList = new List<SKFileInfo>(OldList);
+
+            if (NEWList == null && OldList == null)
+            {
+
+            }
+            else
+            {
+                if (XMLNEWList.Count != XMLNEWList.Count)
+                {
+                    Identical = false;
+                }
+                else
+                {
+                    for (int i = 0; i < XMLNEWList.Count; i++)
+                    {
+                        PropertyInfo[] propertys = XMLNEWList[i].GetType().GetProperties();// 获得此模型的公共属性
+                        PropertyInfo[] propertys1 = XMLOLDList[i].GetType().GetProperties();// 获得此模型的公共属性
+
+                        for (int j = 0; j < propertys.Length; j++)
+                        {
+                            if (propertys[j].Name == propertys1[j].Name)
+                            {
+                                string NewValue = Convert.ToString(propertys[j].GetValue(XMLNEWList[i], null));
+                                string OldValue = Convert.ToString(propertys1[j].GetValue(XMLOLDList[i], null));
+                                if (NewValue == OldValue)
+                                {
+
+                                }
+                                else
+                                {
+                                    Identical = false;
+                                    break;
+                                }
+                            }
+                        }
+                        if (!Identical)
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return Identical;
+        }
+
+
     }
 
     /// <summary>

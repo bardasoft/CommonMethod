@@ -83,16 +83,18 @@ namespace CommonMethod.Tests
         [TestMethod()]
         public void CreaterTest()
         {
+            string XMLFileName = "FileVerInfo";
             string XMLFilePath = @"G:\Working\Maintenance\SK3000\RemoteUpdatePackage\Trunk";
             List<SKFileInfo> sKFileInfos = FileOperat.GetSKFileInfoList(XMLFilePath);
-            bool OK = FileOperat.CreateSKFileInfoXML(XMLFilePath, sKFileInfos);
+
+            bool OK = FileOperat.CreateSKFileInfoXML(XMLFileName, XMLFilePath, sKFileInfos);
             Assert.IsTrue(OK);
         }
 
         [TestMethod()]
         public void ContrastTest()
         {
-            string XMLFileName = @"C:\Users\Administrator\Desktop\新建文件夹 (2)\FileVerInfo.xml"; 
+            string XMLFileName = @"C:\Users\Administrator\Desktop\新建文件夹 (2)\FileVerInfo.xml";
             List<SKFileInfo> sKFileInfos = FileOperat.GetSKFileInfoList_ByXmlFilePath(XMLFileName);
 
             XMLFileName = @"C:\Users\Administrator\Desktop\FileVerInfo.xml";
@@ -116,12 +118,46 @@ namespace CommonMethod.Tests
 
 
             string Key = "name";
-            string[] Contrast = { "path", "fileversion" };
+            string[] Contrast = { "path", "fileversion", "createtime", "productversion", "modifytime" };
 
             List<SKFileInfo> returnList = FileOperat.ContrastSKFileInfo(sKFileInfos, sKFileInfos1, Key, Contrast);
 
             Assert.AreEqual(sKFileInfos.Count, sKFileInfos.Count);
 
+        }
+
+        [TestMethod()]
+        public void GetSKFileInfoListTest1()
+        {
+            List<string> IgnoreFileList = new List<string>();
+            IgnoreFileList.Add("用户布防.wav");
+            string XMLFilePath = @"C:\Users\Administrator\Desktop\新建文件夹 (4)";
+            List<SKFileInfo> sKFileInfos = FileOperat.GetSKFileInfoList(XMLFilePath, IgnoreFileList);
+
+
+
+            string XMLFileName = "FileVerInfo";
+            XMLFilePath = @"C:\Users\Administrator\Desktop";
+
+            bool OK = FileOperat.CreateSKFileInfoXML(XMLFileName, XMLFilePath, sKFileInfos);
+
+            Assert.IsTrue(OK);
+            //Assert.AreEqual(sKFileInfos.Count, sKFileInfos.Count);
+        }
+
+        [TestMethod()]
+        public void ContrastSKFileInfoTest()
+        {
+            //string XMLFileName = @"C:\Users\Administrator\Desktop\新建文件夹 (2)\FileVerInfo.xml";
+            string XMLFileName = @"C:\Users\Administrator\Desktop\FileVerInfo.xml";
+            List<SKFileInfo> sKFileInfos = FileOperat.GetSKFileInfoList_ByXmlFilePath(XMLFileName);
+
+            XMLFileName = @"C:\Users\Administrator\Desktop\FileVerInfo.xml";
+            List<SKFileInfo> sKFileInfos1 = FileOperat.GetSKFileInfoList_ByXmlFilePath(XMLFileName);
+
+            bool OK = FileOperat.ContrastSKFileInfo(sKFileInfos, sKFileInfos1);
+
+            Assert.IsTrue(OK);
         }
     }
 }
