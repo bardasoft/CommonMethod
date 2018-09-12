@@ -84,7 +84,7 @@ namespace CommonMethod.Tests
         public void CreaterTest()
         {
             string XMLFileName = "FileVerInfo";
-            string XMLFilePath = @"G:\Working\Maintenance\SK3000\RemoteUpdatePackage\Trunk";
+            string XMLFilePath = @"G:\Working\Maintenance\SK3000\UpdatePackage\CU\RemoteUpdatePackage\BranchXY";
             List<SKFileInfo> sKFileInfos = FileOperat.GetSKFileInfoList(XMLFilePath);
 
             bool OK = FileOperat.CreateSKFileInfoXML(XMLFileName, XMLFilePath, sKFileInfos);
@@ -110,15 +110,15 @@ namespace CommonMethod.Tests
         [TestMethod()]
         public void ContrastTest1()
         {
-            string XMLFileName = @"C:\Users\Administrator\Desktop\新建文件夹 (2)\FileVerInfo.xml";
+            string XMLFileName = @"C:\Users\thankyou_1996\Desktop\新建文件夹\FileVerInfo.xml";
             List<SKFileInfo> sKFileInfos = FileOperat.GetSKFileInfoList_ByXmlFilePath(XMLFileName);
 
-            XMLFileName = @"C:\Users\Administrator\Desktop\FileVerInfo.xml";
+            XMLFileName = @"C:\Users\thankyou_1996\Desktop\新建文件夹\FileVerInfo.xml";
             List<SKFileInfo> sKFileInfos1 = FileOperat.GetSKFileInfoList_ByXmlFilePath(XMLFileName);
 
 
             string Key = "name";
-            string[] Contrast = { "path", "fileversion", "createtime", "productversion", "modifytime" };
+            string[] Contrast = { "modifytime" };
 
             List<SKFileInfo> returnList = FileOperat.ContrastSKFileInfo(sKFileInfos, sKFileInfos1, Key, Contrast);
 
@@ -158,6 +158,23 @@ namespace CommonMethod.Tests
             bool OK = FileOperat.ContrastSKFileInfo(sKFileInfos, sKFileInfos1);
 
             Assert.IsTrue(OK);
+        }
+
+
+        [TestMethod]
+        public void RemoteContrast()
+        {
+            //1.获取本地文件信息
+            //2.或者远程文件信息
+            //3.对比（bool）
+            //4.对比（文件列表）
+            //5.获取需要下载的远程文件
+            //6.获取无法下载的列表
+            //7.提示/下载
+
+
+
+            Assert.Fail();
         }
     }
 }

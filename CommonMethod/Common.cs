@@ -241,6 +241,31 @@ namespace CommonMethod
             }
             return true;
         }
+
+        /// <summary>
+        /// 获取所有下级子节点
+        /// </summary>
+        /// <param name="tn"></param>
+        /// <returns></returns>
+        public static List<TreeNode> GetSelectNodes(TreeNode tn)
+        {
+            List<TreeNode> lstTn = new List<TreeNode>();
+            foreach (TreeNode tnn in tn.Nodes)
+            {
+                if (tnn.Nodes.Count > 0)
+                {
+                    lstTn.AddRange(GetSelectNodes(tnn));
+                }
+                else
+                {
+                    if (tnn.Checked)
+                    {
+                        lstTn.Add(tnn);
+                    }
+                }
+            }
+            return lstTn;
+        }
     }
 }
 

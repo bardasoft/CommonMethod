@@ -83,6 +83,11 @@ namespace CommonMethod
                 {
                     continue;
                 }
+                if (!dr.Table.Columns.Contains(tempName))
+                {
+                    //数据行不存在对应字段
+                    continue;
+                }
                 object value = dr[tempName];
                 if (value != DBNull.Value)
                 {

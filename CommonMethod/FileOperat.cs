@@ -227,21 +227,22 @@ namespace CommonMethod
             for (int i = 0; i < fileInfo.Length; i++)
             {
                 bool isAdd = true;
-
-                foreach (string s in IgnoreFileList)
+                if (IgnoreFileList != null)
                 {
-                    if (fileInfo[i].Name == s)
+                    foreach (string s in IgnoreFileList)
                     {
-                        isAdd = false;
-                        break;
+                        if (fileInfo[i].Name == s)
+                        {
+                            isAdd = false;
+                            break;
+                        }
+                    }
+
+                    if (!isAdd)
+                    {
+                        continue;
                     }
                 }
-
-                if (!isAdd)
-                {
-                    continue;
-                }
-
                 SKFileInfo ClientInfo = GetSKFileInfo(fileInfo[i], RelativePath);
 
                 if (ClientInfo != null)
