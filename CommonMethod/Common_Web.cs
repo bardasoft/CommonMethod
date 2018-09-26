@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Data;
 using System.IO;
 using System.Net;
+using System.Reflection;
 using System.Text;
+using System.Web;
 
 namespace CommonMethod
 {
@@ -13,7 +17,7 @@ namespace CommonMethod
     public class Common_Web
     {
         /// <summary>
-        /// HttpPost请求
+        /// HttpPost请求 已测试验证
         /// </summary>
         /// <param name="Url"></param>
         /// <param name="postDataStr"></param>
@@ -23,13 +27,11 @@ namespace CommonMethod
             //cookie
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
             request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
-            request.ContentLength = Encoding.UTF8.GetByteCount(postDataStr);
-            //request.CookieContainer = cookie;
+            request.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
+            byte[] bytData = Encoding.UTF8.GetBytes(postDataStr);
+            request.ContentLength = bytData.Length;
             Stream myRequestStream = request.GetRequestStream();
-            StreamWriter myStreamWriter = new StreamWriter(myRequestStream, Encoding.GetEncoding("gb2312"));
-            myStreamWriter.Write(postDataStr);
-            myStreamWriter.Close();
+            myRequestStream.Write(bytData, 0, bytData.Length);
 
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
@@ -37,6 +39,7 @@ namespace CommonMethod
             Stream myResponseStream = response.GetResponseStream();
             StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
             string retString = myStreamReader.ReadToEnd();
+            myRequestStream.Close();
             myStreamReader.Close();
             myResponseStream.Close();
 
@@ -44,7 +47,7 @@ namespace CommonMethod
         }
 
         /// <summary>
-        /// HttpPost请求
+        /// HttpPost请求 尚未测试验证
         /// </summary>
         /// <param name="strUrl"></param>
         /// <param name="strPostData"></param>
@@ -58,16 +61,11 @@ namespace CommonMethod
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(strUrl);
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
+            byte[] bytData = Encoding.UTF8.GetBytes(strPostData);
             request.ContentLength = Encoding.UTF8.GetByteCount(strPostData);
-            //request.CookieContainer = cookie;
             Stream myRequestStream = request.GetRequestStream();
-            StreamWriter myStreamWriter = new StreamWriter(myRequestStream, Encoding.GetEncoding(strSteamWriteEncoding));
-            myStreamWriter.Write(strPostData);
-            myStreamWriter.Close();
-
+            myRequestStream.Write(bytData, 0, bytData.Length);
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-            //response.Cookies = cookie.GetCookies(response.ResponseUri);
             Stream myResponseStream = response.GetResponseStream();
             StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding(strStreamReadEncoding));
             string retString = myStreamReader.ReadToEnd();
@@ -87,7 +85,7 @@ namespace CommonMethod
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url + (postDataStr == "" ? "" : "?") + postDataStr);
             request.Method = "GET";
-            request.ContentType = "text/html;charset=UTF-8";
+            request.ContentType = "application/json;charset=UTF-8";
 
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             Stream myResponseStream = response.GetResponseStream();
@@ -111,8 +109,7 @@ namespace CommonMethod
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(strUrl + (strGetDataStr == "" ? "" : "?") + strGetDataStr);
             request.Method = "GET";
-            request.ContentType = "text/html;charset=UTF-8";
-
+            request.ContentType = "application/json;charset=UTF-8";
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             Stream myResponseStream = response.GetResponseStream();
             StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding(strStreamReadEncoding));
@@ -121,6 +118,36 @@ namespace CommonMethod
             myResponseStream.Close();
             return retString;
         }
+
+
+
+        /// <summary>
+        /// 转换为Url参数
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public static string ConvertToUrlPara<T>(T t)
+        {
+            StringBuilder sbResult = new StringBuilder();
+            PropertyInfo[] propertys = t.GetType().GetProperties();// 获得此模型的公共属性
+            foreach (var pi in propertys)
+            {
+                string Temp_value = Convert.ToString(pi.GetValue(t, null));
+                if (!string.IsNullOrEmpty(Temp_value))
+                {
+                    sbResult.AppendFormat("{0}={1}", pi.Name, Temp_value);
+                    sbResult.Append("&");
+                }
+            }
+            if (sbResult.Length > 0)
+            {
+                sbResult.Length = sbResult.Length - 1;
+            }
+            return sbResult.ToString();
+        }
+
+
 
         /// <summary>
         /// 获取网络时间

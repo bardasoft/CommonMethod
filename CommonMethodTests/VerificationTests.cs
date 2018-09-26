@@ -24,5 +24,12 @@ namespace CommonMethod.Tests
             string ip = hostInfo.AddressList[0].ToString();
             Assert.AreEqual(ip, "1");
         }
+
+        [TestMethod()]
+        public void isNumberTest()
+        {
+            bool bolResult = CommonMethod.Verification.isNumber("15159123456772128");
+            Assert.IsTrue(bolResult);
+        }
     }
 }

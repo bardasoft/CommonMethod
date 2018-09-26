@@ -344,7 +344,16 @@ namespace PublicClassCurrency
                 }
             }
         }
+        private string strLoginPrompt = "";
 
+        /// <summary>
+        /// 登陆提示
+        /// </summary>
+        public string LoginPrompt
+        {
+            get { return strLoginPrompt; }
+            set { strLoginPrompt = value; }
+        }
         /// <summary>
         /// 设备登陆句柄
         /// </summary>

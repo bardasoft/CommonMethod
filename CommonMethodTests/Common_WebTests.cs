@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.Specialized;
+using System.Data;
+using Newtonsoft.Json;
 
 namespace CommonMethod.Tests
 {
@@ -141,14 +143,42 @@ namespace CommonMethod.Tests
         public void HFSHttpGetFileTest1()
         {
             string Temp_str = "http://192.168.2.19:8008/SK3000ClientRemoteUpdate/Trunk/FileVerInfo.xml";
-            string Temp_str1= @"C:\Users\thankyou_1996\Desktop\新建文件夹 (2)\FileVerInfo.xml";
+            string Temp_str1 = @"C:\Users\thankyou_1996\Desktop\新建文件夹 (2)\FileVerInfo.xml";
             HFSDownLoadFileInfo h = new HFSDownLoadFileInfo
             {
-                DownName= Temp_str,
-                SaveName=Temp_str1
+                DownName = Temp_str,
+                SaveName = Temp_str1
             };
             bool bolResule = Common_Web.HFSHttpGetFile(h);
             Assert.IsTrue(bolResule);
+        }
+
+        [TestMethod()]
+        public void ConvertToUrlParaTest()
+        {
+            HFSDownLoadFileInfo h = new HFSDownLoadFileInfo
+            {
+                DownName = "",
+                SaveName = "32"
+            };
+            string str = Common_Web.ConvertToUrlPara<HFSDownLoadFileInfo>(h);
+
+            Assert.AreEqual(str, "1");
+        }
+
+        [TestMethod()]
+        public void HttpGetTest1()
+        {
+            string strUrl = "http://localhost:4827/SK3000WebServiceCore/api/Host/AppendHostInfo";
+            string strData = "token=123&HostId=0001&编程15=测试";
+            string str = Common_Web.HttpPost(strUrl, strData, "utf-8", "utf-8");
+            Assert.AreEqual(str, "1");
+        }
+
+        [TestMethod()]
+        public void GetDataTableByJsonDataTest()
+        {
+       
         }
     }
 }

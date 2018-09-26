@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -32,6 +34,13 @@ namespace CommonMethod_Winform_Use1
                 string file = dialog.FileName;
                 MessageBox.Show(file);
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string strResult = CommonMethod.Common_Web.HttpGet("http://localhost:4827/SK3000WebServiceCore/api/AlarmProcessType/GetData?token=1&strExecSQL=SELECT%20*%20FROM%20%E6%93%8D%E4%BD%9C%E5%91%98", "");
+            SKWebDataInterFace.SKJsonResult result = JsonConvert.DeserializeObject<SKWebDataInterFace.SKJsonResult>(strResult);
+            DataTable result1 = (DataTable)result.Content;
         }
     }
 }
