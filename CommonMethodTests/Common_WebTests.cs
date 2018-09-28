@@ -62,9 +62,16 @@ namespace CommonMethod.Tests
         [TestMethod()]
         public void HttpGetTest()
         {
-            string strUrl = "http://192.168.2.19:8008/SK3000ClientRemoteUpdate/Trunk/ezviz/";
+            //CommonMethod.Common_Web.HttpGet("http://localhost:4827/SK3000WebServiceCore/api/DataBase/GetData?ExecSQL=SELECT * FROM 报警基本信息", "");
+            string strUrl = "http://121.41.87.203:11300/SK3000WebServiceCore/api/DataBase/GetData?ExecSQL=SELECT * FROM 探头编号信息 ";
+            string strResult1 = Common_Web.HttpGet("http://121.41.87.203:11300/SK3000WebServiceCore/api/DataBase/GetData?ExecSQL=SELECT TOP 1  * FROM 报警基本信息 ", "");
+            //string strUrl = "http://localhost:4827/SK3000WebServiceCore/api/DataBase/GetData?ExecSQL=SELECT * FROM 探头编号信息 ";
+            //string strResult1 = Common_Web.HttpGet("http://localhost:4827/SK3000WebServiceCore/api/DataBase/GetData?ExecSQL=SELECT TOP 1  * FROM 报警基本信息 ", "");
+            DateTime tim = DateTime.Now;
             string strResult = Common_Web.HttpGet(strUrl, "");
-            Assert.AreEqual(strResult, "");
+            DateTime tim1 = DateTime.Now;
+            TimeSpan ts = tim1 - tim;
+            Assert.AreEqual(strResult.Length, 100);
         }
 
         [TestMethod()]

@@ -65,7 +65,11 @@ namespace CommonMethod
                     else if (pi.PropertyType == typeof(int))
                     {
                         string Temp_strValue = Convert.ToString(value);
-                        value = string.IsNullOrEmpty(Temp_strValue) ? 0 : value;
+                        value = string.IsNullOrEmpty(Temp_strValue) ? 0 : Convert.ToInt32(value);
+                    }
+                    else if (pi.PropertyType == typeof(DateTime))
+                    {
+                        value = Convert.ToDateTime(value);
                     }
                     pi.SetValue(t, value, null);
                 }

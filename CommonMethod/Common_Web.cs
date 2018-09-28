@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Reflection;
 using System.Text;
@@ -56,8 +57,6 @@ namespace CommonMethod
         /// <returns></returns>
         public static string HttpPost(string strUrl, string strPostData, string strSteamWriteEncoding, string strStreamReadEncoding)
         {
-
-
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(strUrl);
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
@@ -84,18 +83,54 @@ namespace CommonMethod
         public static string HttpGet(string Url, string postDataStr)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url + (postDataStr == "" ? "" : "?") + postDataStr);
+            request.Headers.Add("Accept-Encoding", "gzip");
             request.Method = "GET";
             request.ContentType = "application/json;charset=UTF-8";
-
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            Stream myResponseStream = response.GetResponseStream();
-            StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
-            string retString = myStreamReader.ReadToEnd();
-            myStreamReader.Close();
-            myResponseStream.Close();
+            string retString = GetResponseBody(response);
             return retString;
         }
-
+        /// <summary>
+        /// 数据压缩解码
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
+        private static string GetResponseBody(HttpWebResponse response)
+        {
+            string responseBody = string.Empty;
+            if (response.ContentEncoding.ToLower().Contains("gzip"))
+            {
+                using (GZipStream stream = new GZipStream(response.GetResponseStream(), CompressionMode.Decompress))
+                {
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        responseBody = reader.ReadToEnd();
+                    }
+                }
+            }
+            else if (response.ContentEncoding.ToLower().Contains("deflate"))
+            {
+                using (DeflateStream stream = new DeflateStream(response.GetResponseStream(), CompressionMode.Decompress))
+                {
+                    using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                    {
+                        responseBody = reader.ReadToEnd();
+                    }
+                }
+            }
+            else
+            {
+                using (Stream stream = response.GetResponseStream())
+                {
+                    using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                    {
+                        responseBody = reader.ReadToEnd();
+                    }
+                }
+            }
+            return responseBody;
+        }
+        
 
         /// <summary>
         /// HttpGet请求

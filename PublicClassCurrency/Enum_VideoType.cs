@@ -62,6 +62,11 @@ namespace PublicClassCurrency
         /// 蓝色星际
         /// </summary>
         BlueSky=9,
+
+        /// <summary>
+        /// 宇视视频
+        /// </summary>
+        IMOS=10,
     }
 
     /// <summary>
