@@ -34,9 +34,13 @@ namespace CommonMethod.Tests
         [TestMethod()]
         public void HttpPostTest()
         {
-            string x = "http://192.168.2.19:8008/SK_VideoRecord/0001/5/?mode=section&id=ajax.mkdir&";
-            string formdata = "name=2&token=0.899592403555289";
-            string strResult = Common_Web.HttpPost(x, formdata);
+            //string x = "http://192.168.2.19:8008/SK_VideoRecord/0001/5/?mode=section&id=ajax.mkdir&";
+            //string formdata = "name=2&token=0.899592403555289";
+            StringBuilder sbExecSQL = new StringBuilder();
+            sbExecSQL.Append("ExecSQL=delete FROM T_VideoTable where DVSNumber=000001 ");
+            sbExecSQL.Append(" UPDATE  T_HostEventSet SET T_HostEventSet.linkagedvs=null WHERE ( T_HostEventSet.linkagedvs like '000001%') and (T_HostEventSet.hostnumber='0000')");
+            string strUrl = "http://localhost:4827/SK3000WebServiceCore/api/DataBase/ExecData";
+            string strResult = Common_Web.HttpPost(strUrl, sbExecSQL.ToString());
             Assert.AreEqual(strResult, 1);
         }
 
@@ -63,10 +67,15 @@ namespace CommonMethod.Tests
         public void HttpGetTest()
         {
             //CommonMethod.Common_Web.HttpGet("http://localhost:4827/SK3000WebServiceCore/api/DataBase/GetData?ExecSQL=SELECT * FROM 报警基本信息", "");
-            string strUrl = "http://121.41.87.203:11300/SK3000WebServiceCore/api/DataBase/GetData?ExecSQL=SELECT * FROM 探头编号信息 ";
-            string strResult1 = Common_Web.HttpGet("http://121.41.87.203:11300/SK3000WebServiceCore/api/DataBase/GetData?ExecSQL=SELECT TOP 1  * FROM 报警基本信息 ", "");
+            //string strUrl = "http://121.41.87.203:11300/SK3000WebServiceCore/api/DataBase/GetData?ExecSQL=SELECT * FROM 探头编号信息 ";
+            //string strResult1 = Common_Web.HttpGet("http://121.41.87.203:11300/SK3000WebServiceCore/api/DataBase/GetData?ExecSQL=SELECT TOP 1  * FROM 报警基本信息 ", "");
             //string strUrl = "http://localhost:4827/SK3000WebServiceCore/api/DataBase/GetData?ExecSQL=SELECT * FROM 探头编号信息 ";
             //string strResult1 = Common_Web.HttpGet("http://localhost:4827/SK3000WebServiceCore/api/DataBase/GetData?ExecSQL=SELECT TOP 1  * FROM 报警基本信息 ", "");
+            StringBuilder sbExecSQL = new StringBuilder();
+            sbExecSQL.Append("delete FROM T_VideoTable where DVSNumber=000001 ");
+            sbExecSQL.Append(" UPDATE  T_HostEventSet SET T_HostEventSet.linkagedvs=null WHERE ( T_HostEventSet.linkagedvs like '000001%') and (T_HostEventSet.hostnumber='0000')");
+            string strUrl = "http://localhost:4827/SK3000WebServiceCore/api/DataBase/GetData?ExecSQL=" + sbExecSQL.ToString();
+
             DateTime tim = DateTime.Now;
             string strResult = Common_Web.HttpGet(strUrl, "");
             DateTime tim1 = DateTime.Now;

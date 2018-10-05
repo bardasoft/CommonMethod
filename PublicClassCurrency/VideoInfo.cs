@@ -90,6 +90,7 @@ namespace PublicClassCurrency
         private int intDVSConnectPort = 0;
         /// <summary>
         /// DVS连接端口
+        /// SK3000:DVSControlPort
         /// </summary>
         public int DVSConnectPort
         {
@@ -102,7 +103,8 @@ namespace PublicClassCurrency
         /// </summary>
         private int intDVSDataPort = 0;
         /// <summary>
-        /// DVS连接端口
+        /// DVS数据端口
+        /// SK3000:DVSStreamPort
         /// </summary>
         public int DVSDataPort
         {
@@ -224,6 +226,7 @@ namespace PublicClassCurrency
         private bool bolVideoServerEnable = false;
         /// <summary>
         /// 视频服务器是否启用
+        /// SK3000:DVSPTZProtocol[IP:Port]
         /// </summary>
         public bool VideoServerEnable
         {
@@ -237,6 +240,7 @@ namespace PublicClassCurrency
 
         /// <summary>
         /// 视频服务器IP
+        /// SK3000:DVSPTZProtocol[IP:Port]
         /// </summary>
         public string VideoServerIP
         {
@@ -248,6 +252,7 @@ namespace PublicClassCurrency
 
         /// <summary>
         /// 视频服务器端口
+        /// SK3000:DVSPTZProtocol[IP:Port]
         /// </summary>
         public int VideoServerPort
         {
