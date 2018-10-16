@@ -67,6 +67,11 @@ namespace PublicClassCurrency
         /// 宇视视频
         /// </summary>
         IMOS=10,
+
+        /// <summary>
+        /// 时刻视频（H265）
+        /// </summary>
+        SKNVideo=11,
     }
 
     /// <summary>
