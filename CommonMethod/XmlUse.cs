@@ -221,7 +221,7 @@ namespace CommonMethod
         /// <param name="strFilePath">文件地址</param>
         /// <param name="strParentName">父节点名称</param>
         /// <returns></returns>
-        public static bool AddNodeInfo<T>(T t, string strFilePath,string strParentName)
+        private static bool AddNodeInfo<T>(T t, string strFilePath,string strParentName)
         {
             bool bolResult = false;
 
@@ -239,7 +239,7 @@ namespace CommonMethod
         /// <param name="strField">字段名称</param>
         /// <param name="strKey">字段值</param>
         /// <returns></returns>
-        public static bool UpdateNodeInfo<T>(T t, string strFilePath,string strParentName, string strField,string strKey)
+        private static bool UpdateNodeInfo<T>(T t, string strFilePath,string strParentName, string strField,string strKey)
         {
             bool bolResult = false;
 

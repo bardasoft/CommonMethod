@@ -104,7 +104,11 @@ namespace SKDataSourceConvert
             else if (videoInfo.DVSType.StartsWith("BSRNR"))
             {
                 videoInfo.VideoType = Enum_VideoType.BlueSky;
-                
+
+            }
+            else if (videoInfo.DVSType.Trim() == "SK8616H")
+            {
+                videoInfo.VideoType = Enum_VideoType.SKNVideo;      //181018 时刻h265
             }
             else if (SK3000TransitionSet.SKVideoTypeAssignmentEnable
                     && (videoInfo.DVSType.StartsWith("SK86")
@@ -173,6 +177,7 @@ namespace SKDataSourceConvert
                 case "SK8612":
                 case "SK8616":
                 case "SK8632":
+                case "SK8616H":
                     //4路模拟(0,1,2,3) 8路数字（8,9,10,11,12,13,14,15）
                     for (int i = 0; i < strsCameraInfo.Length; i++)
                     {
