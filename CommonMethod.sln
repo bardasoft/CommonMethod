@@ -23,8 +23,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonMethodTests", "Common
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBOperAtTests1", "DBOperAtTests1\DBOperAtTests1.csproj", "{E447C26E-9121-4971-AFB8-AF152697BABB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SKVideoRecordConvert", "SKVideoRecordConvert\SKVideoRecordConvert.csproj", "{86FB3241-942C-4809-9FDC-1EAF699F31F4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SKVideoRecordConvertTests", "SKVideoRecordConvertTests\SKVideoRecordConvertTests.csproj", "{F702BC65-BE5E-4701-BACE-190AC9543956}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CmdTest", "CmdTest\CmdTest.csproj", "{3ABE5564-9A8E-479D-B576-0051F7D33D3B}"
@@ -75,10 +73,6 @@ Global
 		{E447C26E-9121-4971-AFB8-AF152697BABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E447C26E-9121-4971-AFB8-AF152697BABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E447C26E-9121-4971-AFB8-AF152697BABB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{86FB3241-942C-4809-9FDC-1EAF699F31F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{86FB3241-942C-4809-9FDC-1EAF699F31F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{86FB3241-942C-4809-9FDC-1EAF699F31F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{86FB3241-942C-4809-9FDC-1EAF699F31F4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F702BC65-BE5E-4701-BACE-190AC9543956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F702BC65-BE5E-4701-BACE-190AC9543956}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F702BC65-BE5E-4701-BACE-190AC9543956}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -58,10 +58,6 @@
       <Project>{69bc40a2-638d-49e9-a367-52644bd39c54}</Project>
       <Name>PublicClassCurrency</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SKVideoRecordConvert\SKVideoRecordConvert.csproj">
-      <Project>{86FB3241-942C-4809-9FDC-1EAF699F31F4}</Project>
-      <Name>SKVideoRecordConvert</Name>
-    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
