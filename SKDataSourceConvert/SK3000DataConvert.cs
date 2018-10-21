@@ -73,64 +73,8 @@ namespace SKDataSourceConvert
             {
                 videoInfo.VideoServerEnable = false;
             }
-            #region 新版本视频控件兼容类型判断
-            if (videoInfo.DVSType.EndsWith("ZW") || videoInfo.DVSType == "SK838")
-            {
-                //云视通设备
-                videoInfo.VideoType = Enum_VideoType.CloundSee;
-            }
-            else if (videoInfo.DVSType.Contains("IPCWA") || videoInfo.DVSType.Contains("SK835"))
-            {
-                videoInfo.VideoType = Enum_VideoType.IPCWA;
-            }
-            else if (videoInfo.DVSType.EndsWith("YS"))
-            {
-                videoInfo.VideoType = Enum_VideoType.Ezviz;
-            }
-            else if (videoInfo.DVSType.EndsWith("HM"))  //180117 华迈设备
-            {
-                videoInfo.VideoType = Enum_VideoType.HuaMaiVideo;
-            }
-            else if (videoInfo.DVSType == "AXISM3037")
-            {
-                videoInfo.VideoType = Enum_VideoType.Axis;
-            }
-            else if (videoInfo.DVSType.EndsWith("XM")
-                    || videoInfo.DVSType == "SK838C"
-                    || videoInfo.DVSType == "SK836C")
-            {
-                videoInfo.VideoType = Enum_VideoType.XMaiVideo;
-            }
-            else if (videoInfo.DVSType.StartsWith("BSRNR"))
-            {
-                videoInfo.VideoType = Enum_VideoType.BlueSky;
-
-            }
-            else if (videoInfo.DVSType.Trim() == "SK8616H")
-            {
-                videoInfo.VideoType = Enum_VideoType.SKNVideo;      //181018 时刻h265
-                videoInfo.IntercomEnable = true;
-            }
-            else if (SK3000TransitionSet.SKVideoTypeAssignmentEnable
-                    && (videoInfo.DVSType.StartsWith("SK86")
-                    || videoInfo.DVSType.StartsWith("SK519")
-                    || videoInfo.DVSType.StartsWith("SK8519")
-                    || (videoInfo.DVSType == "SK836")))
-            {
-                videoInfo.VideoType = Enum_VideoType.SKVideo;
-                videoInfo.IntercomEnable = !(videoInfo.DVSType == "SK836");
-            }
-            else if (SK3000TransitionSet.HikVideoTypeAssignmentEnable
-                    && (videoInfo.DVSType.EndsWith("HA")))
-            {
-                videoInfo.VideoType = Enum_VideoType.HikDVR;
-            }
-            else
-            {
-                videoInfo.VideoType = Enum_VideoType.Unrecognized;
-            }
-            #endregion
-
+            videoInfo.VideoType = GetVideoTypeByVideoTypeName(videoInfo.DVSType);
+            videoInfo.IntercomEnable = GetIntercomEnableByVideoTypeName(videoInfo.DVSType);
             try
             {
                 videoInfo.NetworkState = Convert.ToInt32(drVideoInfo["Reserver3"]);
@@ -308,6 +252,135 @@ namespace SKDataSourceConvert
             return c;
         }
 
+
+
         #endregion
+
+
+        /// <summary>
+        /// 使用视频设备类型名称获取视频设备类型
+        /// </summary>
+        /// <param name="strVideoTypeName"></param>
+        /// <returns></returns>
+        public static Enum_VideoType GetVideoTypeByVideoTypeName(string strVideoTypeName)
+        {
+            Enum_VideoType result = Enum_VideoType.Unrecognized;
+            if (strVideoTypeName.EndsWith("ZW") || strVideoTypeName == "SK838")
+            {
+                //云视通设备
+                result = Enum_VideoType.CloundSee;
+            }
+            else if (strVideoTypeName.Contains("IPCWA") || strVideoTypeName.Contains("SK835"))
+            {
+                result = Enum_VideoType.IPCWA;
+            }
+            else if (strVideoTypeName.EndsWith("YS"))
+            {
+                result = Enum_VideoType.Ezviz;
+            }
+            else if (strVideoTypeName.EndsWith("HM"))  //180117 华迈设备
+            {
+                result = Enum_VideoType.HuaMaiVideo;
+            }
+            else if (strVideoTypeName == "AXISM3037")
+            {
+                result = Enum_VideoType.Axis;
+            }
+            else if (strVideoTypeName.EndsWith("XM")
+                    || strVideoTypeName == "SK838C"
+                    || strVideoTypeName == "SK836C")
+            {
+                result = Enum_VideoType.XMaiVideo;
+            }
+            else if (strVideoTypeName.StartsWith("BSRNR"))
+            {
+                result = Enum_VideoType.BlueSky;
+
+            }
+            else if (strVideoTypeName.Trim() == "SK8616H")
+            {
+                result = Enum_VideoType.SKNVideo;      //181018 时刻h265
+            }
+            else if (SK3000TransitionSet.SKVideoTypeAssignmentEnable
+                    && (strVideoTypeName.StartsWith("SK86")
+                    || strVideoTypeName.StartsWith("SK519")
+                    || strVideoTypeName.StartsWith("SK8519")
+                    || (strVideoTypeName == "SK836")))
+            {
+                result = Enum_VideoType.SKVideo;
+            }
+            else if (SK3000TransitionSet.HikVideoTypeAssignmentEnable
+                    && (strVideoTypeName.EndsWith("HA")))
+            {
+                result = Enum_VideoType.HikDVR;
+            }
+            else
+            {
+                result = Enum_VideoType.Unrecognized;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 使用视频设备类型名称获取设备是否支持对讲
+        /// </summary>
+        /// <param name="strVideoTypeName"></param>
+        /// <returns></returns>
+        public static bool GetIntercomEnableByVideoTypeName(string strVideoTypeName)
+        {
+            bool bolResult = false;
+            switch (strVideoTypeName)
+            {
+                case "SK8601":
+                case "SK8604":
+                case "SK8608":
+                case "SK8616":
+                case "SK8632":
+                case "SK519V":
+                case "SK8519V":
+                case "SK8616H":
+                    bolResult = true;
+                    break;
+            }
+            return bolResult;
+        }
+
+        public static Byte GetIdentityTypeValueByVideoTypeName(string strVideoTypeName)
+        {
+            bool Temp_bolIPEnable = false;
+            bool Temp_bolUniqueCpdeEnable = false;
+
+            switch (strVideoTypeName)
+            {
+                default:
+                    break;
+            }
+            byte result = Convert.ToByte((Temp_bolIPEnable ? 1 : 0) + (Temp_bolUniqueCpdeEnable ? 2 : 0));
+            return result;
+        }
+
+
+        public static bool GetPTZControlByVideoTypeName(string strVideoTypeName)
+        {
+            bool bolResult = true;
+            switch (strVideoTypeName)
+            {
+
+            }
+            return bolResult;
+        }
+
+        public static bool GetPTZControlByVideoType(Enum_VideoType videoType)
+        {
+            bool bolResult = true;
+            switch (videoType)
+            {
+                case Enum_VideoType.SKNVideo:
+
+                    break;
+            }
+            return bolResult;
+        }
     }
 }
