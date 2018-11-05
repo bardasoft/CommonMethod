@@ -52,25 +52,7 @@ namespace CommonMethod
                 object value = dr[tempName];
                 if (value != DBNull.Value)
                 {
-                    Type Temp_t = pi.PropertyType;
-                    if (Temp_t.IsGenericType && Temp_t.GetGenericTypeDefinition() == typeof(Nullable<>))
-                    {
-                        NullableConverter nullableConverter = new NullableConverter(Temp_t);
-                        value = nullableConverter.ConvertFromString(value.ToString());
-                    }
-                    else if (pi.PropertyType == typeof(byte))
-                    {
-                        value = Convert.ToByte(value);
-                    }
-                    else if (pi.PropertyType == typeof(int))
-                    {
-                        string Temp_strValue = Convert.ToString(value);
-                        value = string.IsNullOrEmpty(Temp_strValue) ? 0 : Convert.ToInt32(value);
-                    }
-                    else if (pi.PropertyType == typeof(DateTime))
-                    {
-                        value = Convert.ToDateTime(value);
-                    }
+                    value = PropertyInfoConvertHelper.GetPropertyValue(pi, value);
                     pi.SetValue(t, value, null);
                 }
 

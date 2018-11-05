@@ -40,6 +40,8 @@ namespace PublicClassCurrency
         private int intChannel = 0;
         /// <summary>
         /// 摄像头通道号
+        /// 181105后接入设备统一通道号由1开始
+        /// 已统一设备 ：智诺（ZL）
         /// </summary>
         public int Channel
         {

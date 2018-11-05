@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Reflection;
 using System.Text;
 using System.Xml;
@@ -202,8 +203,6 @@ namespace CommonMethod
             XmlNodeList result = null;
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(strFilePath);
-            XmlNodeList x = xmlDoc.GetElementsByTagName("EntranceType");
-            int count = x.Count;
             XmlNode nodeParent = xmlDoc.SelectSingleNode(strParentName);   //父节点
             result = nodeParent.SelectNodes(strNodeName);
             return result;
@@ -252,6 +251,12 @@ namespace CommonMethod
         #endregion
 
         #region 对象获取
+        /// <summary>
+        /// XMLNode获取对象
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="node"></param>
+        /// <returns></returns>
         public static T GetObjectInfo<T>(XmlNode node)
         {
             T reuslt = System.Activator.CreateInstance<T>();
@@ -260,14 +265,22 @@ namespace CommonMethod
             {
                 string Temp_strFieldName = pi.Name;
                 XmlAttribute attr = node.Attributes[Temp_strFieldName];
-                if (attr != null)
+                if (attr != null && pi.CanWrite)
                 {
-                    pi.SetValue(reuslt, attr.Value, null);
+                    object value = attr.Value;
+                    value = PropertyInfoConvertHelper.GetPropertyValue(pi, value);
+                    pi.SetValue(reuslt, value, null);
                 }
             }
             return reuslt;
         }
 
+        /// <summary>
+        /// List<XMLNode>获取List<T>
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="lstNode"></param>
+        /// <returns></returns>
         public static List<T> GetObjectListInfo<T>(XmlNodeList lstNode)
         {
             List<T> result = new List<T>();

@@ -44,15 +44,7 @@ namespace PublicClassCurrency
         /// </summary>
         Axis = 6,
 
-        /// <summary>
-        /// 海康DVR 直接访问模式
-        /// </summary>
-        HikDVR=12,
-
-        /// <summary>
-        /// 海康流媒体模式
-        /// </summary>
-        HikDVRStream=13,
+       
         /// <summary>
         /// 雄迈视频SDK
         /// </summary>
@@ -72,6 +64,20 @@ namespace PublicClassCurrency
         /// 时刻视频（H265）
         /// </summary>
         SKNVideo=11,
+        /// <summary>
+        /// 海康DVR 直接访问模式
+        /// </summary>
+        HikDVR = 12,
+
+        /// <summary>
+        /// 海康流媒体模式
+        /// </summary>
+        HikDVRStream = 13,
+
+        /// <summary>
+        /// 智诺视频
+        /// </summary>
+        ZLVideo = 82,
     }
 
     /// <summary>
@@ -109,6 +115,10 @@ namespace PublicClassCurrency
         /// 海康流媒体模式
         /// </summary>
         HikStreamVideo=14,
+        /// <summary>
+        /// 智诺视频
+        /// </summary>
+        ZLVideoRecord = 82,
     }
 
     

@@ -158,7 +158,7 @@ namespace CommonMethod.Tests
             string strParertName = "EntranceTypeInfo";
             string strNodeName = "EntranceType";
             XmlNodeList x = XmlUse.GetNodeListInfo(strFilePath, strParertName, strNodeName);
-            Assert.AreEqual(x, "1");
+            Assert.AreEqual(x.Count,2);
         }
 
         public class EntranceType
@@ -170,7 +170,7 @@ namespace CommonMethod.Tests
 
             public string Key1
             {
-                get; set;
+                get; 
             }
         }
 

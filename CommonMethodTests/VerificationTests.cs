@@ -28,7 +28,7 @@ namespace CommonMethod.Tests
         [TestMethod()]
         public void isNumberTest()
         {
-            bool bolResult = CommonMethod.Verification.isNumber("15159123456772128");
+            bool bolResult = CommonMethod.Verification.isNumber("123");
             Assert.IsTrue(bolResult);
         }
     }

@@ -129,7 +129,7 @@ namespace CommonMethod
 
         #endregion
         /// <summary>
-        /// 是否为数字
+        /// 是否为数字(仅正数)
         /// </summary>
         /// <param name="strNumber"></param>
         /// <returns></returns>

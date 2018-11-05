@@ -201,6 +201,8 @@ namespace SKDataSourceConvert
                 case "BSRNR32":
                 case "BSRNR64":
                 case "AXISM3037":
+                case "SK8516ZL":
+                case "SK8532ZL":
                 for (int i = 1; i <= videoInfo.DVSChannelNum; i++)
                 {
                     if (strsCameraInfo.Length >= i && !string.IsNullOrEmpty(strsCameraInfo[i - 1]))
@@ -222,7 +224,6 @@ namespace SKDataSourceConvert
                         }
                     }
                     break;
-
                 default:
                     //其余设备按照通道数量区摄像头信息 下标从0开始
                     for (int i = 0; i < strsCameraInfo.Length; i++)
@@ -313,6 +314,10 @@ namespace SKDataSourceConvert
                     && (strVideoTypeName.EndsWith("HA")))
             {
                 result = Enum_VideoType.HikDVR;
+            }
+            else if (strVideoTypeName.EndsWith("ZL"))
+            {
+                result = Enum_VideoType.ZLVideo;
             }
             else
             {
