@@ -55,6 +55,10 @@
     <Compile Include="SK3000DataConvertTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommonMethod\CommonMethod.csproj">
+      <Project>{fe120503-38ed-4a41-91e7-835bdb1b625c}</Project>
+      <Name>CommonMethod</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DBOperAt\DBOperAt.csproj">
       <Project>{e7fc843f-c055-446b-84a7-3ff0a74b4fc2}</Project>
       <Name>DBOperAt</Name>

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CloneExtends.cs" />
     <Compile Include="CmdEXE.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="CommonObject.cs" />

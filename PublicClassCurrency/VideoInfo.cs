@@ -16,7 +16,11 @@ namespace PublicClassCurrency
         /// <summary>
         /// 视频设备类型
         /// </summary>
-        public Enum_VideoType VideoType = Enum_VideoType.Unrecognized;
+        public Enum_VideoType VideoType
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// 摄像机编号
