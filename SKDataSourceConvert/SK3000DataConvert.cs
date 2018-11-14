@@ -136,19 +136,6 @@ namespace SKDataSourceConvert
                     }
                     break;
 
-                case "SK8616H":     //仅8路模拟
-                    for (int i = 0; i < strsCameraInfo.Length; i++)
-                    {
-                        if (videoInfo.DVSChannelNum <= i)
-                        {
-                            break;
-                        }
-                        if ((i >= 8) && !string.IsNullOrEmpty(strsCameraInfo[i]))
-                        {
-                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i]);
-                        }
-                    }
-                    break;
                 case "SK519V":
                 case "SK8519V":
                     //1路模拟(0)  3路数字(8,9,10)
@@ -214,6 +201,15 @@ namespace SKDataSourceConvert
                 }
                 break;
 
+                case "SK8616H":     //仅8路模拟
+                    for (int i = 1; i <= videoInfo.DVSChannelNum; i++)
+                    {
+                        if ((i > 8) && !string.IsNullOrEmpty(strsCameraInfo[i]))
+                        {
+                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i-1]);
+                        }
+                    }
+                    break;
                 case "SK838C":
                 case "SK836C":
                     for (int i = 0; i < videoInfo.DVSChannelNum; i++)

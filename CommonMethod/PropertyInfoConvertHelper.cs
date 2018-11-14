@@ -38,6 +38,10 @@ namespace CommonMethod
             {
                 value = Convert.ToDateTime(value);
             }
+            else if (inValue == DBNull.Value)
+            {
+                value = null;
+            }
             return value;
         }
     }
