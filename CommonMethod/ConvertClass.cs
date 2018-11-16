@@ -385,6 +385,34 @@ namespace CommonMethod
         //    StringBuilder sbResult = new StringBuilder();
         //    sbResult.Append("");
         //}
+
+        /// <summary>
+        /// 获取Boolean值
+        /// </summary>
+        /// <param name="objValue"></param>
+        /// <param name="bolDefaultValue"></param>
+        /// <returns></returns>
+        public static bool GetBooleanValue(object objValue, bool bolDefaultValue = false)
+        {
+            bool bolResult = bolDefaultValue;
+            if (objValue != DBNull.Value)
+            {
+                try
+                {
+                    bolResult = Convert.ToBoolean(objValue);
+                }
+                catch
+                {
+                    //异常
+                    string Temp_strValue = Convert.ToString(objValue);
+                    if (CommonMethod.Verification.isNumber(Temp_strValue))
+                    {
+                        bolResult = Convert.ToBoolean(Convert.ToInt32(Temp_strValue));
+                    }
+                }
+            }
+            return  bolResult;
+        }
         #endregion
 
         #region 位运算
@@ -504,5 +532,6 @@ namespace CommonMethod
         }
 
         #endregion
+
     }
 }
