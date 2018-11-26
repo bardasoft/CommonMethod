@@ -23,6 +23,10 @@ namespace CommonMethod
             PropertyInfo[] propertyInfos = model.GetType().GetProperties();     //获取T对象的所有公共属性
             foreach (PropertyInfo propertyInfo in propertyInfos)
             {
+                if (!propertyInfo.CanWrite) //不支持赋值
+                {
+                    continue;
+                }
                 //判断值是否为空，如果空赋值为null见else
                 if (propertyInfo.PropertyType.IsGenericType && propertyInfo.PropertyType.GetGenericTypeDefinition().Equals(typeof(Nullable<>)))
                 {

@@ -18,14 +18,15 @@ namespace SKDataSourceConvert.Tests
         public SK3000DataConvertTests()
         {
             //DataBaseOperAt.SetDBInfo("121.41.87.203", 1433, "报警点基本信息", "sa", "security999", Enum_DataBase.MSSQLServer);
-            DataBaseOperAt.SetDBInfo("192.168.5.15", 43399, "报警点基本信息", "sa", "security999", Enum_DataBase.MSSQLServer);
+            //DataBaseOperAt.SetDBInfo("192.168.5.15", 43399, "报警点基本信息", "sa", "security999", Enum_DataBase.MSSQLServer);
+            DataBaseOperAt.SetDBInfo("192.168.2.19", 1433, "报警点基本信息1", "sa", "security999", Enum_DataBase.MSSQLServer);
         }
         [TestMethod()]
         public void VideoInfo_DataRowToVideoInfoTest()
         {
             StringBuilder sbExecSQL = new StringBuilder();
             sbExecSQL.Append("SELECT TOP 1 * FROM T_VideoTable ");
-            sbExecSQL.Append("WHERE HostNumber ='0713' ");
+            sbExecSQL.Append("WHERE HostNumber ='0209' ");
             DataTable dtResult = DataBaseOperAt.QuerySQL(sbExecSQL.ToString()).Tables[0];
             VideoInfo v = SK3000DataConvert.VideoInfo_DataRowToVideoInfo(dtResult.Rows[0]).DeepCloneObject();
             Assert.AreEqual(v.VideoType, Enum_VideoType.XMaiVideo);
