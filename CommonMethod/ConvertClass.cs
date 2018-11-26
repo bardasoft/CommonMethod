@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using System.Text;
 
@@ -533,5 +534,24 @@ namespace CommonMethod
 
         #endregion
 
+        #region 数据表转换
+
+        /// <summary>
+        /// 数据行转数据表
+        /// </summary>
+        /// <param name="drs"></param>
+        /// <returns></returns>
+        public static DataTable DataRowsToDataTable(DataRow[] drs)
+        {
+            if (drs == null || drs.Length == 0) return null;
+            DataTable tmp = drs[0].Table.Clone(); // 复制DataRow的表结构
+            foreach (DataRow row in drs)
+            {
+                tmp.ImportRow(row); // 将DataRow添加到DataTable中
+            }
+            return tmp;
+        }
+
+        #endregion  
     }
 }

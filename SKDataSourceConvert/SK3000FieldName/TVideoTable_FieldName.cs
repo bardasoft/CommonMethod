@@ -132,5 +132,10 @@ namespace SKDataSourceConvert.SK3000FieldName
         /// 视频预览密码
         /// </summary>
         public const string c_strFieldName_PreviewPwd = "RecordTime4";
+
+        /// <summary>
+        /// 视频录像时间设置(秒)
+        /// </summary>
+        public const string c_strFileName_VideoRecordTimeConstraintSecond = "VideoRecordTimeConstraintSecond";
     }
 }

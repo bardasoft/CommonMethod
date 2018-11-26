@@ -98,6 +98,16 @@ namespace SKDataSourceConvert
             {
                 videoInfo.AutoIntercom = Convert.ToInt32(strTempAutoIntercom);
             }
+            if (drVideoInfo.Table.Columns.Contains(TVideoTable_FieldName.c_strFileName_VideoRecordTimeConstraintSecond))
+            {
+                Temp_strValue = Convert.ToString(drVideoInfo[TVideoTable_FieldName.c_strFileName_VideoRecordTimeConstraintSecond]);
+                int Temp_intResult = 180;
+                if (CommonMethod.Verification.isNumber(Temp_strValue))
+                {
+                    Temp_intResult = Convert.ToInt32(Temp_strValue);
+                }
+                videoInfo.VideoRecordTimeConstraintSecond = Temp_intResult;
+            }
             videoInfo = SetVideoCameraInfo(videoInfo, sbCameraInfos.ToString());
             return videoInfo;
         }
@@ -123,15 +133,15 @@ namespace SKDataSourceConvert
                 case "SK8616":
                 case "SK8632":
                     //4路模拟(0,1,2,3) 8路数字（8,9,10,11,12,13,14,15）
-                    for (int i = 0; i < strsCameraInfo.Length; i++)
+                    for (int i = 1; i <= strsCameraInfo.Length; i++)
                     {
-                        if (videoInfo.DVSChannelNum <= i)
+                        if (videoInfo.DVSChannelNum < i)
                         {
                             break;
                         }
-                        if ((i < 4 || i > 7) && !string.IsNullOrEmpty(strsCameraInfo[i]))
+                        if ((i < 5 || i > 8) && !string.IsNullOrEmpty(strsCameraInfo[i - 1]))
                         {
-                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i]);
+                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i - 1]);
                         }
                     }
                     break;
@@ -139,30 +149,30 @@ namespace SKDataSourceConvert
                 case "SK519V":
                 case "SK8519V":
                     //1路模拟(0)  3路数字(8,9,10)
-                    for (int i = 0; i < strsCameraInfo.Length; i++)
+                    for (int i = 1; i <= strsCameraInfo.Length; i++)
                     {
-                        if (videoInfo.DVSChannelNum <= i)
+                        if (videoInfo.DVSChannelNum < i)
                         {
                             break;
                         }
-                        if ((i == 0 || i == 8 || i == 9 || i == 10) && !string.IsNullOrEmpty(strsCameraInfo[i]))
+                        if ((i == 1 || i == 9 || i == 10 || i == 11) && !string.IsNullOrEmpty(strsCameraInfo[i-1]))
                         {
-                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i]);
+                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i-1]);
                         }
                     }
                     break;
 
                 case "SK836":
                     //1路模拟(0)
-                    for (int i = 0; i < strsCameraInfo.Length; i++)
+                    for (int i = 1; i <= strsCameraInfo.Length; i++)
                     {
-                        if (videoInfo.DVSChannelNum <= i)
+                        if (videoInfo.DVSChannelNum < i)
                         {
                             break;
                         }
-                        if (i == 0 && !string.IsNullOrEmpty(strsCameraInfo[i]))
+                        if (i == 1 && !string.IsNullOrEmpty(strsCameraInfo[i - 1]))
                         {
-                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i]);
+                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i - 1]);
                             break;
                         }
                     }
@@ -190,47 +200,37 @@ namespace SKDataSourceConvert
                 case "AXISM3037":
                 case "SK8516ZL":
                 case "SK8532ZL":
-                for (int i = 1; i <= videoInfo.DVSChannelNum; i++)
-                {
-                    if (strsCameraInfo.Length >= i && !string.IsNullOrEmpty(strsCameraInfo[i - 1]))
+                case "SK838C":  //雄迈
+                case "SK836C":
+                    for (int i = 1; i <= videoInfo.DVSChannelNum; i++)
                     {
-                        //171911 修正 通道从1 开始 ,摄像头名称依然从1 开始
-                        videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i - 1]);
+                        if (strsCameraInfo.Length >= i && !string.IsNullOrEmpty(strsCameraInfo[i - 1]))
+                        {
+                            //171911 修正 通道从1 开始 ,摄像头名称依然从1 开始
+                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i - 1]);
 
+                        }
                     }
-                }
-                break;
+                    break;
 
                 case "SK8616H":     //仅8路模拟
                     for (int i = 1; i <= videoInfo.DVSChannelNum; i++)
                     {
                         if ((i > 8) && !string.IsNullOrEmpty(strsCameraInfo[i]))
                         {
-                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i-1]);
-                        }
-                    }
-                    break;
-                case "SK838C":
-                case "SK836C":
-                    for (int i = 0; i < videoInfo.DVSChannelNum; i++)
-                    {
-                        if (strsCameraInfo.Length >= i && !string.IsNullOrEmpty(strsCameraInfo[i]))
-                        {
-                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i]);
+                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i - 1]);
                         }
                     }
                     break;
                 default:
                     //其余设备按照通道数量区摄像头信息 下标从0开始
-                    for (int i = 0; i < strsCameraInfo.Length; i++)
+                    for (int i = 1; i <= videoInfo.DVSChannelNum; i++)
                     {
-                        if (videoInfo.DVSChannelNum <= i)
+                        if (strsCameraInfo.Length >= i && !string.IsNullOrEmpty(strsCameraInfo[i - 1]))
                         {
-                            break;
-                        }
-                        if (!string.IsNullOrEmpty(strsCameraInfo[i]))
-                        {
-                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i]);
+                            //171911 修正 通道从1 开始 ,摄像头名称依然从1 开始
+                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i - 1]);
+
                         }
                     }
                     break;

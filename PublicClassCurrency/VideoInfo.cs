@@ -182,7 +182,31 @@ namespace PublicClassCurrency
             set { intVideoPlayTime_Minute = value; }
         }
 
+        /// <summary>
+        /// 视频播放时间限制(秒) 0标识无限制
+        /// 仅支持Get方法 数据来源为VidePlayTime_Minute
+        /// </summary>
+        public int VideoPlayTimeConstraintSecond
+        {
+            get
+            {
+                return (VideoPlayTime_Minute * 60);
+            }
+        }
 
+        /// <summary>
+        /// 视频录像时长限制
+        /// </summary>
+        private int intVideoRecordTimeConstraintSecond = 180;
+        /// <summary>
+        /// 视频录像时长限制 0标识无时长限制
+        /// 默认 180 秒
+        /// </summary>
+        public int VideoRecordTimeConstraintSecond
+        {
+            get { return intVideoRecordTimeConstraintSecond; }
+            set { intVideoRecordTimeConstraintSecond = value; }
+        }
 
         /// <summary>
         /// 自动对讲功能
