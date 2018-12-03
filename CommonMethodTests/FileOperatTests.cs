@@ -85,9 +85,10 @@ namespace CommonMethod.Tests
         {
             string XMLFileName = "FileVerInfo";
             //string XMLFilePath = @"G:\Working\Maintenance\SK3000\UpdatePackage\CU\RemoteUpdatePackage\BranchXY";
-            string XMLFilePath = @"G:\Working\Maintenance\SK3000\UpdatePackage\CU\RemoteUpdatePackage\Trunk";
+            //string XMLFilePath = @"G:\Working\Maintenance\SK3000\UpdatePackage\CU\RemoteUpdatePackage\Trunk";
+            //string XMLFilePath = @"G:\Working\Maintenance\SK3000\CU\CUGenerateInstallationPackage\ReleaseFile_XY";
+            string XMLFilePath = @"G:\Working\Maintenance\SK3000\CU\CUGenerateInstallationPackage\ReleaseFile_XY - 副本";
             List<SKFileInfo> sKFileInfos = FileOperat.GetSKFileInfoList(XMLFilePath);
-
             bool OK = FileOperat.CreateSKFileInfoXML(XMLFileName, XMLFilePath, sKFileInfos);
             Assert.IsTrue(OK);
         }

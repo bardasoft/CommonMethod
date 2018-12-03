@@ -15,5 +15,11 @@ namespace SKDataSourceConvert
         /// 海康视频设备类型赋值使能
         /// </summary>
         public static bool HikVideoTypeAssignmentEnable = false;
+
+
+        /// <summary>
+        /// 大华视频设备
+        /// </summary>
+        public static bool DaHuaVideoTypeAssignmentEnable = false;
     }
 }

@@ -74,6 +74,13 @@ namespace PublicClassCurrency
         /// </summary>
         HikDVRStream = 13,
 
+
+        /// <summary>
+        /// 大华设备
+        /// </summary>
+        DaHuaVideo = 31,
+
+
         /// <summary>
         /// 智诺视频
         /// </summary>
@@ -115,6 +122,12 @@ namespace PublicClassCurrency
         /// 海康流媒体模式
         /// </summary>
         HikStreamVideo=14,
+
+        /// <summary>
+        /// 大华视频录像类型
+        /// </summary>
+        DaHuaVideoRecord = 31,
+
         /// <summary>
         /// 智诺视频
         /// </summary>

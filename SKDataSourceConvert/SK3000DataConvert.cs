@@ -315,6 +315,11 @@ namespace SKDataSourceConvert
             {
                 result = Enum_VideoType.ZLVideo;
             }
+            else if (SK3000TransitionSet.DaHuaVideoTypeAssignmentEnable
+                && (strVideoTypeName.EndsWith("DA")))
+            {
+                result = Enum_VideoType.DaHuaVideo;
+            }
             else
             {
                 result = Enum_VideoType.Unrecognized;

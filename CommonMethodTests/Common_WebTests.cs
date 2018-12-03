@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Collections.Specialized;
 using System.Data;
-using Newtonsoft.Json;
 
 namespace CommonMethod.Tests
 {
@@ -36,11 +35,22 @@ namespace CommonMethod.Tests
         {
             //string x = "http://192.168.2.19:8008/SK_VideoRecord/0001/5/?mode=section&id=ajax.mkdir&";
             //string formdata = "name=2&token=0.899592403555289";
-            StringBuilder sbExecSQL = new StringBuilder();
-            sbExecSQL.Append("ExecSQL=delete FROM T_VideoTable where DVSNumber=000001 ");
-            sbExecSQL.Append(" UPDATE  T_HostEventSet SET T_HostEventSet.linkagedvs=null WHERE ( T_HostEventSet.linkagedvs like '000001%') and (T_HostEventSet.hostnumber='0000')");
-            string strUrl = "http://localhost:4827/SK3000WebServiceCore/api/DataBase/ExecData";
-            string strResult = Common_Web.HttpPost(strUrl, sbExecSQL.ToString());
+            //StringBuilder sbExecSQL = new StringBuilder();
+            //sbExecSQL.Append("ExecSQL=delete FROM T_VideoTable where DVSNumber=000001 ");
+            //sbExecSQL.Append(" UPDATE  T_HostEventSet SET T_HostEventSet.linkagedvs=null WHERE ( T_HostEventSet.linkagedvs like '000001%') and (T_HostEventSet.hostnumber='0000')");
+            //string strUrl = "http://localhost:4827/SK3000WebServiceCore/api/DataBase/ExecData";
+            StringBuilder sbData = new StringBuilder();
+            sbData.AppendFormat("appId={0}", "808f1db7");
+            sbData.AppendFormat("&appSecret={0}", "f6e914c40c850b2c76c5001066c799424167bedc");
+            sbData.AppendFormat("&username={0}", "50007876");
+            sbData.AppendFormat("&password={0}", "gqSYPm5ZF9H0%2Btk0zhodTA=="); //密码需要进行加密
+            //sbData.AppendFormat("&username={0}", "50003019");
+            //sbData.AppendFormat("&password={0}", "zAHOv0QUK10yqzWmCemXxw=="); //密码需要进行加密
+            //gqSYPm5ZF9H0+tk0zhodTA==
+            //zAHOv0QUK10yqzWmCemXxw==
+            //sbData.Append("&imageCode=''");
+            string strUrl = "https://urms.mmall.com/passport/login/app";
+            string strResult = Common_Web.HttpPost(strUrl, sbData.ToString());
             Assert.AreEqual(strResult, 1);
         }
 
