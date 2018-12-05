@@ -26,9 +26,12 @@ namespace SKDataSourceConvert.Tests
         {
             StringBuilder sbExecSQL = new StringBuilder();
             sbExecSQL.Append("SELECT TOP 1 * FROM T_VideoTable ");
-            sbExecSQL.Append("WHERE HostNumber ='0209' ");
+            sbExecSQL.Append("WHERE HostNumber ='9998' ");
             DataTable dtResult = DataBaseOperAt.QuerySQL(sbExecSQL.ToString()).Tables[0];
             VideoInfo v = SK3000DataConvert.VideoInfo_DataRowToVideoInfo(dtResult.Rows[0]).DeepCloneObject();
+            List<VideoInfo> lst = new List<VideoInfo>();
+            lst.Add(v);
+            List<VideoInfo> lstV = lst.DeepCloneList().ToList();
             Assert.AreEqual(v.VideoType, Enum_VideoType.XMaiVideo);
         }
     }
