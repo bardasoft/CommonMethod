@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Collections.Specialized;
 using System.Data;
+using System.IO;
+using System.IO.Compression;
 
 namespace CommonMethod.Tests
 {
@@ -212,7 +214,32 @@ namespace CommonMethod.Tests
         [TestMethod()]
         public void GetDataTableByJsonDataTest()
         {
-       
+
+        }
+
+        [TestMethod()]
+        public void HttpGetTest2()
+        {
+            string strUrl = "http://192.168.2.19:11300/SK3000WebServiceCore/api/DataBase/GetData";
+            //string strData = "token=&ExecSQL=U0VMRUNUIHRwLlvkuLvmnLrnvJblj7ddLHRwLlvmiqXorabnsbvlnotdLHRwLlvpmLLljLrlkI3np7BdLHRwLlvlrZDlnLDlm77mlofku7blkI1dLHRwLlt4XSx0cC5beV0sdHAuW2xpbmthZ2VkdnNdLHRwLltkdGNwb3NdIEZST00g5o6i5aS057yW5Y%2B35L%2Bh5oGvIHRwIExFRlQgSk9JTiDmiqXorabln7rmnKzkv6Hmga8gdGggT04gdHAu5Li75py657yW5Y%2B3PXRoLuS4u%2Bacuue8luWPtyBXSEVSRSB0aC7kuLvmnLrnvJblj7cgPSAnMDAxNicgT1JERVIgQlkgdHAu5o6i5aS057yW5Y%2B3IA==";
+            string strData = "token=&ExecSQL=U0VMRUNUIHRwLiogRlJPTSDmjqLlpLTnvJblj7fkv6Hmga8gdHAgTEVGVCBKT0lOIOaKpeitpuWfuuacrOS/oeaBryB0aCBPTiB0cC7kuLvmnLrnvJblj7c9dGgu5Li75py657yW5Y%2B3IE9SREVSIEJZIHRwLuS4u%2Bacuue8luWPtyA=";
+            string str1 = Common_Web.HttpGet(strUrl, strData);
+            //string str = Common_Web.HttpGet_RawData(strUrl, strData);
+            int le = str1.Length;
+            string strResult = ZipHelper.GZipCompressString(str1);
+            //string Temp_strss = ZipHelper.GZipDecompressString(strResult);
+            using (StreamWriter file = new System.IO.StreamWriter(@"F:\\123.txt", false))
+            {
+                file.Write(strResult);
+            }
+            string str = "";
+            using (StreamReader srr = new StreamReader(@"F:\\123.txt", Encoding.UTF8))
+            {
+                str = srr.ReadToEnd();
+            }
+            string Temp_strss = ZipHelper.GZipDecompressString(str);
+            int le1 = strResult.Length;
+            Assert.AreEqual(str.Length, Temp_strss.Length);
         }
     }
 }

@@ -32,8 +32,15 @@ namespace CommonMethod.Tests
         public void DeleteDirTest()
         {
             string s2 = @"C:\Users\thankyou_1996\Desktop\新建文件夹 (2)";
-            int intResult = CommonMethod.Common.DeleteDir( s2);
+            int intResult = CommonMethod.Common.DeleteDir(s2);
             Assert.AreEqual(intResult, 1);
+        }
+
+        [TestMethod()]
+        public void GetIPTest()
+        {
+            string strIP = Common.GetInternetIP();
+            Assert.AreEqual(strIP, "1");
         }
     }
 }

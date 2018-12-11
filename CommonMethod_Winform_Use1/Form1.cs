@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -39,8 +39,8 @@ namespace CommonMethod_Winform_Use1
         private void button3_Click(object sender, EventArgs e)
         {
             string strResult = CommonMethod.Common_Web.HttpGet("http://localhost:4827/SK3000WebServiceCore/api/DataBase/GetData?ExecSQL=SELECT * FROM 报警基本信息", "");
-            SKWebDataInterFace.SKJsonResult result = JsonConvert.DeserializeObject<SKWebDataInterFace.SKJsonResult>(strResult);
-            DataTable result1 = (DataTable)result.Content;
+            //SKWebDataInterFace.SKJsonResult result = JsonConvert.DeserializeObject<SKWebDataInterFace.SKJsonResult>(strResult);
+            //DataTable result1 = (DataTable)result.Content;
         }
     }
 }

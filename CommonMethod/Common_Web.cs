@@ -95,7 +95,7 @@ namespace CommonMethod
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        private static string GetResponseBody(HttpWebResponse response)
+        public static string GetResponseBody(HttpWebResponse response)
         {
             string responseBody = string.Empty;
             if (response.ContentEncoding.ToLower().Contains("gzip"))
@@ -130,7 +130,32 @@ namespace CommonMethod
             }
             return responseBody;
         }
-        
+
+        /// <summary>
+        /// HpptGet 原始数据
+        /// </summary>
+        /// <param name="Url"></param>
+        /// <param name="postDataStr"></param>
+        /// <returns></returns>
+        public static string HttpGet_RawData(string Url, string postDataStr)
+        {
+            string strResult = "";
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url + (postDataStr == "" ? "" : "?") + postDataStr);
+            request.Headers.Add("Accept-Encoding", "gzip");
+            request.Method = "GET";
+            request.ContentType = "application/json;charset=UTF-8";
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            using (Stream stream = response.GetResponseStream())
+            {
+                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                {
+                    strResult = reader.ReadToEnd();
+                }
+            }
+            return strResult;
+        }
+
+      
 
         /// <summary>
         /// HttpGet请求
