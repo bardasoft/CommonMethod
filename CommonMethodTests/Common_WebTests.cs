@@ -225,6 +225,8 @@ namespace CommonMethod.Tests
             string strData = "token=&ExecSQL=U0VMRUNUIHRwLiogRlJPTSDmjqLlpLTnvJblj7fkv6Hmga8gdHAgTEVGVCBKT0lOIOaKpeitpuWfuuacrOS/oeaBryB0aCBPTiB0cC7kuLvmnLrnvJblj7c9dGgu5Li75py657yW5Y%2B3IE9SREVSIEJZIHRwLuS4u%2Bacuue8luWPtyA=";
             string str1 = Common_Web.HttpGet(strUrl, strData);
             //string str = Common_Web.HttpGet_RawData(strUrl, strData);
+            str1 = str1.Substring(39);
+            str1= str1.Substring(0, str1.Length - 1);
             int le = str1.Length;
             string strResult = ZipHelper.GZipCompressString(str1);
             //string Temp_strss = ZipHelper.GZipDecompressString(strResult);

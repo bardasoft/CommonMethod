@@ -139,9 +139,10 @@ namespace SKDataSourceConvert
                         {
                             break;
                         }
-                        if ((i < 5 || i > 8) && !string.IsNullOrEmpty(strsCameraInfo[i - 1]))
+                        if (i < 5 || i > 8)
                         {
-                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i - 1]);
+                            string Temp_strCameraName = GetCameraName(strsCameraInfo[i - 1], i);
+                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, Temp_strCameraName);
                         }
                     }
                     break;
@@ -155,9 +156,10 @@ namespace SKDataSourceConvert
                         {
                             break;
                         }
-                        if ((i == 1 || i == 9 || i == 10 || i == 11) && !string.IsNullOrEmpty(strsCameraInfo[i-1]))
+                        if (i == 1 || i == 9 || i == 10 || i == 11)
                         {
-                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i-1]);
+                            string Temp_strCameraName = GetCameraName(strsCameraInfo[i - 1], i);
+                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, Temp_strCameraName);
                         }
                     }
                     break;
@@ -170,9 +172,10 @@ namespace SKDataSourceConvert
                         {
                             break;
                         }
-                        if (i == 1 && !string.IsNullOrEmpty(strsCameraInfo[i - 1]))
+                        if (i == 1)
                         {
-                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i - 1]);
+                            string Temp_strCameraName = GetCameraName(strsCameraInfo[i - 1], i);
+                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, Temp_strCameraName);
                             break;
                         }
                     }
@@ -204,10 +207,11 @@ namespace SKDataSourceConvert
                 case "SK836C":
                     for (int i = 1; i <= videoInfo.DVSChannelNum; i++)
                     {
-                        if (strsCameraInfo.Length >= i && !string.IsNullOrEmpty(strsCameraInfo[i - 1]))
+                        if (strsCameraInfo.Length >= i)
                         {
                             //171911 修正 通道从1 开始 ,摄像头名称依然从1 开始
-                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i - 1]);
+                            string Temp_strCameraName = GetCameraName(strsCameraInfo[i - 1], i);
+                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, Temp_strCameraName);
 
                         }
                     }
@@ -216,9 +220,10 @@ namespace SKDataSourceConvert
                 case "SK8616H":     //仅8路模拟
                     for (int i = 1; i <= videoInfo.DVSChannelNum; i++)
                     {
-                        if ((i > 8) && !string.IsNullOrEmpty(strsCameraInfo[i]))
+                        if ((i > 8))
                         {
-                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i - 1]);
+                            string Temp_strCameraName = GetCameraName(strsCameraInfo[i - 1], i);
+                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, Temp_strCameraName);
                         }
                     }
                     break;
@@ -226,16 +231,27 @@ namespace SKDataSourceConvert
                     //其余设备按照通道数量区摄像头信息 下标从0开始
                     for (int i = 1; i <= videoInfo.DVSChannelNum; i++)
                     {
-                        if (strsCameraInfo.Length >= i && !string.IsNullOrEmpty(strsCameraInfo[i - 1]))
+                        if (strsCameraInfo.Length >= i)
                         {
                             //171911 修正 通道从1 开始 ,摄像头名称依然从1 开始
-                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, strsCameraInfo[i - 1]);
+                            string Temp_strCameraName = GetCameraName(strsCameraInfo[i - 1], i);
+                            videoInfo.Cameras[i] = GetCameraInfo(videoInfo, i, Temp_strCameraName);
 
                         }
                     }
                     break;
             }
             return videoInfo;
+        }
+
+        private static string GetCameraName(string strSourceName,int intChannelId)
+        {
+            string strResult = strSourceName;
+            if (string.IsNullOrEmpty(strResult))
+            {
+                strResult = "通道" + intChannelId;
+            }
+            return strResult;
         }
 
         private static CameraInfo GetCameraInfo(VideoInfo v, int intChannel, string strCameraName)
