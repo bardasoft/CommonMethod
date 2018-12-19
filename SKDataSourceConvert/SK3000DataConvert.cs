@@ -228,7 +228,7 @@ namespace SKDataSourceConvert
                     }
                     break;
                 default:
-                    //其余设备按照通道数量区摄像头信息 下标从0开始
+                    //其余设备按照通道数量区摄像头信息 下标从1开始
                     for (int i = 1; i <= videoInfo.DVSChannelNum; i++)
                     {
                         if (strsCameraInfo.Length >= i)
@@ -323,7 +323,11 @@ namespace SKDataSourceConvert
                 result = Enum_VideoType.SKVideo;
             }
             else if (SK3000TransitionSet.HikVideoTypeAssignmentEnable
-                    && (strVideoTypeName.EndsWith("HA")))
+                    && (
+                        strVideoTypeName.EndsWith("HA") 
+                        || strVideoTypeName.EndsWith("HY")      //浩云设备，与海康一样
+                        )
+                    )
             {
                 result = Enum_VideoType.HikDVR;
             }
