@@ -270,13 +270,24 @@ namespace SKDataSourceConvert
         #endregion
 
 
+
         /// <summary>
-        /// 使用视频设备类型名称获取视频设备类型
+        /// 通过类型名称获取类型枚举
         /// </summary>
-        /// <param name="strVideoTypeName"></param>
+        /// <param name="strVideoTypeName">类型名称</param>
+        /// <param name="GlobalSetEnable">系统设置使能</param>
+        /// <param name="bolSKVideo">时刻使能</param>
+        /// <param name="bolHikVideo">海康使能</param>
+        /// <param name="bolDHVideo">大华使能</param>
         /// <returns></returns>
-        public static Enum_VideoType GetVideoTypeByVideoTypeName(string strVideoTypeName)
+        public static Enum_VideoType GetVideoTypeByVideoTypeName(string strVideoTypeName, bool GlobalSetEnable = true, bool bolSKVideo = false, bool bolHikVideo = false, bool bolDHVideo = false)
         {
+            if (GlobalSetEnable)
+            {
+                bolSKVideo = SK3000TransitionSet.SKVideoTypeAssignmentEnable;
+                bolHikVideo = SK3000TransitionSet.HikVideoTypeAssignmentEnable;
+                bolDHVideo = SK3000TransitionSet.DaHuaVideoTypeAssignmentEnable;
+            }
             Enum_VideoType result = Enum_VideoType.Unrecognized;
             if (strVideoTypeName.EndsWith("ZW") || strVideoTypeName == "SK838")
             {
@@ -314,7 +325,7 @@ namespace SKDataSourceConvert
             {
                 result = Enum_VideoType.SKNVideo;      //181018 时刻h265
             }
-            else if (SK3000TransitionSet.SKVideoTypeAssignmentEnable
+            else if (bolSKVideo
                     && (strVideoTypeName.StartsWith("SK86")
                     || strVideoTypeName.StartsWith("SK519")
                     || strVideoTypeName.StartsWith("SK8519")
@@ -322,7 +333,7 @@ namespace SKDataSourceConvert
             {
                 result = Enum_VideoType.SKVideo;
             }
-            else if (SK3000TransitionSet.HikVideoTypeAssignmentEnable
+            else if (bolHikVideo
                     && (
                         strVideoTypeName.EndsWith("HA") 
                         || strVideoTypeName.EndsWith("HY")      //浩云设备，与海康一样
@@ -335,7 +346,7 @@ namespace SKDataSourceConvert
             {
                 result = Enum_VideoType.ZLVideo;
             }
-            else if (SK3000TransitionSet.DaHuaVideoTypeAssignmentEnable
+            else if (bolDHVideo
                 && (strVideoTypeName.EndsWith("DA")))
             {
                 result = Enum_VideoType.DaHuaVideo;
