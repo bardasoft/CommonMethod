@@ -46,7 +46,11 @@ namespace CommonMethod
                 {
                     continue;   //主键跳过
                 }
-                if ((pi.PropertyType == typeof(byte)))
+                if (pi.PropertyType == typeof(bool))
+                {
+                    sbResult.Append(Convert.ToBoolean(pi.GetValue(t, null)) ? "1" : "0" + " ");
+                }
+                else if ((pi.PropertyType == typeof(byte)))
                 {
                     //特殊处理1  byte类型
                     sbResult.Append(Convert.ToString(pi.GetValue(t, null)) + " ");
@@ -108,7 +112,11 @@ namespace CommonMethod
                     {
                         continue;   //主键跳过
                     }
-                    if ((pi.PropertyType == typeof(byte)))
+                    if (pi.PropertyType == typeof(bool))
+                    {
+                        sbResult.Append(Convert.ToBoolean(pi.GetValue(t, null)) ? "1" : "0" + " ");
+                    }
+                    else if ((pi.PropertyType == typeof(byte)))
                     {
                         //特殊处理1  byte类型
                         sbResult.Append(Convert.ToString(pi.GetValue(t, null)) + " ");
@@ -186,7 +194,11 @@ namespace CommonMethod
                 {
                     continue;   //非插入字段
                 }
-                if ((pi.PropertyType == typeof(byte)))
+                if (pi.PropertyType == typeof(bool))
+                {
+                    sbResult.Append(Convert.ToBoolean(pi.GetValue(t, null)) ? "1" : "0" + " ");
+                }
+                else if ((pi.PropertyType == typeof(byte)))
                 {
                     //特殊处理1  byte类型
                     sbResult.Append(Convert.ToString(pi.GetValue(t, null)) + " ");
@@ -260,7 +272,11 @@ namespace CommonMethod
                 {
                     continue;   //非插入字段
                 }
-                if ((pi.PropertyType == typeof(byte)))
+                if (pi.PropertyType == typeof(bool))
+                {
+                    sbResult.Append(Convert.ToBoolean(pi.GetValue(t, null)) ? "1" : "0" + " ");
+                }
+                else if ((pi.PropertyType == typeof(byte)))
                 {
                     //特殊处理1  byte类型
                     sbResult.Append(Convert.ToString(pi.GetValue(t, null)) + " ");
@@ -321,7 +337,11 @@ namespace CommonMethod
                     continue;
                 }
                 sbResult.Append(pi.Name + " = ");
-                if ((pi.PropertyType == typeof(byte)))
+                if (pi.PropertyType == typeof(bool))
+                {
+                    sbResult.Append(Convert.ToBoolean(pi.GetValue(t, null)) ? "1" : "0" + " ");
+                }
+                else if ((pi.PropertyType == typeof(byte)))
                 {
                     //特殊处理1  byte类型
                     sbResult.Append(Convert.ToString(pi.GetValue(t, null)) + " ");
@@ -354,7 +374,11 @@ namespace CommonMethod
                 if (StrInStrs(strsKeyField, pi.Name))
                 {
                     sbResult.Append(pi.Name + " = ");
-                    if (!(pi.PropertyType == typeof(byte)))
+                    if (pi.PropertyType == typeof(bool))
+                    {
+                        sbResult.Append(Convert.ToBoolean(pi.GetValue(t, null)) ? "1" : "0" + " ");
+                    }
+                    else if (!(pi.PropertyType == typeof(byte)))
                     {
                         sbResult.Append("'" + Convert.ToString(pi.GetValue(t, null)) + "' ");
                     }
@@ -393,7 +417,11 @@ namespace CommonMethod
                 if (StrInStrs(strsUpdateField, pi.Name))
                 {
                     sbResult.Append(pi.Name + " = ");
-                    if ((pi.PropertyType == typeof(byte)))
+                    if (pi.PropertyType == typeof(bool))
+                    {
+                        sbResult.Append(Convert.ToBoolean(pi.GetValue(t, null)) ? "1" : "0" + " ");
+                    }
+                    else if ((pi.PropertyType == typeof(byte)))
                     {
                         //特殊处理1  byte类型
                         sbResult.Append(Convert.ToString(pi.GetValue(t, null)) + " ");
@@ -426,7 +454,11 @@ namespace CommonMethod
                 if (StrInStrs(strsKeyField, pi.Name))
                 {
                     sbResult.Append(pi.Name + " = ");
-                    if (!(pi.PropertyType == typeof(byte)))
+                    if (pi.PropertyType == typeof(bool))
+                    {
+                        sbResult.Append(Convert.ToBoolean(pi.GetValue(t, null)) ? "1" : "0" + " ");
+                    }
+                    else if (!(pi.PropertyType == typeof(byte)))
                     {
                         sbResult.Append("'" + Convert.ToString(pi.GetValue(t, null)) + "' ");
                     }
@@ -466,7 +498,11 @@ namespace CommonMethod
                 if (!StrInStrs(strPara, pi.Name))
                 {
                     sbResult.Append(pi.Name + " = ");
-                    if ((pi.PropertyType == typeof(byte)))
+                    if (pi.PropertyType == typeof(bool))
+                    {
+                        sbResult.Append(Convert.ToBoolean(pi.GetValue(t, null)) ? "1" : "0" + " ");
+                    }
+                    else if ((pi.PropertyType == typeof(byte)))
                     {
                         //特殊处理1  byte类型
                         sbResult.Append(Convert.ToString(pi.GetValue(t, null)) + " ");
@@ -499,7 +535,11 @@ namespace CommonMethod
                 if (StrInStrs(strsKeyField, pi.Name))
                 {
                     sbResult.Append(pi.Name + " = ");
-                    if (!(pi.PropertyType == typeof(byte)))
+                    if (pi.PropertyType == typeof(bool))
+                    {
+                        sbResult.Append(Convert.ToBoolean(pi.GetValue(t, null)) ? "1" : "0" + " ");
+                    }
+                    else if (!(pi.PropertyType == typeof(byte)))
                     {
                         sbResult.Append("'" + Convert.ToString(pi.GetValue(t, null)) + "' ");
                     }
@@ -534,7 +574,11 @@ namespace CommonMethod
                 if (StrInStrs(strsKeyField, pi.Name))
                 {
                     sbResult.Append(pi.Name + " = ");
-                    if ((pi.PropertyType == typeof(byte)))
+                    if (pi.PropertyType == typeof(bool))
+                    {
+                        sbResult.Append(Convert.ToBoolean(pi.GetValue(t, null)) ? "1" : "0" + " ");
+                    }
+                    else if ((pi.PropertyType == typeof(byte)))
                     {
                         //特殊处理1  byte类型
                         sbResult.Append(Convert.ToString(pi.GetValue(t, null)) + " ");
@@ -576,7 +620,11 @@ namespace CommonMethod
                 if (StrInStrs(strsKeyField, pi.Name))
                 {
                     sbResult.Append(pi.Name + " = ");
-                    if (!(pi.PropertyType == typeof(byte)))
+                    if (pi.PropertyType == typeof(bool))
+                    {
+                        sbResult.Append(Convert.ToBoolean(pi.GetValue(t, null)) ? "1" : "0" + " ");
+                    }
+                    else if (!(pi.PropertyType == typeof(byte)))
                     {
                         sbResult.Append("'" + Convert.ToString(pi.GetValue(t, null)) + "' ");
                     }
