@@ -158,7 +158,7 @@ namespace CommonMethod.Tests
             string strParertName = "EntranceTypeInfo";
             string strNodeName = "EntranceType";
             XmlNodeList x = XmlUse.GetNodeListInfo(strFilePath, strParertName, strNodeName);
-            Assert.AreEqual(x.Count,2);
+            Assert.AreEqual(x.Count, 2);
         }
 
         public class EntranceType
@@ -170,7 +170,11 @@ namespace CommonMethod.Tests
 
             public string Key1
             {
-                get; 
+                get;
+            }
+            public string Key2
+            {
+                get; set;
             }
         }
 
@@ -186,7 +190,7 @@ namespace CommonMethod.Tests
             Assert.AreEqual(result.Key1, "1");
         }
 
-        
+
 
         [TestMethod()]
         public void GetObjectListInfoTest()
@@ -199,6 +203,36 @@ namespace CommonMethod.Tests
 
             List<EntranceType> result = XmlUse.GetObjectListInfo<EntranceType>(x);
             Assert.AreEqual(result.Count, 1);
+        }
+
+        [TestMethod()]
+        public void AddNodeInfoTest2()
+        {
+            string strFilePath = Environment.CurrentDirectory + "\\EntranceTypeInfo.xml";
+            string strParertName = "EntranceTypeInfo";
+            string strNodeName = "EntranceType";
+            EntranceType e = new EntranceType
+            {
+                Key = "11",
+                Key2 = "12"
+            };
+            bool bolResult = XmlUse.AddNodeInfo(e, strFilePath, strParertName);
+            Assert.IsTrue(bolResult);
+        }
+
+        [TestMethod()]
+        public void DeleteNodeInfoTest()
+        {
+            string strFilePath = Environment.CurrentDirectory + "\\EntranceTypeInfo.xml";
+            string strParertName = "EntranceTypeInfo";
+            string strNodeName = "EntranceType";
+            EntranceType e = new EntranceType
+            {
+                Key = "11",
+                Key2 = "12"
+            };
+            bool bolResult = XmlUse.DeleteNodeInfo(e, strFilePath, strParertName);
+            Assert.IsTrue(bolResult);
         }
     }
 }

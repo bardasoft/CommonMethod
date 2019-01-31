@@ -220,11 +220,31 @@ namespace CommonMethod
         /// <param name="strFilePath">文件地址</param>
         /// <param name="strParentName">父节点名称</param>
         /// <returns></returns>
-        private static bool AddNodeInfo<T>(T t, string strFilePath,string strParentName)
+        public static bool AddNodeInfo<T>(T t, string strFilePath,string strParentName)
         {
-            bool bolResult = false;
-
-
+            bool bolResult = true;
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(strFilePath);
+            XmlNode ParentNode = xmlDoc.SelectSingleNode(strParentName);   //父节点
+            XmlElement element = xmlDoc.CreateElement(typeof(T).Name);
+            string tempName = "";
+            PropertyInfo[] propertys = t.GetType().GetProperties();// 获得此模型的公共属性
+            foreach (PropertyInfo pi in propertys)
+            {
+                tempName = pi.Name;
+                if (!pi.CanWrite)
+                {
+                    continue;
+                }
+                object obj = pi.GetValue(t, null);
+                if (pi.PropertyType.IsEnum)
+                {
+                    obj = obj.GetHashCode();
+                }
+                element.SetAttribute(pi.Name, Convert.ToString(obj));
+            }
+            ParentNode.AppendChild(element);
+            xmlDoc.Save(strFilePath);
             return bolResult;
         }
 
@@ -246,8 +266,62 @@ namespace CommonMethod
             return bolResult;
         }
 
+        /// <summary>
+        /// 删除节点信息
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t"></param>
+        /// <param name="strFilePath"></param>
+        /// <param name="strParentName"></param>
+        /// <returns></returns>
+        public static bool DeleteNodeInfo<T>(T t, string strFilePath, string strParentName)
+        {
+            bool bolResult = false;
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(strFilePath);
+            XmlNode ParentNode = xmlDoc.SelectSingleNode(strParentName);   //父节点
+            PropertyInfo[] propertys = t.GetType().GetProperties();// 获得此模型的公共属性
+            XmlNode nodeDelete = null;
+            foreach (XmlNode node in ParentNode.ChildNodes)
+            {
+                if (NodeEqual(t, node, propertys))
+                {
+                    nodeDelete = node;
+                    break;
+                }
+            }
+            if (nodeDelete != null)
+            {
+                ParentNode.RemoveChild(nodeDelete);
+                xmlDoc.Save(strFilePath);
+                bolResult = true;
+            }
+            return bolResult;
+        }
 
 
+        private static bool NodeEqual<T>(T t,XmlNode node, PropertyInfo[] propertys)
+        {
+            string tempName = "";
+            foreach (PropertyInfo pi in propertys)
+            {
+                if (!pi.CanWrite)
+                {
+                    continue;
+                }
+                tempName = pi.Name;
+                if (node.Attributes[tempName] == null)
+                {
+                    return false;
+                }
+                string Temp_strValue = Convert.ToString(pi.GetValue(t, null));
+                if (node.Attributes[tempName].Value != Temp_strValue)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
         #endregion
 
         #region 对象获取
