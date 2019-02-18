@@ -224,6 +224,49 @@ namespace PublicClassCurrency
             set { intAutoIntercom = value; }
         }
 
+        /// <summary>
+        /// 默认联动通道 从1 开始
+        /// </summary>
+        int intDefaultLinakgeChannel = 1;
+
+        /// <summary>
+        /// 默认联动通道
+        /// </summary>
+        public int DefaultLinkageChannel
+        {
+            get { return intDefaultLinakgeChannel; }
+            set { intDefaultLinakgeChannel = value; }
+        }
+
+        /// <summary>
+        /// 默认联动摄像头信息
+        /// </summary>
+        public CameraInfo DefaultLinkageCameraInfo
+        {
+            get
+            {
+                CameraInfo cInfo = null;
+                if (Cameras.ContainsKey(intDefaultLinakgeChannel))
+                {
+                    cInfo = Cameras[intDefaultLinakgeChannel];
+                }
+                return cInfo;
+            }
+        }
+
+        private int intVideoConnectType = 1;
+
+        /// <summary>
+        /// 连接方式
+        /// 1 默认
+        /// 2.直连
+        /// 3.流媒体
+        /// </summary>
+        public int VideoConnectType
+        {
+            get { return intVideoConnectType; }
+            set { intVideoConnectType = value; }
+        }
 
         /// <summary>
         /// 摄像头信息

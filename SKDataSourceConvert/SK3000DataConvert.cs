@@ -109,6 +109,25 @@ namespace SKDataSourceConvert
                 videoInfo.VideoRecordTimeConstraintSecond = Temp_intResult;
             }
             videoInfo = SetVideoCameraInfo(videoInfo, sbCameraInfos.ToString());
+            if (drVideoInfo.Table.Columns.Contains("v_defaultlinkagechannel"))
+            {
+                Temp_strValue = Convert.ToString(drVideoInfo["v_defaultlinkagechannel"]);
+                int Temp_intResult = 1;
+                if (CommonMethod.Verification.isNumber(Temp_strValue))
+                {
+                    Temp_intResult = Convert.ToInt32(Temp_strValue);
+                }
+                videoInfo.DefaultLinkageChannel = Temp_intResult;
+            }
+            if (drVideoInfo.Table.Columns.Contains("vconntype_id"))
+            {
+                Temp_strValue = Convert.ToString(drVideoInfo["vconntype_id"]);
+                if (CommonMethod.Verification.isNumber(Temp_strValue))
+                {
+                    int Temp_intResult = Convert.ToInt32(Temp_strValue);
+                    videoInfo.VideoConnectType = Temp_intResult;
+                }
+            }
             return videoInfo;
         }
 
