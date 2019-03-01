@@ -230,12 +230,18 @@ namespace PublicClassCurrency
         int intDefaultLinakgeChannel = 1;
 
         /// <summary>
-        /// 默认联动通道
+        /// 默认联动通道 
         /// </summary>
         public int DefaultLinkageChannel
         {
-            get { return intDefaultLinakgeChannel; }
-            set { intDefaultLinakgeChannel = value; }
+            get
+            {
+                return intDefaultLinakgeChannel;
+            }
+            set
+            {
+                intDefaultLinakgeChannel = value; 
+            }
         }
 
         /// <summary>
@@ -249,6 +255,10 @@ namespace PublicClassCurrency
                 if (Cameras.ContainsKey(intDefaultLinakgeChannel))
                 {
                     cInfo = Cameras[intDefaultLinakgeChannel];
+                }
+                else
+                {
+                    cInfo = (CameraInfo)PubMethod.GetDictionaryFirstValue(Cameras);
                 }
                 return cInfo;
             }

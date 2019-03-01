@@ -132,6 +132,11 @@ namespace PublicClassCurrency
         /// 智诺视频
         /// </summary>
         ZLVideoRecord = 82,
+
+        /// <summary>
+        /// 时刻H265视频设备类型
+        /// </summary>
+        SKNVideoRecord = 83,
     }
 
     

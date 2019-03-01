@@ -49,6 +49,7 @@
     <Compile Include="Map\MapPointInfo1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Enum_SerialDeviceType.cs" />
+    <Compile Include="PubMethod.cs" />
     <Compile Include="VideoInfo.cs" />
     <Compile Include="Enum_VideoType.cs" />
     <Compile Include="VideoRecordInfo.cs" />
