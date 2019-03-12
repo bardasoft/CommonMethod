@@ -495,7 +495,21 @@ namespace CommonMethod
             DateTime timResult = Convert.ToDateTime(sbDateTimeValue.ToString());
             return timResult;
         }
-
+        /// <summary>
+        /// 获取当前时间当天的结束时间
+        /// </summary>
+        /// <param name="tim"></param>
+        /// <returns></returns>
+        public static DateTime GetDateTimeToDayEnd(DateTime tim)
+        {
+            StringBuilder sbDateTimeValue = new StringBuilder();
+            sbDateTimeValue.Append(tim.Year);
+            sbDateTimeValue.Append("-" + tim.Month);
+            sbDateTimeValue.Append("-" + tim.Day);
+            sbDateTimeValue.Append(" 23:59:59");
+            DateTime timResult = Convert.ToDateTime(sbDateTimeValue.ToString());
+            return timResult;
+        }
         /// <summary>
         /// 获取当前周数（当前月）
         /// </summary>
