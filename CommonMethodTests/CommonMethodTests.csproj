@@ -65,6 +65,7 @@
     <Compile Include="CommonTests.cs" />
     <Compile Include="Common_WebTests.cs" />
     <Compile Include="ConvertClassTests.cs" />
+    <Compile Include="Crypto\Base64Tests.cs" />
     <Compile Include="DBRelevantTests.cs" />
     <Compile Include="FileOperatTests.cs" />
     <Compile Include="FTPHelperTests.cs" />

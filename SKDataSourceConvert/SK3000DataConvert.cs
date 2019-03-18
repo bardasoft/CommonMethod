@@ -213,12 +213,12 @@ namespace SKDataSourceConvert
                 case "SK8516HA":
                 case "SK8532HA":
                 case "SK8564HA":
-                case "BSRNR01":  //蓝色星际
-                case "BSRNR04":
-                case "BSRNR08":
-                case "BSRNR16":
-                case "BSRNR32":
-                case "BSRNR64":
+                case "BRSNR01":  //蓝色星际
+                case "BRSNR04":
+                case "BRSNR08":
+                case "BRSNR16":
+                case "BRSNR32":
+                case "BRSNR64":
                 case "AXISM3037":
                 case "SK8516ZL":
                 case "SK8532ZL":
@@ -335,7 +335,7 @@ namespace SKDataSourceConvert
             {
                 result = Enum_VideoType.XMaiVideo;
             }
-            else if (strVideoTypeName.StartsWith("BSRNR"))
+            else if (strVideoTypeName.StartsWith("BRSNR"))
             {
                 result = Enum_VideoType.BlueSky;
 
