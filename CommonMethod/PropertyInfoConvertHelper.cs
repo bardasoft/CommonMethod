@@ -38,9 +38,21 @@ namespace CommonMethod
             {
                 value = Convert.ToDateTime(value);
             }
+            else if (pi.PropertyType.IsEnum)
+            {
+                value = Convert.ToInt32(value);
+            }
+            else if (pi.PropertyType == typeof(UInt16))
+            {
+                value = Convert.ToUInt16(value);
+            }
             else if (inValue == DBNull.Value)
             {
                 value = null;
+            }
+            else if (pi.PropertyType == typeof(bool))
+            {
+                value = ConvertClass.GetBooleanValue(value);
             }
             return value;
         }

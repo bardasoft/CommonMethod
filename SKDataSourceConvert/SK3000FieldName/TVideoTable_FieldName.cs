@@ -79,52 +79,52 @@ namespace SKDataSourceConvert.SK3000FieldName
         public const string c_strFieldName_AutoIntercom = "RecordTime2";
 
         /// <summary>
-        /// 摄像头信息1 通道 0~3
+        /// 摄像头信息1 通道 1~4
         /// </summary>
         public const string c_strFieldName_CamerasInfo1 = "Reserver5";
 
         /// <summary>
-        /// 摄像头信息2 通道 4~7
+        /// 摄像头信息2 通道 5~8
         /// </summary>
         public const string c_strFieldName_CamerasInfo2 = "Reserver6";
 
         /// <summary>
-        /// 摄像头信息3 通道 8~11
+        /// 摄像头信息3 通道 9~12
         /// </summary>
         public const string c_strFieldName_CamerasInfo3 = "Reserver7";
 
         /// <summary>
-        /// 摄像头信息4 通道 12~15
+        /// 摄像头信息4 通道 13~16
         /// </summary>
         public const string c_strFieldName_CamerasInfo4 = "Reserver8";
 
         /// <summary>
-        /// 摄像头信息5 通道  16~23
+        /// 摄像头信息5 通道  17~24
         /// </summary>
         public const string c_strFieldName_CamerasInfo5 = "Reserver11";
 
         /// <summary>
-        /// 摄像头信息6 通道  24~31
+        /// 摄像头信息6 通道  25~32
         /// </summary>
         public const string c_strFieldName_CamerasInfo6 = "Reserver12";
 
         /// <summary>
-        /// 摄像头信息7 通道  32~39
+        /// 摄像头信息7 通道  33~40
         /// </summary>
         public const string c_strFieldName_CamerasInfo7 = "Reserver13";
 
         /// <summary>
-        /// 摄像头信息8 通道  40~47
+        /// 摄像头信息8 通道  41~48
         /// </summary>
         public const string c_strFieldName_CamerasInfo8 = "Reserver14";
 
         /// <summary>
-        /// 摄像头信息9 通道  48~55
+        /// 摄像头信息9 通道  49~56
         /// </summary>
         public const string c_strFieldName_CamerasInfo9 = "Reserver15";
 
         /// <summary>
-        /// 摄像头信息10 通道  56~63
+        /// 摄像头信息10 通道  57~64
         /// </summary>
         public const string c_strFieldName_CamerasInfo10 = "Reserver16";
 

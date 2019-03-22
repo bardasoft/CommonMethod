@@ -128,6 +128,7 @@ namespace SKDataSourceConvert
                     videoInfo.VideoConnectType = Temp_intResult;
                 }
             }
+            SetVideoUniqueConvert(videoInfo);
             return videoInfo;
         }
 
@@ -284,6 +285,24 @@ namespace SKDataSourceConvert
             return c;
         }
 
+        /// <summary>
+        /// 视频唯一码转换 
+        /// 部分第三方设备唯一码会进行转换在此方法中将唯一码转警并存储至 DVSUnqieuCode属性
+        /// </summary>
+        /// <param name="vInfo"></param>
+        public static void SetVideoUniqueConvert(VideoInfo vInfo)
+        {
+            if (vInfo.VideoType == Enum_VideoType.TLiVideo && vInfo.DVSAddress.StartsWith("F3"))
+            {
+                //通立设备
+                vInfo.DVSUniqueCode = vInfo.DVSAddress.Remove(0, 2);
+            }
+            else
+            {
+                vInfo.DVSUniqueCode = vInfo.DVSAddress;
+            }
+        }
+
 
 
         #endregion
@@ -354,7 +373,7 @@ namespace SKDataSourceConvert
             }
             else if (bolHikVideo
                     && (
-                        strVideoTypeName.EndsWith("HA") 
+                        strVideoTypeName.EndsWith("HA")
                         || strVideoTypeName.EndsWith("HY")      //浩云设备，与海康一样
                         )
                     )
@@ -369,6 +388,10 @@ namespace SKDataSourceConvert
                 && (strVideoTypeName.EndsWith("DA")))
             {
                 result = Enum_VideoType.DaHuaVideo;
+            }
+            else if (strVideoTypeName.StartsWith("SK87"))
+            {
+                result = Enum_VideoType.TLiVideo ;
             }
             else
             {

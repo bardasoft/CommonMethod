@@ -76,6 +76,12 @@ namespace PublicClassCurrency
 
 
         /// <summary>
+        /// 通立视频设备
+        /// </summary>
+        TLiVideo = 15,
+
+
+        /// <summary>
         /// 大华设备
         /// </summary>
         DaHuaVideo = 31,
@@ -122,6 +128,12 @@ namespace PublicClassCurrency
         /// 海康流媒体模式
         /// </summary>
         HikStreamVideo=14,
+
+
+        /// <summary>
+        /// 通立视频设备
+        /// </summary>
+        TLiVideoRecord = 15,
 
         /// <summary>
         /// 大华视频录像类型

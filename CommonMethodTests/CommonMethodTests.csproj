@@ -78,12 +78,17 @@
     <Compile Include="SystemMetthodTests.cs" />
     <Compile Include="testTests.cs" />
     <Compile Include="VerificationTests.cs" />
+    <Compile Include="VideoTypeInfo.cs" />
     <Compile Include="XmlUseTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonMethod\CommonMethod.csproj">
       <Project>{FE120503-38ED-4A41-91E7-835BDB1B625C}</Project>
       <Name>CommonMethod</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PublicClassCurrency\PublicClassCurrency.csproj">
+      <Project>{69bc40a2-638d-49e9-a367-52644bd39c54}</Project>
+      <Name>PublicClassCurrency</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

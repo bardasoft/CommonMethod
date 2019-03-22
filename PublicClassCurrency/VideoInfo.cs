@@ -81,11 +81,37 @@ namespace PublicClassCurrency
         private string strDVSAddress = "";
         /// <summary>
         /// DSV地址/唯一码
+        /// 与数据库对应
         /// </summary>
         public string DVSAddress
         {
             get { return strDVSAddress; }
             set { strDVSAddress = value; }
+        }
+
+        private string strDVSUniqueCode="";
+
+        /// <summary>
+        /// DVS唯一码
+        /// 注意：此属性用于标识第三方设备原有唯一码情况 
+        /// 大多数情况下与DVSAddress一致，
+        /// 特殊情况下与DvsAddress 不一致（不一致时 以此属性为准（调用视频控件时））
+        /// 为空/未赋值的情况下 会返回 DVSAddress的值
+        /// </summary>
+        public string DVSUniqueCode
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(strDVSUniqueCode))
+                {
+                    return strDVSAddress;
+                }
+                return strDVSUniqueCode;
+            }
+            set
+            {
+                strDVSUniqueCode = value;
+            }
         }
 
         /// <summary>
