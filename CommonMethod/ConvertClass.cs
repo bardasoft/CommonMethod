@@ -433,6 +433,11 @@ namespace CommonMethod
         #endregion
 
         #region 时间相关
+        /// <summary>
+        /// 时间戳转DateTime
+        /// </summary>
+        /// <param name="lTime"></param>
+        /// <returns></returns>
         public static DateTime UnixTimestampToDateTime(long lTime)
         {
             DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
@@ -440,6 +445,12 @@ namespace CommonMethod
             TimeSpan toNow = new TimeSpan(lTime);
             return dtStart.Add(toNow);
         }
+
+        /// <summary>
+        /// DateTime 转时间戳
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
         public static long DateTimeToUnixTimestamp(DateTime dateTime)
         {
             var start = new DateTime(1970, 1, 1, 8, 0, 0, dateTime.Kind);
