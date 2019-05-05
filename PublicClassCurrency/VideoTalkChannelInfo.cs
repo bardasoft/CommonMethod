@@ -6,6 +6,15 @@ namespace PublicClassCurrency
 {
     public class VideoTalkChannelInfo
     {
+        /// <summary>
+        /// 视频设备信息
+        /// </summary>
+        public VideoInfo VideoInfo
+        {
+            get;
+            set;
+        }
+
         private int intVideoTalkChannelID = 0;
 
         /// <summary>

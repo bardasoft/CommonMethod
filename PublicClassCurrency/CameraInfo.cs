@@ -10,6 +10,15 @@ namespace PublicClassCurrency
     public class CameraInfo
     {
 
+        /// <summary>
+        /// 视频设备信息
+        /// </summary>
+        public VideoInfo VideoInfo
+        {
+            get;
+            set;
+        }
+
         private int intCameraID = 0;
         /// <summary>
         /// ID

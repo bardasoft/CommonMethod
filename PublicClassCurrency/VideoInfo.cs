@@ -373,19 +373,18 @@ namespace PublicClassCurrency
 
         #region 设备功能
 
-        /// <summary>
-        /// 对讲使能
-        /// </summary>
-        private bool bolIntercomEnable = false;
+        ///// <summary>
+        ///// 对讲使能
+        ///// </summary>
+        //private bool bolIntercomEnable = false;
         /// <summary>
         /// 对讲使能
         /// </summary>
         public bool IntercomEnable
         {
-            get { return bolIntercomEnable; }
-            set
+            get
             {
-                bolIntercomEnable = value;
+                return (TalkChannel != null && TalkChannel.Count > 0);
             }
         }
 
