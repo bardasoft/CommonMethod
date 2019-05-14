@@ -54,6 +54,10 @@
     <Compile Include="Enum_VideoType.cs" />
     <Compile Include="VideoRecordInfo.cs" />
     <Compile Include="VideoTalkChannelInfo.cs" />
+    <Compile Include="Video\IVideoInfo.cs" />
+    <Compile Include="Video\VideoInfo_Default.cs" />
+    <Compile Include="Video\VIdeoInfo_SK8519V.cs" />
+    <Compile Include="Video\VideoStream.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

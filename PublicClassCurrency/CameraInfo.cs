@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PublicClassCurrency.Video;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -145,6 +146,13 @@ namespace PublicClassCurrency
         {
             get { return intPlaneMapY; }
             set { intPlaneMapY = value; }
+        }
+
+        private List<VideoStream> videoStream = new List<VideoStream>();
+        public List<VideoStream> VideoStream
+        {
+            get { return videoStream; }
+            set { videoStream = value; }
         }
     }
 }

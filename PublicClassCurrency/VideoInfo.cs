@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PublicClassCurrency.Video;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,8 +8,24 @@ namespace PublicClassCurrency
     /// <summary>
     /// 摄像机信息
     /// </summary>
-    public class VideoInfo
+    public class VideoInfo:IVideoInfo 
     {
+        #region IVideoInfo
+
+        private IVideoInfo VideoBasicInfo = new VideoInfo_Default();
+
+        public void VideoBasicInfoInit(string strDVSType)
+        {
+            switch (strDVSType)
+            {
+                case "SK8519V":
+                    VideoBasicInfo = new VIdeoInfo_SK8519V();
+                    break;
+            }
+        }
+        public bool GetStreamInfoEnable => VideoBasicInfo.GetStreamInfoEnable;
+
+        #endregion
         #region 参数
 
         #region 设备基本信息
@@ -58,7 +75,11 @@ namespace PublicClassCurrency
         public string DVSType
         {
             get { return strDVSType; }
-            set { strDVSType = value; }
+            set
+            {
+                strDVSType = value;
+                VideoBasicInfoInit(value);
+            }
         }
 
         /// <summary>
@@ -478,7 +499,8 @@ namespace PublicClassCurrency
             get { return intLoginHandle; }
             set { intLoginHandle = value; }
         }
-        
+
+
         #endregion
 
         #endregion
