@@ -231,7 +231,12 @@ namespace CommonMethod
         /// <returns></returns>
         public static bool CreateFolder(string strFolderPath)
         {
-            string Temp_strUpperLevelFolderPath = strFolderPath.Substring(0, strFolderPath.LastIndexOf("\\") );
+            int Temp_intIndex = strFolderPath.LastIndexOf("\\");
+            if (Temp_intIndex == -1)
+            {
+                Temp_intIndex = strFolderPath.LastIndexOf("/");
+            }
+            string Temp_strUpperLevelFolderPath = strFolderPath.Substring(0, Temp_intIndex);
             if (!Directory.Exists(Temp_strUpperLevelFolderPath))
             {
                 CreateFolder(Temp_strUpperLevelFolderPath);

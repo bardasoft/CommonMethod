@@ -58,6 +58,8 @@
     <Compile Include="Video\VideoInfo_Default.cs" />
     <Compile Include="Video\VIdeoInfo_SK8519V.cs" />
     <Compile Include="Video\VideoStream.cs" />
+    <Compile Include="Video\VideoTypeInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -28,5 +28,12 @@ namespace CommonMethod.Tests
             string Temp_result = Convert.ToBase64String(bytes);
             Assert.AreEqual(Temp_result, "");
         }
+
+        [TestMethod()]
+        public void Base64EncodeTest()
+        {
+            string sss = StringEncrypt.Base64Encode("testt");
+            Assert.AreEqual(sss, "123");
+        }
     }
 }

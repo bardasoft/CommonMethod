@@ -23,6 +23,9 @@ namespace PublicClassCurrency
                     break;
             }
         }
+        /// <summary>
+        /// 获取码流信息使能
+        /// </summary>
         public bool GetStreamInfoEnable => VideoBasicInfo.GetStreamInfoEnable;
 
         #endregion

@@ -148,6 +148,17 @@ namespace PublicClassCurrency
             set { intPlaneMapY = value; }
         }
 
+        private bool bolEnable = true;
+
+        /// <summary>
+        /// 是否启用
+        /// </summary>
+        public bool Enable
+        {
+            get { return bolEnable; }
+            set { bolEnable = value; }
+        }
+
         private List<VideoStream> videoStream = new List<VideoStream>();
         public List<VideoStream> VideoStream
         {
