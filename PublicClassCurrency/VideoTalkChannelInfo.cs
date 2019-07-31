@@ -58,5 +58,37 @@ namespace PublicClassCurrency
             get { return strVideoTalkChannelTagInfo; }
             set { strVideoTalkChannelTagInfo = value; }
         }
+
+
+        private bool bolTalkbackEnable = true;
+
+        /// <summary>
+        /// 对讲使能
+        /// </summary>
+        public bool TalkbackEnable
+        {
+            get { return bolTalkbackEnable; }
+            set { bolTalkbackEnable = value; }
+        }
+
+        private bool bolSperakEnable = true;
+        /// <summary>
+        /// 喊话使能
+        /// </summary>
+        public bool SperakEnable
+        {
+            get { return bolSperakEnable; }
+            set { bolSperakEnable = value; }
+        }
+
+        private bool bolInterceptionEnable = true;
+        /// <summary>
+        /// 侦听使能
+        /// </summary>
+        public bool InterceptionEnable
+        {
+            get { return bolInterceptionEnable; }
+            set { bolInterceptionEnable = value; }
+        }
     }
 }

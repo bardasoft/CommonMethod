@@ -91,6 +91,16 @@ namespace PublicClassCurrency.Video
             set;
         }
 
+        /// <summary>
+        /// 对讲通道模型
+        /// </summary>
+        public List<PublicClassCurrency.VideoTalkChannelInfo> TalkChannelModel
+        {
+            get;
+            set;
+        }
+
+
 
         private bool bolVideoTypeVerificationEnable = false;
 
