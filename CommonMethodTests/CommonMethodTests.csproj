@@ -74,6 +74,7 @@
     <Compile Include="ModelConvertHelperTests.cs" />
     <Compile Include="ProcessControlTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegeditOperatTests.cs" />
     <Compile Include="StringEncryptTests.cs" />
     <Compile Include="SystemMetthodTests.cs" />
     <Compile Include="testTests.cs" />

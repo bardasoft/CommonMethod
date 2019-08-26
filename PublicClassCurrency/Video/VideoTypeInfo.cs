@@ -101,6 +101,7 @@ namespace PublicClassCurrency.Video
         }
 
 
+        #region 视频类型验证
 
         private bool bolVideoTypeVerificationEnable = false;
 
@@ -125,6 +126,104 @@ namespace PublicClassCurrency.Video
             get { return intConnParaType; }
             set { intConnParaType = value; }
         }
+
+        /// <summary>
+        /// 支持485透传功能
+        /// </summary>
+        private bool bolSupport458Data = false;
+        /// <summary>
+        /// 支持485透传功能
+        /// </summary>
+        public bool Support458Data
+        {
+            get { return bolSupport458Data; }
+            set { bolSupport458Data = value; }
+        }
+
+
+        /// <summary>
+        /// 支持解析IP
+        /// </summary>
+        private bool bolSupportParsingIP = false;
+        /// <summary>
+        /// 支持解析IP
+        /// </summary>
+        public bool SupportParsingIP
+        {
+            get { return bolSupportParsingIP; }
+            set { bolSupportParsingIP = value; }
+        }
+
+
+        /// <summary>
+        /// 支持811解析
+        /// </summary>
+        private bool bolSupportParsing811 = false;
+        /// <summary>
+        /// 支持811解析
+        /// </summary>
+        public bool SupportParsing811
+        {
+            get { return bolSupportParsing811; }
+            set { bolSupportParsing811 = value; }
+        }
+
+        /// <summary>
+        /// 支持直连设置
+        /// </summary>
+        private bool bolSupportDirectSet = false;
+
+        /// <summary>
+        /// 支持直连设置
+        /// </summary>
+        public bool SupportDirectSet
+        {
+            get { return bolSupportDirectSet; }
+            set { bolSupportDirectSet = value; }
+        }
+
+        /// <summary>
+        /// 支持云台协议设置
+        /// </summary>
+        private bool bolSupportPTZProtoclSet = false;
+
+        /// <summary>
+        /// 支持云台协议设置
+        /// </summary>
+        public bool SupportPTZProtoclSet
+        {
+            get { return bolSupportPTZProtoclSet; }
+            set { bolSupportPTZProtoclSet = value; }
+        }
+
+        /// <summary>
+        /// 需要输入控制端口
+        /// </summary>
+        private bool bolNeedEnterControlPort = false;
+        /// <summary>
+        /// 需要输入控制端口
+        /// </summary>
+        public bool NeedEnterControlPort
+        {
+            get { return bolNeedEnterControlPort; }
+            set { bolNeedEnterControlPort = value; }
+        }
+
+        /// <summary>
+        /// 需要输入数据端口
+        /// </summary>
+        private bool bolNeedEnterStreamPort = false;
+        /// <summary>
+        /// 需要输入数据端口
+        /// </summary>
+        public bool NeedEnterStreamPort
+        {
+            get { return bolNeedEnterStreamPort; }
+            set { bolNeedEnterStreamPort = value; }
+        }
+
+
+        #endregion
 
     }
 }
