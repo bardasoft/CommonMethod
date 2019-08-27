@@ -86,13 +86,13 @@ namespace CommonMethod.Tests
             string XMLFileName = "FileVerInfo";
             //string XMLFilePath = @"G:\Working\Maintenance\SK3000\UpdatePackage\CU\RemoteUpdatePackage\BranchXY";
             //string XMLFilePath = @"G:\Working\Maintenance\SK3000\UpdatePackage\CU\RemoteUpdatePackage\Trunk";
-            //string XMLFilePath = @"G:\Working\Maintenance\SK3000\CU\CUGenerateInstallationPackage\ReleaseFile_XY";
+            string XMLFilePath = @"G:\Working\SK3000\Cu\InstallPackage\ReleaseFile_XY";
             //string XMLFilePath = @"G:\Working\Maintenance\SK3000\CU\CUGenerateInstallationPackage\ReleaseFile_XY - 副本";
             //string XMLFilePath = @"G:\Working\Maintenance\SK3000\CU\CUGenerateInstallationPackage\ReleaseFile_RedStar";
-            string XMLFilePath = @"G:\Working\Maintenance\SK3000\CU\CUGenerateInstallationPackage\ReleaseFile";
+            //string XMLFilePath = @"G:\Working\Maintenance\SK3000\CU\CUGenerateInstallationPackage\ReleaseFile";
             List<SKFileInfo> sKFileInfos = FileOperat.GetSKFileInfoList(XMLFilePath);
             bool OK = FileOperat.CreateSKFileInfoXML(XMLFileName, XMLFilePath, sKFileInfos);
-            Assert.IsTrue(OK);
+            Assert.AreEqual(sKFileInfos.Count, 1);
         }
 
         [TestMethod()]
@@ -114,19 +114,19 @@ namespace CommonMethod.Tests
         [TestMethod()]
         public void ContrastTest1()
         {
-            string XMLFileName = @"C:\Users\thankyou_1996\Desktop\新建文件夹\FileVerInfo.xml";
+            string XMLFileName = @"F:\SK3000\XiangYou_1\FileVerInfo.xml";
             List<SKFileInfo> sKFileInfos = FileOperat.GetSKFileInfoList_ByXmlFilePath(XMLFileName);
 
-            XMLFileName = @"C:\Users\thankyou_1996\Desktop\新建文件夹\FileVerInfo.xml";
+            XMLFileName = @"G:\Working\SK3000\Cu\InstallPackage\ReleaseFile_XY\FileVerInfo.xml";
             List<SKFileInfo> sKFileInfos1 = FileOperat.GetSKFileInfoList_ByXmlFilePath(XMLFileName);
 
 
-            string Key = "name";
+            string Key = "path";
             string[] Contrast = { "modifytime" };
 
             List<SKFileInfo> returnList = FileOperat.ContrastSKFileInfo(sKFileInfos, sKFileInfos1, Key, Contrast);
 
-            Assert.AreEqual(sKFileInfos.Count, sKFileInfos.Count);
+            Assert.AreEqual(returnList.Count, 1);
 
         }
 

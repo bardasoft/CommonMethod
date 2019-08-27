@@ -25,9 +25,10 @@ namespace CommonMethod.Tests
         [TestMethod()]
         public void CopyDirTest()
         {
-            string s1 = @"C:\Users\thankyou_1996\Desktop\新建文件夹";
-            string s2 = @"C:\Users\thankyou_1996\Desktop\新建文件夹 (2)";
+            string s1 = @"G:\Working\Currency\CommonMethod\CommonMethodTests\bin\Debug\Src";
+            string s2 = @"G:\Working\Currency\CommonMethod\CommonMethodTests\bin\Debug\Aim";
             int intResult = CommonMethod.Common.CopyDir(s1, s2);
+            intResult = CommonMethod.Common.DeleteDir(s2);
             Assert.AreEqual(intResult, 1);
         }
 
