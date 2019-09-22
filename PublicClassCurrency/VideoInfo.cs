@@ -422,7 +422,14 @@ namespace PublicClassCurrency
         /// </summary>
         public bool OnlyIntercom
         {
-            get { return bolOnlyIntercom; }
+            get
+            {
+                if (Cameras == null || Cameras.Count == 0)
+                {
+                    return true;
+                }
+                return false; ;
+            }
             set
             {
                 bolOnlyIntercom = value;
