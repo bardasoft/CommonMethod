@@ -40,7 +40,8 @@ namespace CommonMethod.Tests
         [TestMethod()]
         public void LinuxToTimeTest()
         {
-            long l = 1526886082;
+            //long l = 1526886082;
+            long l = 1569218833000;
             DateTime timResult = ConvertClass.UnixTimestampToDateTime(l);
             Assert.AreEqual(timResult, DateTime.Now);
         }
@@ -48,7 +49,8 @@ namespace CommonMethod.Tests
         [TestMethod()]
         public void DateTimeToUnixTimestampTest()
         {
-            long l = 1526886082;
+            //long l = 1526886082;
+            long l = 1569218833000;
             DateTime timResult = ConvertClass.UnixTimestampToDateTime(l);
             long lResult = ConvertClass.DateTimeToUnixTimestamp(timResult);
             Assert.AreEqual(l, lResult);

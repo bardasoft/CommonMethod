@@ -10,5 +10,10 @@ namespace PublicClassCurrency.Video
         /// 
         /// </summary>
         public bool GetStreamInfoEnable => true;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string IPAddress { get; set; }
     }
 }

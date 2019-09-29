@@ -7,5 +7,7 @@ namespace PublicClassCurrency.Video
     class VideoInfo_Default : IVideoInfo
     {
         public bool GetStreamInfoEnable => false;
+
+        public string IPAddress { get; set; }
     }
 }

@@ -223,6 +223,23 @@ namespace PublicClassCurrency.Video
         }
 
 
+        private bool bolIPAddressEntryEnable = false;
+
+        /// <summary>
+        /// IP地址输入使能（仅记录，不产生效果）
+        /// </summary>
+        public bool IPAddressEntryEnable
+        {
+            get
+            {
+                return bolIPAddressEntryEnable;
+            }
+            set
+            {
+                bolIPAddressEntryEnable = value;
+            }
+        }
+
         #endregion
 
     }

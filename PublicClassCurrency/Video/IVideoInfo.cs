@@ -13,5 +13,14 @@ namespace PublicClassCurrency.Video
         {
             get;
         }
+
+        /// <summary>
+        /// IP地址
+        /// </summary>
+        string IPAddress
+        {
+            get;
+            set;
+        }
     }
 }

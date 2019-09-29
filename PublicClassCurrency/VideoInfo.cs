@@ -28,6 +28,11 @@ namespace PublicClassCurrency
         /// </summary>
         public bool GetStreamInfoEnable => VideoBasicInfo.GetStreamInfoEnable;
 
+        /// <summary>
+        /// IP设备地址
+        /// </summary>
+        public string IPAddress { get => VideoBasicInfo.IPAddress; set => VideoBasicInfo.IPAddress = value; }
+
         #endregion
         #region 参数
 
@@ -165,6 +170,7 @@ namespace PublicClassCurrency
             get { return intDVSDataPort; }
             set { intDVSDataPort = value; }
         }
+
 
         /// <summary>
         /// 通道号数量
@@ -327,6 +333,8 @@ namespace PublicClassCurrency
             get { return intVideoConnectType; }
             set { intVideoConnectType = value; }
         }
+
+
 
         /// <summary>
         /// 摄像头信息

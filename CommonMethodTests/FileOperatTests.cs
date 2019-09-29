@@ -86,7 +86,9 @@ namespace CommonMethod.Tests
             string XMLFileName = "FileVerInfo";
             //string XMLFilePath = @"G:\Working\Maintenance\SK3000\UpdatePackage\CU\RemoteUpdatePackage\BranchXY";
             //string XMLFilePath = @"G:\Working\Maintenance\SK3000\UpdatePackage\CU\RemoteUpdatePackage\Trunk";
-            string XMLFilePath = @"G:\Working\SK3000\Cu\InstallPackage\ReleaseFile_XY";
+            //string XMLFilePath = @"G:\Working\SK3000\Cu\InstallPackage\ReleaseFile";
+            //string XMLFilePath = @"G:\Working\SK3000\Cu\InstallPackage\ReleaseFile_XY";
+            string XMLFilePath = @"G:\Working\SK3000\Cu\InstallPackage\ReleaseFile_Shendun";
             //string XMLFilePath = @"G:\Working\Maintenance\SK3000\CU\CUGenerateInstallationPackage\ReleaseFile_XY - 副本";
             //string XMLFilePath = @"G:\Working\Maintenance\SK3000\CU\CUGenerateInstallationPackage\ReleaseFile_RedStar";
             //string XMLFilePath = @"G:\Working\Maintenance\SK3000\CU\CUGenerateInstallationPackage\ReleaseFile";
@@ -98,15 +100,16 @@ namespace CommonMethod.Tests
         [TestMethod()]
         public void ContrastTest()
         {
-            string XMLFileName = @"C:\Users\Administrator\Desktop\新建文件夹 (2)\FileVerInfo.xml";
+            string XMLFileName = @"C:\Users\hongdongcheng\Desktop\客户端远程功能更新包\FileVerInfo.xml";
             List<SKFileInfo> sKFileInfos = FileOperat.GetSKFileInfoList_ByXmlFilePath(XMLFileName);
 
-            XMLFileName = @"C:\Users\Administrator\Desktop\FileVerInfo.xml";
+            XMLFileName = @"C:\Users\hongdongcheng\Desktop\测试_接警客户端V3.1更新包_190927_01\FileVerInfo.xml";
             List<SKFileInfo> sKFileInfos1 = FileOperat.GetSKFileInfoList_ByXmlFilePath(XMLFileName);
 
-            List<SKFileInfo> AddOrUpList = new List<SKFileInfo>();
-            List<SKFileInfo> DelList = new List<SKFileInfo>();
-            FileOperat.ContrastSKFileInfo(sKFileInfos, sKFileInfos1, ref AddOrUpList, ref DelList);
+            //List<SKFileInfo> AddOrUpList = new List<SKFileInfo>();
+            //List<SKFileInfo> DelList = new List<SKFileInfo>();
+            //FileOperat.ContrastSKFileInfo(sKFileInfos, sKFileInfos1, ref AddOrUpList, ref DelList);
+            List<SKFileInfo> lstUpdateFile=FileOperat.ContrastSKFileInfo(sKFileInfos, sKFileInfos1, "path", new string[] { "modifytime" });
 
             Assert.AreEqual(sKFileInfos.Count, sKFileInfos.Count);
         }
